@@ -9,6 +9,7 @@ import {
   type Photo,
 } from "@/lib/photos";
 import { Reveal } from "@/components/Reveal";
+import { Lightbox } from "./Lightbox";
 
 export type ActivePhoto = { photos: Photo[]; index: number };
 
@@ -56,8 +57,14 @@ export function PortfolioGallery() {
           </section>
         );
       })}
-      {/* Lightbox mounts here in Task 10, driven by `active`. */}
-      {active ? null : null}
+      {active && (
+        <Lightbox
+          photos={active.photos}
+          index={active.index}
+          onIndexChange={(i) => setActive({ photos: active.photos, index: i })}
+          onClose={() => setActive(null)}
+        />
+      )}
     </div>
   );
 }
