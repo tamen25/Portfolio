@@ -35,3 +35,10 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# ---- Claude Code (keep tracked project CLAUDE.md, ignore local artifacts) ----
+.claude/
+.claude.json
+.claude.json.backup
+.mcp.json
+CLAUDE.local.md
