@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, MoveDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatusPill } from "@/components/ui/status-pill";
-import { ClusterOrbit } from "./ClusterOrbit";
+import { HeroMeshLoader } from "./mesh/HeroMeshLoader";
 import { HeroLogStream } from "./HeroLogStream";
 
 export function PlatformHero() {
@@ -10,7 +10,7 @@ export function PlatformHero() {
     <section className="relative isolate min-h-screen overflow-hidden border-b border-border-muted/60">
       <div className="absolute inset-0 -z-10 line-grid opacity-25" aria-hidden />
       <HeroLogStream />
-      <ClusterOrbit />
+      <HeroMeshLoader />
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-8 px-6 py-32 text-center">
         <StatusPill variant="live" className="font-mono tracking-wide">
