@@ -45,7 +45,7 @@ export type ServiceName = (typeof SERVICES)[number];
 // Directed call graph for a place-order flow: gateway fans out to the pricing /
 // inventory / fraud / payment chain; payment writes to the ledger; the
 // projection-worker consumes events async. Matches diagrams/01_mesh_fanout.
-const EDGES: Array<[ServiceName, ServiceName]> = [
+export const EDGES: Array<[ServiceName, ServiceName]> = [
   ["api-gateway", "pricing"],
   ["api-gateway", "inventory"],
   ["api-gateway", "fraud"],
