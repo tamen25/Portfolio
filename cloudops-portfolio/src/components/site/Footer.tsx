@@ -35,7 +35,6 @@ export function Footer() {
             System
           </h4>
           <ul className="space-y-1 text-sm">
-            <li><Link href="/login" className="text-fg-base hover:text-brand-400">Sign in</Link></li>
             {designPreviewEnabled ? (
               <li><Link href="/design" className="text-fg-base hover:text-brand-400">Design system</Link></li>
             ) : null}

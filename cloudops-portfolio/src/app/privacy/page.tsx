@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PrivacyActions } from "@/components/PrivacyActions";
 
 export const dynamic = "force-dynamic";
 
@@ -62,11 +61,12 @@ export default function PrivacyPage() {
         </CardHeader>
         <CardContent className="space-y-4 text-sm text-fg-muted">
           <p>
-            Signed-in users can download the account-linked data currently exposed
-            by this application or request erasure of the direct links the
-            storefront controls.
+            In the production platform, signed-in users can download their
+            account-linked data or request erasure of the direct links the
+            storefront controls. This portfolio build runs on synthetic data
+            with no accounts, so those tools are not wired here — for any
+            request, use the contact below.
           </p>
-          <PrivacyActions />
         </CardContent>
       </Card>
 
