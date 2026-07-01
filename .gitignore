@@ -36,6 +36,9 @@ Thumbs.db
 .vscode/
 *.swp
 
+# ---- Design references (template exports, not redistributable) ----
+photography-portfolio/design-refs/
+
 # ---- Claude Code (keep tracked project CLAUDE.md, ignore local artifacts) ----
 .claude/
 .claude.json
