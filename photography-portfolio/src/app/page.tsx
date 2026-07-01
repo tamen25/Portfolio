@@ -2,6 +2,7 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Collections } from "@/components/Collections";
+import { WideFrame } from "@/components/WideFrame";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
         <Hero />
         <About />
         <Collections />
+        <WideFrame />
       </main>
       <Footer />
     </>
