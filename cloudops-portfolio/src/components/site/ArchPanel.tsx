@@ -129,13 +129,13 @@ export function ArchPanel() {
           </div>
         </CardHeader>
         <CardContent className="overflow-x-auto p-0">
-          <div className="min-w-max space-y-8 px-6 py-8 md:px-8">
+          <div className="group min-w-max space-y-8 px-6 py-8 md:px-8">
             {flows.map((flow) => (
               <div
                 key={flow.label}
                 data-flow-id={flow.id}
                 id={flow.id}
-                className="group/row space-y-3 transition-opacity duration-300 hover:opacity-100 [&:hover_~_*]:opacity-60 [.group/row:hover_~_&]:opacity-60"
+                className="space-y-3 transition-opacity duration-300 group-hover:opacity-60 hover:!opacity-100"
               >
                 <div className="flex items-center gap-3">
                   <span className={`h-1 w-8 rounded-full ${accentBar[flow.accent]}`} />
