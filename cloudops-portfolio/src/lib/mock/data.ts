@@ -31,28 +31,71 @@ import type { Topology, ServiceMetric, TraceSummary } from "@/lib/observe";
 // service names and call graph means the /services metadata map, the topology
 // layout, and the trace waterfall all read as the genuine CloudOps system.
 export const SERVICES = [
+  // edge / entry
   "api-gateway",
+  "bff-web",
+  "auth",
+  "session",
+  // catalog + discovery
+  "catalog",
+  "search",
+  "recommendation",
   "pricing",
   "inventory",
+  // order path
+  "cart",
+  "checkout",
   "fraud",
+  "tax",
   "payment",
+  "wallet",
   "ledger",
+  // fulfilment + async
+  "warehouse",
+  "shipping",
+  "notification",
   "projection-worker",
 ] as const;
 
 export type ServiceName = (typeof SERVICES)[number];
 
-// Directed call graph for a place-order flow: gateway fans out to the pricing /
-// inventory / fraud / payment chain; payment writes to the ledger; the
-// projection-worker consumes events async. Matches diagrams/01_mesh_fanout.
+// Directed call graph for a real multi-tenant storefront. The gateway fronts a
+// web BFF; auth/session gate every request; browse fans into catalog / search /
+// recommendation (which read pricing + inventory); the order path runs
+// cart → checkout → fraud → tax → payment → wallet → ledger; fulfilment hands
+// off to warehouse → shipping; notification and the projection-worker consume
+// events async. Every name maps to a plausible module under modules/.
 export const EDGES: Array<[ServiceName, ServiceName]> = [
-  ["api-gateway", "pricing"],
-  ["api-gateway", "inventory"],
-  ["api-gateway", "fraud"],
-  ["api-gateway", "payment"],
+  // entry
+  ["api-gateway", "bff-web"],
+  ["bff-web", "auth"],
+  ["auth", "session"],
+  // browse / discovery
+  ["bff-web", "catalog"],
+  ["bff-web", "search"],
+  ["bff-web", "recommendation"],
+  ["catalog", "pricing"],
+  ["catalog", "inventory"],
+  ["search", "catalog"],
+  ["recommendation", "catalog"],
+  // order path
+  ["bff-web", "cart"],
+  ["cart", "pricing"],
+  ["cart", "inventory"],
+  ["bff-web", "checkout"],
+  ["checkout", "cart"],
+  ["checkout", "fraud"],
+  ["checkout", "tax"],
+  ["checkout", "payment"],
+  ["payment", "wallet"],
   ["payment", "ledger"],
+  // fulfilment + async
+  ["checkout", "warehouse"],
+  ["warehouse", "shipping"],
+  ["checkout", "notification"],
   ["ledger", "projection-worker"],
   ["inventory", "projection-worker"],
+  ["shipping", "notification"],
 ];
 
 // ─── noise helpers ───────────────────────────────────────────────────────────
@@ -68,15 +111,30 @@ function jitter(base: number, spread: number, seed: number): number {
   return Math.max(0, base + (wave(seed) - 0.5) * 2 * spread);
 }
 
-// A per-service baseline rps so the mesh has a believable shape (gateway hottest).
+// A per-service baseline rps so the mesh has a believable shape: the edge and
+// browse tier carry the most traffic, the order path tapers as it deepens, and
+// async workers sit lowest.
 const RPS_BASE: Record<ServiceName, number> = {
-  "api-gateway": 42,
-  pricing: 38,
-  inventory: 36,
-  fraud: 34,
-  payment: 31,
-  ledger: 30,
-  "projection-worker": 28,
+  "api-gateway": 96,
+  "bff-web": 88,
+  auth: 74,
+  session: 70,
+  catalog: 61,
+  search: 44,
+  recommendation: 33,
+  pricing: 58,
+  inventory: 52,
+  cart: 40,
+  checkout: 22,
+  fraud: 21,
+  tax: 20,
+  payment: 19,
+  wallet: 15,
+  ledger: 18,
+  warehouse: 14,
+  shipping: 12,
+  notification: 17,
+  "projection-worker": 24,
 };
 
 // ─── topology ────────────────────────────────────────────────────────────────
