@@ -36,7 +36,6 @@ export function MeshScene() {
           <Node
             key={svc}
             position={positions.get(svc)!}
-            label={svc}
             seed={i * 1.7}
             hovered={hovered === svc}
             onHover={(h) => setHovered(h ? svc : null)}

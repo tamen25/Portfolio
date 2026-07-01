@@ -2,23 +2,19 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
 import type { Mesh } from "three";
 import type { Vec3 } from "@/lib/mesh-layout";
 
 const BRAND = "#2dd4bf";
 const BRAND_HOT = "#5eead4";
-const LABEL = "#cdd9e5";
 
 export function Node({
   position,
-  label,
   seed,
   hovered,
   onHover,
 }: {
   position: Vec3;
-  label: string;
   seed: number;
   hovered: boolean;
   onHover: (h: boolean) => void;
@@ -51,17 +47,6 @@ export function Node({
           toneMapped={false}
         />
       </mesh>
-      <Text
-        position={[0, 0.6, 0]}
-        fontSize={0.34}
-        color={LABEL}
-        anchorX="center"
-        anchorY="bottom"
-        outlineWidth={0.01}
-        outlineColor="#0d1117"
-      >
-        {label}
-      </Text>
     </group>
   );
 }
