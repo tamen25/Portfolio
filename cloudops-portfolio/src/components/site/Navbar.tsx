@@ -2,31 +2,35 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, Boxes } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  Activity,
+  Boxes,
+  Layers,
+  Workflow,
+  Network,
+  GitBranch,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { StatusPill } from "@/components/ui/status-pill";
 import { designPreviewEnabled } from "@/lib/flags";
 
 interface NavItem {
   href: string;
   label: string;
+  icon: LucideIcon;
 }
-
-const console_: NavItem[] = [
-  { href: "/console", label: "Map" },
-  { href: "/services", label: "Services" },
-  { href: "/traces", label: "Traces" },
-  { href: "/load", label: "Load" },
-];
 
 // /design is an internal preview gated by NEXT_PUBLIC_DESIGN_PREVIEW (it
 // notFound()s otherwise) — only surface the link when the flag is set (#149).
 const platform: NavItem[] = [
-  { href: "/platform", label: "Platform" },
-  { href: "/architecture", label: "Architecture" },
-  { href: "/diagrams", label: "Diagrams" },
-  { href: "/pipeline", label: "Pipeline" },
-  ...(designPreviewEnabled ? [{ href: "/design", label: "Design" }] : []),
+  { href: "/platform", label: "Platform", icon: Layers },
+  { href: "/architecture", label: "Architecture", icon: Network },
+  { href: "/diagrams", label: "Diagrams", icon: Workflow },
+  { href: "/pipeline", label: "Pipeline", icon: GitBranch },
+  ...(designPreviewEnabled
+    ? [{ href: "/design", label: "Design", icon: Sparkles }]
+    : []),
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -36,14 +40,16 @@ function isActive(pathname: string, href: string): boolean {
 
 function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
   const active = isActive(pathname, item.href);
+  const Icon = item.icon;
   return (
     <Link
       href={item.href}
       aria-current={active ? "page" : undefined}
-      className={`transition-colors ${
+      className={`inline-flex items-center gap-1.5 transition-colors ${
         active ? "text-fg-base" : "text-fg-muted hover:text-fg-base"
       }`}
     >
+      <Icon className="h-4 w-4" strokeWidth={2} />
       {item.label}
     </Link>
   );
@@ -64,18 +70,7 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm md:flex" aria-label="Main">
-          <ul className="flex gap-6">
-            {console_.map((item) => (
-              <li key={item.href}>
-                <NavLink item={item} pathname={pathname} />
-              </li>
-            ))}
-          </ul>
-          <span
-            aria-hidden
-            className="mx-1 hidden h-4 w-px bg-border-muted lg:inline-block"
-          />
-          <ul className="hidden gap-6 lg:flex">
+          <ul className="flex items-center gap-6">
             {platform.map((item) => (
               <li key={item.href}>
                 <NavLink item={item} pathname={pathname} />
@@ -84,17 +79,17 @@ export function Navbar() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
-          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-            <Link href="/console">
-              <Activity className="h-4 w-4" />
-              Console
-            </Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link href="/login">Sign in</Link>
-          </Button>
-        </div>
+        {/* Console is the single entry point into the live app — the /console
+            page's own tabs cover Map / Services / Traces / Load. Styled as an
+            accent pill so it reads as the primary call to action. */}
+        <Link
+          href="/console"
+          aria-current={isActive(pathname, "/console") ? "page" : undefined}
+          className="group inline-flex items-center gap-1.5 rounded-full border border-brand-500/40 bg-brand-500/10 px-3.5 py-1.5 text-sm font-medium text-brand-400 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:border-brand-500/70 hover:bg-brand-500/20 hover:text-brand-400"
+        >
+          <Activity className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" strokeWidth={2.25} />
+          Console
+        </Link>
       </div>
     </header>
   );
