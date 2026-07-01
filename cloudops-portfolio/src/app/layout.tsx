@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toast";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
+import { RevealOnScroll } from "@/components/site/RevealOnScroll";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -42,7 +43,9 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-bg-base">
+        <div aria-hidden className="grain-overlay" />
         <ScrollProgress />
+        <RevealOnScroll />
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />

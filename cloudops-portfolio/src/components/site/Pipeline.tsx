@@ -67,7 +67,7 @@ export function Pipeline() {
               y1={HEIGHT / 2}
               x2={RIGHT}
               y2={HEIGHT / 2}
-              stroke="#2dd4bf"
+              stroke="#4d9fff"
               strokeWidth="1.5"
               data-motion="line-draw"
               style={
@@ -97,7 +97,7 @@ export function Pipeline() {
                   <circle
                     r="9"
                     fill={inView ? "#0d1117" : "#0d1117"}
-                    stroke={inView ? "#2dd4bf" : "#30363d"}
+                    stroke={inView ? "#4d9fff" : "#30363d"}
                     strokeWidth="1.5"
                     style={{
                       transition: "stroke 220ms ease-out",
@@ -106,7 +106,7 @@ export function Pipeline() {
                   />
                   <circle
                     r="3.5"
-                    fill="#2dd4bf"
+                    fill="#4d9fff"
                     opacity={inView ? 1 : 0}
                     style={{
                       transition: "opacity 220ms ease-out",

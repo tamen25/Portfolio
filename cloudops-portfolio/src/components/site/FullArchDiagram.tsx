@@ -14,7 +14,7 @@ interface Node {
 
 const LAYER_COLOR = {
   edge: "#67e8f9",
-  compute: "#2dd4bf",
+  compute: "#4d9fff",
   data: "#a78bfa",
   obs: "#fbbf24",
 } as const;
@@ -299,8 +299,8 @@ export function FullArchDiagram() {
                   <feGaussianBlur stdDeviation="2" />
                 </filter>
                 <linearGradient id="eksFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="rgba(45,212,191,0.15)" />
-                  <stop offset="100%" stopColor="rgba(45,212,191,0.04)" />
+                  <stop offset="0%" stopColor="rgba(77, 159, 255,0.15)" />
+                  <stop offset="100%" stopColor="rgba(77, 159, 255,0.04)" />
                 </linearGradient>
               </defs>
 
@@ -326,7 +326,7 @@ export function FullArchDiagram() {
                 height={EKS_BOX.h}
                 rx="14"
                 fill="url(#eksFill)"
-                stroke="rgba(45,212,191,0.35)"
+                stroke="rgba(77, 159, 255,0.35)"
                 strokeDasharray="4 4"
                 strokeWidth="1"
               />
@@ -335,7 +335,7 @@ export function FullArchDiagram() {
                 y={EKS_BOX.y + 14}
                 fontFamily="var(--font-mono)"
                 fontSize="9"
-                fill="#5eead4"
+                fill="#7db8ff"
               >
                 EKS · order-api + storefront + polyglot mesh (6 svc)
               </text>
@@ -351,14 +351,14 @@ export function FullArchDiagram() {
                     <path
                       d={d}
                       fill="none"
-                      stroke={isHL ? "#5eead4" : "rgba(94,234,212,0.4)"}
+                      stroke={isHL ? "#7db8ff" : "rgba(125, 184, 255,0.4)"}
                       strokeWidth={isHL ? 1.6 : 1}
                       strokeDasharray={isHL ? "0" : "3 4"}
                       filter={isHL ? "url(#archGlow)" : undefined}
                     />
                     <circle
                       r={isHL ? 3 : 2}
-                      fill={isHL ? "#5eead4" : "rgba(94,234,212,0.85)"}
+                      fill={isHL ? "#7db8ff" : "rgba(125, 184, 255,0.85)"}
                       data-motion="packet"
                     >
                       <animateMotion
@@ -399,7 +399,7 @@ export function FullArchDiagram() {
                         height={n.h}
                         rx="8"
                         fill={isActive ? `${c}30` : "rgba(20,28,45,0.85)"}
-                        stroke={isActive ? c : "rgba(94,234,212,0.35)"}
+                        stroke={isActive ? c : "rgba(125, 184, 255,0.35)"}
                         strokeWidth={isActive ? 1.6 : 1}
                         strokeDasharray={k === "libraries" ? "5 4" : undefined}
                         filter={isActive ? "url(#archGlow)" : undefined}
@@ -439,11 +439,11 @@ export function FullArchDiagram() {
               >
                 <path
                   d="M 0 50 Q 200 20, 400 50 T 800 50 L 800 80 L 0 80 Z"
-                  fill="rgba(45,212,191,0.06)"
+                  fill="rgba(77, 159, 255,0.06)"
                 />
                 <path
                   d="M 0 60 Q 200 40, 400 60 T 800 60 L 800 80 L 0 80 Z"
-                  fill="rgba(45,212,191,0.04)"
+                  fill="rgba(77, 159, 255,0.04)"
                 />
               </svg>
             </div>
@@ -482,11 +482,11 @@ export function FullArchDiagram() {
                   <div
                     key={s.name}
                     title={`${s.name} · ${s.cost}`}
-                    className="group flex cursor-default flex-col items-center gap-1 rounded-lg border border-border-default/60 bg-bg-base/40 px-1.5 py-2.5 text-center transition-all hover:-translate-y-0.5 hover:border-brand-500/60 hover:shadow-[0_0_18px_rgba(45,212,191,0.18)]"
+                    className="group flex cursor-default flex-col items-center gap-1 rounded-lg border border-border-default/60 bg-bg-base/40 px-1.5 py-2.5 text-center transition-all hover:-translate-y-0.5 hover:border-brand-500/60 hover:shadow-[0_0_18px_rgba(77, 159, 255,0.18)]"
                   >
                     <span
                       className="text-lg text-brand-500"
-                      style={{ textShadow: "0 0 8px rgba(45,212,191,0.6)" }}
+                      style={{ textShadow: "0 0 8px rgba(77, 159, 255,0.6)" }}
                     >
                       {s.icon}
                     </span>

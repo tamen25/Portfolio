@@ -72,7 +72,7 @@ const features: Feature[] = [
 export function FeatureGrid() {
   return (
     <section className="mx-auto max-w-7xl space-y-8 px-6 py-16">
-      <header className="max-w-3xl space-y-3">
+      <header data-reveal className="max-w-3xl space-y-3">
         <p className="text-xs uppercase tracking-wide text-brand-400">
           What ships
         </p>
@@ -86,40 +86,61 @@ export function FeatureGrid() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <FeatureCard key={feature.title} feature={feature} />
+      {/* Asymmetric bento: the lead demo spans two columns, the rest tile
+          around it so the row never reads as a uniform 3-up card grid. */}
+      <div className="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((feature, i) => (
+          <FeatureCard
+            key={feature.title}
+            feature={feature}
+            index={i}
+            wide={i === 0}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-function FeatureCard({ feature }: { feature: Feature }) {
+function FeatureCard({
+  feature,
+  index,
+  wide,
+}: {
+  feature: Feature;
+  index: number;
+  wide?: boolean;
+}) {
   const Icon = feature.icon;
   return (
-    <Link href={feature.href} className="group block">
-      <Card className="h-full transition-all group-hover:border-brand-500/60 group-hover:bg-bg-elev brand-glow">
-        <CardHeader className="space-y-3">
+    <Link
+      href={feature.href}
+      data-reveal
+      style={{ transitionDelay: `${index * 60}ms` }}
+      className={`group block ${wide ? "sm:col-span-2 lg:col-span-2" : ""}`}
+    >
+      <article className="spotlight-card flex h-full flex-col justify-between rounded-xl border border-border-muted/70 bg-bg-raised/50 p-6 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-translate-y-0.5 group-hover:border-brand-500/50 group-hover:bg-bg-elev/70">
+        <div className="space-y-4">
           <div className="flex items-start justify-between">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-500/12 text-brand-400 transition-transform group-hover:scale-105">
-              <Icon className="h-5 w-5" strokeWidth={2} />
+            <span className="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/12 text-brand-400 ring-1 ring-inset ring-brand-500/20 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105">
+              <Icon className="h-5 w-5" strokeWidth={1.75} />
             </span>
             <span className="font-mono text-[10px] uppercase tracking-wide text-fg-subtle">
               {feature.meta}
             </span>
           </div>
-          <CardTitle className="text-base">{feature.title}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <CardDescription className="text-sm leading-relaxed">
+          <h3 className={`font-semibold tracking-tight ${wide ? "text-lg" : "text-base"}`}>
+            {feature.title}
+          </h3>
+          <p className={`text-pretty leading-relaxed text-fg-muted ${wide ? "text-[15px] max-w-xl" : "text-sm"}`}>
             {feature.body}
-          </CardDescription>
-          <span className="inline-flex items-center gap-1 text-xs text-brand-400 opacity-0 transition-opacity group-hover:opacity-100">
-            see it →
-          </span>
-        </CardContent>
-      </Card>
+          </p>
+        </div>
+        <span className="mt-5 inline-flex translate-y-1 items-center gap-1 text-xs font-medium text-brand-400 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-y-0 group-hover:opacity-100">
+          see it
+          <span className="grid h-4 w-4 place-items-center rounded-full bg-brand-500/15 transition-transform group-hover:translate-x-0.5">→</span>
+        </span>
+      </article>
     </Link>
   );
 }

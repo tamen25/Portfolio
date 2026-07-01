@@ -55,7 +55,7 @@ export function Sparkline({
   width = 80,
   height = 28,
   pattern = "flat",
-  color = "#2dd4bf",
+  color = "#4d9fff",
 }: SparklineProps) {
   const values = generate(seed, pattern);
   const stepX = width / (values.length - 1);

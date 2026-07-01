@@ -54,13 +54,13 @@ export function ClusterOrbit() {
       >
         <defs>
           <radialGradient id="orbit-core" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.85" />
-            <stop offset="55%" stopColor="#2dd4bf" stopOpacity="0.15" />
-            <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
+            <stop offset="0%" stopColor="#4d9fff" stopOpacity="0.85" />
+            <stop offset="55%" stopColor="#4d9fff" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="#4d9fff" stopOpacity="0" />
           </radialGradient>
           <radialGradient id="orbit-pod" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#5eead4" stopOpacity="1" />
-            <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.4" />
+            <stop offset="0%" stopColor="#7db8ff" stopOpacity="1" />
+            <stop offset="100%" stopColor="#2f7fe0" stopOpacity="0.4" />
           </radialGradient>
           {RINGS.map((r, i) => (
             <path
@@ -78,7 +78,7 @@ export function ClusterOrbit() {
           cx="0"
           cy="0"
           r="18"
-          fill="#2dd4bf"
+          fill="#4d9fff"
           opacity="0.9"
           data-motion="orbit"
         >
@@ -118,7 +118,7 @@ export function ClusterOrbit() {
                 y1="0"
                 x2={-x * 0.4}
                 y2={-y * 0.4}
-                stroke="#2dd4bf"
+                stroke="#4d9fff"
                 strokeWidth="0.6"
                 opacity={active ? 0.45 : 0.12}
               />
@@ -134,7 +134,7 @@ export function ClusterOrbit() {
                 <circle
                   r="9"
                   fill="none"
-                  stroke="#2dd4bf"
+                  stroke="#4d9fff"
                   strokeWidth="1"
                   opacity="0.6"
                   data-motion="orbit"
@@ -158,7 +158,7 @@ export function ClusterOrbit() {
                 textAnchor="middle"
                 fontSize="10"
                 fontFamily="var(--font-mono)"
-                fill={active ? "#5eead4" : "#687480"}
+                fill={active ? "#7db8ff" : "#687480"}
                 style={{ transition: "fill 220ms ease-out" }}
               >
                 {pod.id}
@@ -175,7 +175,7 @@ export function ClusterOrbit() {
             <circle
               key={pod.id}
               r="2.2"
-              fill="#5eead4"
+              fill="#7db8ff"
               opacity="0.85"
               data-motion="orbit"
             >

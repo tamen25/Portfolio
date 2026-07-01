@@ -6,8 +6,8 @@ import { Vector3, type Mesh } from "three";
 import type { Vec3 } from "@/lib/mesh-layout";
 
 const BASE = "#30363d";
-const ACTIVE = "#2dd4bf";
-const PACKET = "#5eead4";
+const ACTIVE = "#4d9fff";
+const PACKET = "#7db8ff";
 
 export function Edge({ from, to, active, seed }: { from: Vec3; to: Vec3; active: boolean; seed: number }) {
   const packet = useRef<Mesh>(null);

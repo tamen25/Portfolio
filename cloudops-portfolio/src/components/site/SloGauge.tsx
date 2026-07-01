@@ -32,7 +32,7 @@ export function SloGauge({ valuePct, label, sublabel }: SloGaugeProps) {
           cy={SIZE / 2}
           r={R}
           fill="none"
-          stroke="#2dd4bf"
+          stroke="#4d9fff"
           strokeWidth={STROKE}
           strokeLinecap="round"
           strokeDasharray={`${filled} ${CIRC}`}

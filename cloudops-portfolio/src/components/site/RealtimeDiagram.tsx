@@ -33,7 +33,7 @@ export function RealtimeDiagram() {
       </g>
 
       <g transform="translate(220, 75)">
-        <rect x="-44" y="-22" width="88" height="44" rx="6" fill="#161b22" stroke="#2dd4bf" />
+        <rect x="-44" y="-22" width="88" height="44" rx="6" fill="#161b22" stroke="#4d9fff" />
         <text textAnchor="middle" y="-4" fontSize="10" fontFamily="var(--font-mono)" fill="#cdd9e5">
           fanout λ
         </text>
@@ -66,7 +66,7 @@ export function RealtimeDiagram() {
       ))}
 
       {FANOUT.map((f, i) => (
-        <circle key={f.id} r="2.4" fill="#2dd4bf" data-motion="packet">
+        <circle key={f.id} r="2.4" fill="#4d9fff" data-motion="packet">
           <animate
             attributeName="cx"
             values={`264;${f.x - 30}`}

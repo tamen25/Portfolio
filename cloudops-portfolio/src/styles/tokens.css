@@ -1,7 +1,7 @@
 /*
- * CloudOps Dim — design tokens
+ * CloudOps Nocturne — design tokens
  *
- * Dark-only theme inspired by GitHub Dark Dimmed + Linear app palette.
+ * Dark-only theme: near-black canvas with an ice / electric-blue accent.
  * Single source of truth for colour, radius, focus ring. Tailwind v4
  * @theme block exposes every token as a Tailwind utility key
  * (bg-bg-base, text-fg-base, border-border-default, etc.). Same tokens
@@ -12,32 +12,32 @@
  */
 
 @theme {
-  /* Surfaces — deep dark, GitHub Dark base. Deeper than Dimmed on purpose
-   * so the teal brand accent stays punchy and cards read as raised. */
-  --color-bg-base: #0d1117;
-  --color-bg-raised: #161b22;
-  --color-bg-elev: #21262d;
+  /* Surfaces — deep near-black. Deeper than GitHub-dark on purpose so the
+   * ice-blue accent reads cinematic and cards feel like lifted glass. */
+  --color-bg-base: #0a0b0d;
+  --color-bg-raised: #101216;
+  --color-bg-elev: #191c22;
 
   /* Borders */
-  --color-border-default: #30363d;
-  --color-border-muted: #21262d;
+  --color-border-default: #262a31;
+  --color-border-muted: #191c22;
 
   /* Text */
-  --color-fg-base: #cdd9e5;
-  --color-fg-muted: #909dab;
-  --color-fg-subtle: #687480;
-  --color-fg-invert: #1c2128;
+  --color-fg-base: #d3dae3;
+  --color-fg-muted: #8b95a3;
+  --color-fg-subtle: #626b78;
+  --color-fg-invert: #0a0b0d;
 
-  /* Brand — teal */
-  --color-brand-400: #5eead4;
-  --color-brand-500: #2dd4bf;
-  --color-brand-600: #14b8a6;
+  /* Brand — ice / electric blue */
+  --color-brand-400: #7db8ff;
+  --color-brand-500: #4d9fff;
+  --color-brand-600: #2f7fe0;
 
   /* State */
   --color-success: #57ab5a;
   --color-warning: #c69026;
   --color-danger: #e5534b;
-  --color-info: #539bf5;
+  --color-info: #4d9fff;
 
   /* Radius */
   --radius-sm: 0.25rem;
@@ -53,21 +53,21 @@
 }
 
 :root {
-  --bg-base: #0d1117;
-  --bg-raised: #161b22;
-  --bg-elev: #21262d;
-  --border-default: #30363d;
-  --border-muted: #21262d;
-  --fg-base: #cdd9e5;
-  --fg-muted: #909dab;
-  --fg-subtle: #687480;
-  --fg-invert: #1c2128;
-  --brand-400: #5eead4;
-  --brand-500: #2dd4bf;
-  --brand-600: #14b8a6;
+  --bg-base: #0a0b0d;
+  --bg-raised: #101216;
+  --bg-elev: #191c22;
+  --border-default: #262a31;
+  --border-muted: #191c22;
+  --fg-base: #d3dae3;
+  --fg-muted: #8b95a3;
+  --fg-subtle: #626b78;
+  --fg-invert: #0a0b0d;
+  --brand-400: #7db8ff;
+  --brand-500: #4d9fff;
+  --brand-600: #2f7fe0;
   --success: #57ab5a;
   --warning: #c69026;
   --danger: #e5534b;
-  --info: #539bf5;
-  --focus-ring: rgb(45 212 191 / 0.6);
+  --info: #4d9fff;
+  --focus-ring: rgb(77 159 255 / 0.6);
 }

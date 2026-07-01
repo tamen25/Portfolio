@@ -10,10 +10,10 @@ export function SignalPills() {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <StatusPill variant="live">platform online</StatusPill>
-      <StatusPill variant="info">Cognito · OIDC</StatusPill>
-      <StatusPill variant="info">OTel · traces</StatusPill>
-      <StatusPill variant="success">Step Functions</StatusPill>
-      <StatusPill variant="warning">WS · streaming</StatusPill>
+      <StatusPill variant="muted">Cognito · OIDC</StatusPill>
+      <StatusPill variant="muted">OTel · traces</StatusPill>
+      <StatusPill variant="muted">Step Functions</StatusPill>
+      <StatusPill variant="muted">WS · streaming</StatusPill>
       <StatusPill variant="muted">RLS · multi-tenant</StatusPill>
     </div>
   );

@@ -50,7 +50,7 @@ const flows: Flow[] = [
     id: "page-load",
     label: "Page load",
     accent: "frontend",
-    packetColor: "#2dd4bf",
+    packetColor: "#4d9fff",
     nodes: [
       { icon: Globe, category: "client", name: "Browser", detail: "RSC + WS" },
       { icon: Cloud, category: "networking", name: "CloudFront", detail: "assets.<dom>" },
@@ -183,7 +183,7 @@ export function ArchPanel() {
           <LegendDot color="#DD344C" label="Security" />
           <LegendDot color="#E7157B" label="App Integration" />
           <LegendDot color="#5A4FCF" label="Analytics" />
-          <LegendDot color="#2dd4bf" label="Frontend · CloudOps" />
+          <LegendDot color="#4d9fff" label="Frontend · CloudOps" />
         </div>
       </Card>
     </section>

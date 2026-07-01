@@ -11,8 +11,9 @@ export function Hero() {
         <div className="space-y-8">
           <SignalPills />
 
-          <h1 className="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            <span className="gradient-text-brand">Production-shaped</span> operator console on Kubernetes &amp; AWS.
+          <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+            <span className="gradient-text-brand">Production-shaped</span>{" "}
+            operator console on Kubernetes &amp; AWS.
           </h1>
 
           <p className="max-w-2xl text-lg leading-relaxed text-fg-muted md:text-xl">

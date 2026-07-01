@@ -28,7 +28,7 @@ const KIND_COLORS: Record<Kind, string> = {
   scan: "#dd344c", // red — security scan
   gate: "#d29922", // gold — approval gate
   deploy: "#8c4fff", // violet — deploy
-  target: "#2dd4bf", // teal — runtime target
+  target: "#4d9fff", // teal — runtime target
 };
 
 const PIPELINES: Pipeline[] = [
@@ -80,10 +80,10 @@ function StageTile({ stage }: { stage: Stage }) {
     <div
       className="flex min-w-0 flex-1 basis-0 flex-col gap-1 rounded-lg border bg-bg-raised/70 px-2.5 py-2.5 transition-all duration-200"
       style={{
-        borderColor: stage.primary ? "rgba(94,234,212,0.45)" : undefined,
+        borderColor: stage.primary ? "rgba(125, 184, 255,0.45)" : undefined,
         borderTopColor: c,
         borderTopWidth: 2,
-        background: stage.primary ? "rgba(45,212,191,0.06)" : undefined,
+        background: stage.primary ? "rgba(77, 159, 255,0.06)" : undefined,
       }}
     >
       <div className="flex items-center gap-2">
@@ -160,8 +160,8 @@ function PipelineTrack({
         style={{
           width: 6,
           height: 6,
-          backgroundColor: "#5eead4",
-          boxShadow: "0 0 10px #5eead4",
+          backgroundColor: "#7db8ff",
+          boxShadow: "0 0 10px #7db8ff",
           animation: "flow-move 4.6s linear infinite",
           animationDelay: `${(seed * -0.9 - 2.3).toFixed(2)}s`,
           opacity: 0.85,

@@ -138,10 +138,10 @@ function ServiceTile({ step }: ServiceTileProps) {
     <div
       className="flex min-w-[140px] flex-1 flex-col gap-1 rounded-lg border bg-bg-raised/70 px-3.5 py-3 transition-all duration-200"
       style={{
-        borderColor: step.primary ? "rgba(94,234,212,0.45)" : undefined,
+        borderColor: step.primary ? "rgba(125, 184, 255,0.45)" : undefined,
         borderTopColor: c,
         borderTopWidth: 2,
-        background: step.primary ? "rgba(45,212,191,0.06)" : undefined,
+        background: step.primary ? "rgba(77, 159, 255,0.06)" : undefined,
       }}
     >
       <div className="flex items-center gap-2">
@@ -216,8 +216,8 @@ function FlowTrack({ accent, steps, active, seed }: FlowTrackProps) {
         style={{
           width: 6,
           height: 6,
-          backgroundColor: "#5eead4",
-          boxShadow: "0 0 10px #5eead4",
+          backgroundColor: "#7db8ff",
+          boxShadow: "0 0 10px #7db8ff",
           animation: "flow-move 4.2s linear infinite",
           animationDelay: `${(seed * -0.9 - 2.1).toFixed(2)}s`,
           opacity: 0.85,

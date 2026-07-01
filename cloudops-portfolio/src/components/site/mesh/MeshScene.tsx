@@ -21,7 +21,7 @@ export function MeshScene() {
   return (
     <>
       <ambientLight intensity={0.4} />
-      <pointLight position={[6, 6, 8]} intensity={1.2} color="#5eead4" />
+      <pointLight position={[6, 6, 8]} intensity={1.2} color="#7db8ff" />
       <group ref={group}>
         {EDGES.map(([s, t], i) => (
           <Edge

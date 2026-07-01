@@ -58,9 +58,9 @@ export default function DesignPreview() {
 
       <Section title="Brand">
         <div className="grid grid-cols-3 gap-4">
-          <Swatch label="brand.400" hex="#5eead4" className="bg-brand-400 text-fg-invert" />
-          <Swatch label="brand.500" hex="#2dd4bf" className="bg-brand-500 text-fg-invert" />
-          <Swatch label="brand.600" hex="#14b8a6" className="bg-brand-600 text-fg-invert" />
+          <Swatch label="brand.400" hex="#7db8ff" className="bg-brand-400 text-fg-invert" />
+          <Swatch label="brand.500" hex="#4d9fff" className="bg-brand-500 text-fg-invert" />
+          <Swatch label="brand.600" hex="#2f7fe0" className="bg-brand-600 text-fg-invert" />
         </div>
       </Section>
 

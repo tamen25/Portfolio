@@ -28,7 +28,7 @@ const categoryGradient: Record<ServiceCategory, string> = {
   integration: "from-[#E7157B] to-[#A50E58]",
   analytics: "from-[#5A4FCF] to-[#3525A0]",
   ml: "from-[#01A88D] to-[#057E69]",
-  frontend: "from-[#2dd4bf] to-[#14b8a6]",
+  frontend: "from-[#4d9fff] to-[#2f7fe0]",
   client: "from-[#374151] to-[#1f2937]",
 };
 

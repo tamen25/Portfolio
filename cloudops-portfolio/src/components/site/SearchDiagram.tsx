@@ -22,7 +22,7 @@ export function SearchDiagram() {
       </g>
 
       <g transform="translate(180, 70)">
-        <rect x="-40" y="-22" width="80" height="44" rx="6" fill="#161b22" stroke="#2dd4bf" />
+        <rect x="-40" y="-22" width="80" height="44" rx="6" fill="#161b22" stroke="#4d9fff" />
         <text textAnchor="middle" y="-2" fontSize="10" fontFamily="var(--font-mono)" fill="#cdd9e5">
           λ gateway
         </text>

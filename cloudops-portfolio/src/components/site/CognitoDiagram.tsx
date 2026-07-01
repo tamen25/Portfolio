@@ -35,7 +35,7 @@ export function CognitoDiagram() {
       />
       {NODES.map((n) => (
         <g key={n.id} transform={`translate(${n.x}, 60)`}>
-          <circle r="14" fill="#161b22" stroke="#2dd4bf" strokeWidth="1" />
+          <circle r="14" fill="#161b22" stroke="#4d9fff" strokeWidth="1" />
           <text
             y="3"
             textAnchor="middle"
@@ -56,7 +56,7 @@ export function CognitoDiagram() {
           </text>
         </g>
       ))}
-      <circle r="3" fill="#2dd4bf" data-motion="packet">
+      <circle r="3" fill="#4d9fff" data-motion="packet">
         <animate
           attributeName="cx"
           values="30;430"

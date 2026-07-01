@@ -5,8 +5,8 @@ import { useFrame } from "@react-three/fiber";
 import type { Mesh } from "three";
 import type { Vec3 } from "@/lib/mesh-layout";
 
-const BRAND = "#2dd4bf";
-const BRAND_HOT = "#5eead4";
+const BRAND = "#4d9fff";
+const BRAND_HOT = "#7db8ff";
 
 export function Node({
   position,

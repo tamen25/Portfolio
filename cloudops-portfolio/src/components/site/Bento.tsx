@@ -29,7 +29,7 @@ function BentoTile({
   return (
     <Link
       href={href}
-      className={`group relative flex flex-col gap-4 rounded-2xl border border-border-default/80 bg-bg-raised/55 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_30px_80px_-20px_rgba(45,212,191,0.18)] ${
+      className={`group relative flex flex-col gap-4 rounded-2xl border border-border-default/80 bg-bg-raised/55 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_30px_80px_-20px_rgba(77, 159, 255,0.18)] ${
         className ?? ""
       }`}
     >

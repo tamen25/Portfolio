@@ -109,7 +109,7 @@ export function SecurityPanel() {
                   <Sparkline
                     seed={1 + i * 173}
                     pattern={s.pattern}
-                    color={s.pattern === "spike" ? "#f59e0b" : "#2dd4bf"}
+                    color={s.pattern === "spike" ? "#f59e0b" : "#4d9fff"}
                   />
                 </div>
               ))}

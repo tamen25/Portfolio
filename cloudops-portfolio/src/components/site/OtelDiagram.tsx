@@ -1,5 +1,5 @@
 const SIGNALS = [
-  { id: "spans", label: "spans", colour: "#2dd4bf" },
+  { id: "spans", label: "spans", colour: "#4d9fff" },
   { id: "metrics", label: "metrics", colour: "#a78bfa" },
   { id: "logs", label: "logs", colour: "#f59e0b" },
 ];
@@ -18,7 +18,7 @@ export function OtelDiagram() {
       </g>
 
       <g transform="translate(220, 75)">
-        <rect x="-44" y="-22" width="88" height="44" rx="6" fill="#161b22" stroke="#2dd4bf" />
+        <rect x="-44" y="-22" width="88" height="44" rx="6" fill="#161b22" stroke="#4d9fff" />
         <text textAnchor="middle" y="-4" fontSize="10" fontFamily="var(--font-mono)" fill="#cdd9e5">
           OTel
         </text>

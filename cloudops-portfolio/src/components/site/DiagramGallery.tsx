@@ -229,7 +229,7 @@ function DiagramCard({ item, onOpen }: DiagramCardProps) {
     <button
       type="button"
       onClick={() => onOpen(item)}
-      className={`group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-border-default/80 bg-bg-raised/55 p-6 text-left backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_30px_80px_-20px_rgba(45,212,191,0.18)] ${item.span}`}
+      className={`group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-border-default/80 bg-bg-raised/55 p-6 text-left backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_30px_80px_-20px_rgba(77, 159, 255,0.18)] ${item.span}`}
     >
       <header className="flex items-start justify-between gap-3">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-fg-subtle">
