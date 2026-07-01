@@ -35,6 +35,17 @@ npm run test:coverage  # tests with coverage thresholds
 npm run contract-check # tsx scripts/contract-check.ts
 ```
 
+### photography-portfolio (Next.js + TypeScript)
+
+```bash
+cd photography-portfolio
+npm install            # install deps
+npm run dev            # start dev server (next dev; use -p 3001 if 3000 is busy)
+npm run build          # production build
+npm run lint           # eslint
+npm test               # tsx --test test/*.test.ts
+```
+
 ## Adding a new website
 
 1. Create a new top-level folder at the repo root.
