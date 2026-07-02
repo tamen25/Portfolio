@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { HorizonRule } from "@/components/HorizonRule";
+import { CollectionNav } from "@/components/gallery/CollectionNav";
 import { PortfolioGallery } from "@/components/gallery/PortfolioGallery";
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function PortfolioPage() {
           photographed over the last several years.
         </p>
         <HorizonRule className="mt-10" />
+        <CollectionNav />
         <PortfolioGallery />
       </main>
       <Footer />

@@ -21,7 +21,7 @@ export function PortfolioGallery() {
       {COLLECTIONS.map((c, ci) => {
         const photos = photosByCollection(c.id);
         return (
-          <section key={c.id} id={c.id} className="scroll-mt-24 pt-20">
+          <section key={c.id} id={c.id} className="scroll-mt-36 pt-20">
             <Reveal>
               <h2 className="font-display text-2xl font-medium tracking-tight md:text-3xl">
                 {c.name}
