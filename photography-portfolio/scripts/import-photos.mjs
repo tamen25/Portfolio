@@ -96,5 +96,15 @@ for (const [dir, collection] of Object.entries(COLLECTION_DIRS)) {
   }
 }
 
+// One-off portrait for the About section; not part of the gallery manifest.
+await mkdir(path.join(OUT, "about"), { recursive: true });
+const about = await sharp(path.join(SRC, "About", "Pro.jpg"))
+  .rotate()
+  .resize(LONG_EDGE, LONG_EDGE, { fit: "inside", withoutEnlargement: true })
+  .jpeg({ quality: 88, progressive: true, mozjpeg: true })
+  .toBuffer({ resolveWithObject: true });
+await writeFile(path.join(OUT, "about", "portrait.jpg"), about.data);
+console.log(`About/Pro.jpg -> ${about.info.width}x${about.info.height}`);
+
 await writeFile(MANIFEST, JSON.stringify(manifest, null, 2) + "\n");
 console.log(`\n${manifest.length} photos written; manifest at ${MANIFEST}`);
