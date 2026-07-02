@@ -19,10 +19,33 @@ export default function HlsVideo({ className = "" }: { className?: string }) {
       const { default: Hls } = await import("hls.js");
       if (cancelled) return;
       if (Hls.isSupported()) {
-        hls = new Hls();
+        hls = new Hls({
+          // Default estimate is ~500 kbps, which starts playback on the
+          // 360p rendition of this stream. Full-screen background video
+          // upscaled from 360p is visibly soft, so bias high.
+          abrEwmaDefaultEstimate: 8_000_000,
+        });
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          const h = hls;
+          if (!h) return;
+          // Lock to the sharpest rendition; a moment of buffering is far
+          // less visible than an upscaled low-bitrate loop.
+          let top = 0;
+          h.levels.forEach((level, i) => {
+            const best = h.levels[top];
+            if (
+              level.height > best.height ||
+              (level.height === best.height && level.bitrate > best.bitrate)
+            ) {
+              top = i;
+            }
+          });
+          h.currentLevel = top;
+        });
         hls.loadSource(STREAM);
         hls.attachMedia(video);
       } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        // Native HLS (Safari) picks renditions itself; no override API.
         video.src = STREAM;
       }
     })();
