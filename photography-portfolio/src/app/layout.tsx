@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { JetBrains_Mono } from "next/font/google";
+import { Great_Vibes, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const clash = localFont({
@@ -27,10 +27,23 @@ const jbMono = JetBrains_Mono({
   variable: "--font-jbmono",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+});
+
+const vibes = Great_Vibes({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-vibes",
+});
+
 export const metadata: Metadata = {
   title: "Tamen Dutta | Landscape Photography",
   description:
-    "Landscape photography by Tamen Dutta: mountains, coasts, and night skies, photographed slowly.",
+    "Landscape photography by Tamen Dutta: Iceland, the high Himalaya, and the night sky, photographed slowly.",
 };
 
 export default function RootLayout({
@@ -41,9 +54,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${clash.variable} ${satoshi.variable} ${jbMono.variable}`}
+      className={`${clash.variable} ${satoshi.variable} ${jbMono.variable} ${playfair.variable} ${vibes.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <div aria-hidden className="grain" />
+      </body>
     </html>
   );
 }

@@ -1,34 +1,50 @@
 import Image from "next/image";
-import { photosByCollection } from "@/lib/photos";
+import Link from "next/link";
+import { photoById } from "@/lib/photos";
 import { Reveal } from "./Reveal";
 
 export function About() {
-  const photo = photosByCollection("coasts")[1];
+  const photo = photoById("iceland-day-4-mann");
 
   return (
-    <section id="about" className="mx-auto max-w-[1400px] scroll-mt-24 px-6 pt-32">
-      <div className="grid gap-10 md:grid-cols-12 md:items-center">
-        <Reveal className="md:col-span-5">
-          <Image
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            sizes="(min-width: 768px) 40vw, 100vw"
-            className="w-full object-cover"
-          />
-        </Reveal>
-        <Reveal className="md:col-span-6 md:col-start-7" delay={0.1}>
-          <h2 className="font-display text-3xl font-medium tracking-tight md:text-4xl">
+    <section id="about" className="mx-auto max-w-[1400px] scroll-mt-24 px-6 pt-36">
+      <div className="grid gap-12 md:grid-cols-12 md:items-center">
+        <Reveal className="md:col-span-6">
+          <h2 className="font-serif text-4xl font-medium tracking-tight md:text-5xl">
             About
           </h2>
           {/* Placeholder bio; Tamen supplies the real one (spec section 8). */}
-          <p className="mt-6 max-w-[65ch] leading-relaxed text-overcast">
+          <p className="mt-8 max-w-[62ch] leading-relaxed text-overcast">
             I am Tamen Dutta. I photograph landscapes: long walks, early
             starts, and weather that rarely cooperates. Every image here was
             made in the field, on foot, waiting for the light to do what it
             was going to do anyway.
           </p>
+          <p className="mt-4 max-w-[62ch] leading-relaxed text-overcast">
+            The work moves between Iceland&rsquo;s coasts and glaciers, the
+            high passes of Spiti and Ladakh, and long nights under dark
+            Himalayan skies. No composites, no staged skies. What was there,
+            when it was there.
+          </p>
+          <Link
+            href="/portfolio"
+            className="mt-9 inline-flex h-11 items-center rounded-full border border-snowlight/25 px-6 text-sm text-snowlight transition-colors hover:border-alpenglow hover:text-alpenglow active:scale-[0.98]"
+          >
+            Learn more
+          </Link>
+        </Reveal>
+        <Reveal className="md:col-span-5 md:col-start-8" delay={0.1}>
+          <div className="rounded-2xl bg-snowlight/5 p-2 shadow-[0_24px_80px_-24px_rgba(3,4,10,0.9)] ring-1 ring-snowlight/10">
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              sizes="(min-width: 768px) 40vw, 100vw"
+              quality={90}
+              className="w-full rounded-xl object-cover"
+            />
+          </div>
         </Reveal>
       </div>
     </section>

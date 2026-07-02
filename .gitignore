@@ -39,6 +39,9 @@ Thumbs.db
 # ---- Design references (template exports, not redistributable) ----
 photography-portfolio/design-refs/
 
+# ---- Full-res photo originals (~3 GB; web copies live in public/photos) ----
+photography-portfolio/Photo/
+
 # ---- Claude Code (keep tracked project CLAUDE.md, ignore local artifacts) ----
 .claude/
 .claude.json

@@ -18,7 +18,8 @@ export default function PortfolioPage() {
           Portfolio
         </h1>
         <p className="mt-4 max-w-md text-overcast">
-          Three collections, photographed over the last several years.
+          Six collections, from Iceland to the Himalaya to the night sky,
+          photographed over the last several years.
         </p>
         <HorizonRule className="mt-10" />
         <PortfolioGallery />

@@ -18,7 +18,7 @@ export function PortfolioGallery() {
 
   return (
     <div>
-      {COLLECTIONS.map((c) => {
+      {COLLECTIONS.map((c, ci) => {
         const photos = photosByCollection(c.id);
         return (
           <section key={c.id} id={c.id} className="scroll-mt-24 pt-20">
@@ -43,6 +43,8 @@ export function PortfolioGallery() {
                       width={p.width}
                       height={p.height}
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      quality={90}
+                      priority={ci === 0 && i < 3}
                       className="w-full transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </span>
