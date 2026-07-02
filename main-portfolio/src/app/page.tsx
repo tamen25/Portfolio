@@ -5,6 +5,7 @@ import { AnimatePresence } from "motion/react";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Works from "@/components/Works";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +20,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero started={!isLoading} />
+        <Works />
       </main>
     </>
   );
