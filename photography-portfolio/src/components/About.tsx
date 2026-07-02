@@ -29,8 +29,8 @@ export function About() {
           <p className="mt-4 max-w-[62ch] leading-relaxed text-overcast">
             The work moves between Iceland&rsquo;s coasts and glaciers, the
             high passes of Spiti and Ladakh, and long nights under dark
-            Himalayan skies. No composites, no staged skies. What was there,
-            when it was there.
+            Himalayan skies. Some frames are a single exposure; the deep-sky
+            work is stacked from hours under the same sky.
           </p>
           <Link
             href="/portfolio"
