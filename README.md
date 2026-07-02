@@ -7,7 +7,6 @@ top-level folder and is self-contained (its own dependencies, build, and config)
 
 | Folder | Stack | Description |
 | ------ | ----- | ----------- |
-| [`main-portfolio/`](./main-portfolio) | Next.js + TypeScript + Tailwind | Root-domain hub landing page linking to all sites |
 | [`cloudops-portfolio/`](./cloudops-portfolio) | Next.js + TypeScript + Tailwind | CloudOps portfolio site |
 | [`photography-portfolio/`](./photography-portfolio) | Next.js + TypeScript + Tailwind | Landscape photography portfolio |
 
