@@ -258,8 +258,31 @@ export const photoById = (id: string): Photo => {
   return photo;
 };
 
-export const photosByCollection = (id: CollectionId): Photo[] =>
-  PHOTOS.filter((p) => p.collection === id);
+/**
+ * Hand-curated display order per collection. List photo ids here in the
+ * order they should appear on the site; anything not listed follows after
+ * the curated ones, keeping import (filename) order. Edit freely; a test
+ * fails on any id that does not exist.
+ */
+export const ORDER: Partial<Record<CollectionId, string[]>> = {
+  // Example:
+  // iceland: [
+  //   "iceland-aurora-kirk",
+  //   "iceland-day-10-kirk-au",
+  //   "iceland-day-5-vestra",
+  // ],
+};
+
+export const photosByCollection = (id: CollectionId): Photo[] => {
+  const photos = PHOTOS.filter((p) => p.collection === id);
+  const order = ORDER[id];
+  if (!order?.length) return photos;
+  const rank = new Map(order.map((photoId, i) => [photoId, i]));
+  return [...photos].sort(
+    (a, b) =>
+      (rank.get(a.id) ?? order.length) - (rank.get(b.id) ?? order.length),
+  );
+};
 
 export const collectionCover = (id: CollectionId): Photo => {
   const collection = COLLECTIONS.find((c) => c.id === id);

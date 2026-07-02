@@ -6,9 +6,11 @@ import {
   HERO_PHOTO,
   PANORAMA_PHOTO,
   INSTAGRAM_PHOTOS,
+  ORDER,
   photosByCollection,
   collectionCover,
   formatExif,
+  type CollectionId,
 } from "../src/lib/photos";
 import { SITE } from "../src/lib/site";
 
@@ -43,6 +45,27 @@ test("panorama is actually wide", () => {
 
 test("instagram strip has 6 photos", () => {
   assert.equal(INSTAGRAM_PHOTOS.length, 6);
+});
+
+test("curated ORDER only references real photo ids, no duplicates", () => {
+  for (const [collection, ids] of Object.entries(ORDER)) {
+    assert.equal(new Set(ids).size, ids.length, `${collection}: duplicate id`);
+    for (const id of ids) {
+      assert.ok(
+        PHOTOS.some((p) => p.id === id && p.collection === collection),
+        `${collection}: unknown id ${id}`,
+      );
+    }
+  }
+});
+
+test("curated photos lead their collection in the given order", () => {
+  for (const [collection, ids] of Object.entries(ORDER)) {
+    const shown = photosByCollection(collection as CollectionId).map(
+      (p) => p.id,
+    );
+    assert.deepEqual(shown.slice(0, ids.length), ids, collection);
+  }
 });
 
 test("formatExif renders the caption line", () => {
