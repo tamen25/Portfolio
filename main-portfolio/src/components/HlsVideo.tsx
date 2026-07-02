@@ -2,8 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
+// min_resolution prunes every low rendition from the manifest itself, so
+// even native-HLS players (Safari) can only play the 1708x1212 top tier.
 const STREAM =
-  "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
+  "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8?min_resolution=1080p";
 
 /** Absolutely-centered, cover-fitted background video fed by hls.js. */
 export default function HlsVideo({ className = "" }: { className?: string }) {
