@@ -13,7 +13,6 @@ dependencies.
 
 ```
 Portfolio/                 # repo root (remote: github.com/tamen25/Portfolio.git)
-├── main-portfolio/        # root-domain 3D-creator landing page
 ├── cloudops-portfolio/    # Next.js + TypeScript + Tailwind site
 └── <future-site>/         # each new website added as its own top-level folder
 ```
@@ -42,19 +41,6 @@ npm run contract-check # tsx scripts/contract-check.ts
 cd photography-portfolio
 npm install            # install deps
 npm run dev            # start dev server (next dev; use -p 3001 if 3000 is busy)
-npm run build          # production build
-npm run lint           # eslint
-npm test               # tsx --test test/*.test.ts
-```
-
-### main-portfolio (Next.js + TypeScript)
-
-The root-domain landing page ("Jack — 3D Creator" design).
-
-```bash
-cd main-portfolio
-npm install            # install deps
-npm run dev            # start dev server on port 3002
 npm run build          # production build
 npm run lint           # eslint
 npm test               # tsx --test test/*.test.ts
