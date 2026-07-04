@@ -26,6 +26,11 @@ export const SITE = {
     bridge:
       "Two crafts, one obsession: pattern. Whether it's a well-typed function or a well-timed frame, I'm looking for the shape underneath.",
   },
+  about: {
+    dev: "Typed systems, visible state, small ships. I like software that can explain itself — and deleting more code than I add.",
+    photo:
+      "High passes and dark skies — Iceland, Spiti, Leh, Sikkim, and long nights pointed at the stars, waiting for light to cooperate.",
+  },
   stack: [
     "TypeScript",
     "React",

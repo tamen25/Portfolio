@@ -2,6 +2,8 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Developer from "@/components/Developer";
 import Photographer from "@/components/Photographer";
+import About from "@/components/About";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -12,8 +14,8 @@ export default function Home() {
         <Hero />
         <Developer />
         <Photographer />
-        <section id="about" />
-        <section id="contact" />
+        <About />
+        <Contact />
       </main>
       <Footer />
     </div>
