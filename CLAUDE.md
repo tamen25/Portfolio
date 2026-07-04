@@ -47,10 +47,17 @@ npm test               # tsx --test test/*.test.ts
 npm run sync-instagram # regenerate photo manifest from Instagram (see .env.example)
 ```
 
-The photo manifest is Instagram-driven: `sync-instagram` fetches posts (Behold
-feed or Instagram Graph API), downloads new images to `public/photos/`, and
-rewrites `src/lib/photo-manifest.json`. After a sync, re-run
-`npm run import-photos` in `main-portfolio` to refresh its gallery.
+The photo manifest is Instagram-driven: `sync-instagram` fetches posts (data
+export folder via `--from-export`, Behold feed, or Instagram Graph API),
+downloads new images to `public/photos/`, and rewrites
+`src/lib/photo-manifest.json`. After a sync, re-run `npm run import-photos`
+in `main-portfolio` to refresh its gallery.
+
+Automatic syncing: the `PortfolioInstagramSync` Windows scheduled task runs
+`scripts/instagram-auto-sync.ps1` (repo root) daily at 20:00 — it syncs,
+re-imports, and commits when there are new posts. It no-ops until an
+Instagram source is configured; flip `$Push` in the script once deployment
+is wired to origin.
 
 ### main-portfolio (Next.js + TypeScript + Three.js)
 
