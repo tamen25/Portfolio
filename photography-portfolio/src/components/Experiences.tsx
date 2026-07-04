@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { photoById } from "@/lib/photos";
+import { pinnedPhoto } from "@/lib/photos";
 import { Reveal } from "./Reveal";
 
 /**
@@ -36,9 +36,9 @@ function Moon({
 }
 
 export function Experiences() {
-  const tall = photoById("spiti-langza-buddha");
-  const wide = photoById("iceland-day-7-aurora");
-  const small = photoById("moon-moonhdr");
+  const tall = pinnedPhoto("spiti-langza-buddha", 6);
+  const wide = pinnedPhoto("iceland-day-7-aurora", 7);
+  const small = pinnedPhoto("moon-moonhdr", 8);
 
   return (
     <section className="mx-auto max-w-[1400px] px-6 pt-36">

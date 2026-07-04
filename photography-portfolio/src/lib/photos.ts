@@ -1,12 +1,23 @@
 import manifest from "./photo-manifest.json";
 
-export type CollectionId =
-  | "iceland"
-  | "spiti"
-  | "astro"
-  | "moon"
-  | "leh"
-  | "sikkim";
+/**
+ * Collections are derived from the manifest (which `npm run sync-instagram`
+ * regenerates from Instagram), so ids are open-ended. The six original
+ * collections plus "journal" (untagged posts) have curated names/blurbs.
+ */
+export type CollectionId = string;
+
+type ManifestEntry = {
+  id: string;
+  collection: string;
+  src: string;
+  width: number;
+  height: number;
+  /** Present on Instagram-synced entries. */
+  alt?: string;
+  permalink?: string | null;
+  timestamp?: string | null;
+};
 
 export type Exif = {
   focal: string;
@@ -24,6 +35,7 @@ export type Photo = {
   collection: CollectionId;
   width: number;
   height: number;
+  permalink?: string | null;
   exif?: Exif;
 };
 
@@ -31,46 +43,59 @@ export type Collection = {
   id: CollectionId;
   name: string;
   blurb: string;
-  coverId: string;
+  coverId?: string;
 };
 
-export const COLLECTIONS: Collection[] = [
-  {
-    id: "iceland",
+/** Curated names, blurbs, and preferred covers for known collections. */
+const COLLECTION_META: Record<
+  string,
+  { name: string; blurb: string; coverId?: string }
+> = {
+  iceland: {
     name: "Iceland",
     blurb: "Ten days around the ring road, chasing weather and aurora.",
     coverId: "iceland-day-10-kirk-au",
   },
-  {
-    id: "spiti",
+  spiti: {
     name: "Spiti",
     blurb: "The cold desert at altitude, and its very dark skies.",
     coverId: "spiti-milky-lang-2",
   },
-  {
-    id: "astro",
+  astro: {
     name: "Deep sky",
     blurb: "Galaxies, nebulae, and one good comet.",
     coverId: "astro-andromeda-2022",
   },
-  {
-    id: "moon",
+  moon: {
     name: "Moon",
     blurb: "One subject, photographed for years.",
     coverId: "moon-moonhdr",
   },
-  {
-    id: "leh",
+  leh: {
     name: "Leh",
     blurb: "High passes and still lakes in Ladakh.",
     coverId: "leh-tso2",
   },
-  {
-    id: "sikkim",
+  sikkim: {
     name: "Sikkim",
     blurb: "The eastern Himalaya at sunrise.",
     coverId: "sikkim-ravangla-buddha",
   },
+  journal: {
+    name: "Field notes",
+    blurb: "Everything else from the feed.",
+  },
+};
+
+/** Known collections come first, in this order; new ones follow. */
+const COLLECTION_PREFERENCE = [
+  "iceland",
+  "spiti",
+  "astro",
+  "moon",
+  "leh",
+  "sikkim",
+  "journal",
 ];
 
 /**
@@ -240,23 +265,48 @@ const humanize = (id: string, collection: CollectionId): string => {
   return words.charAt(0).toUpperCase() + words.slice(1);
 };
 
-export const PHOTOS: Photo[] = manifest.map((m) => {
-  const collection = m.collection as CollectionId;
-  return {
-    id: m.id,
-    src: m.src,
-    collection,
-    width: m.width,
-    height: m.height,
-    alt: ALT[m.id] ?? humanize(m.id, collection),
-  };
-});
+export const PHOTOS: Photo[] = (manifest as ManifestEntry[]).map((m) => ({
+  id: m.id,
+  src: m.src,
+  collection: m.collection,
+  width: m.width,
+  height: m.height,
+  alt: m.alt ?? ALT[m.id] ?? humanize(m.id, m.collection),
+  permalink: m.permalink ?? null,
+}));
+
+/** Collections present in the manifest, known ones first. */
+export const COLLECTIONS: Collection[] = [
+  ...new Set(PHOTOS.map((p) => p.collection)),
+]
+  .sort((a, b) => {
+    const ia = COLLECTION_PREFERENCE.indexOf(a);
+    const ib = COLLECTION_PREFERENCE.indexOf(b);
+    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib) || a.localeCompare(b);
+  })
+  .map((id) => {
+    const meta = COLLECTION_META[id];
+    return {
+      id,
+      name: meta?.name ?? id.charAt(0).toUpperCase() + id.slice(1),
+      blurb: meta?.blurb ?? "",
+      coverId: meta?.coverId,
+    };
+  });
 
 export const photoById = (id: string): Photo => {
   const photo = PHOTOS.find((p) => p.id === id);
   if (!photo) throw new Error(`unknown photo id: ${id}`);
   return photo;
 };
+
+/**
+ * Editorial slots pin a specific frame but must survive the manifest being
+ * regenerated from Instagram: if the pinned id is gone, fall back to a
+ * deterministic frame so layouts stay filled and builds never crash.
+ */
+export const pinnedPhoto = (id: string, fallbackIndex = 0): Photo =>
+  PHOTOS.find((p) => p.id === id) ?? PHOTOS[fallbackIndex % PHOTOS.length];
 
 /**
  * Hand-curated display order per collection. List photo ids here in the
@@ -284,24 +334,44 @@ export const photosByCollection = (id: CollectionId): Photo[] => {
   );
 };
 
+const maybePhotoById = (id: string | undefined): Photo | undefined =>
+  id ? PHOTOS.find((p) => p.id === id) : undefined;
+
 export const collectionCover = (id: CollectionId): Photo => {
   const collection = COLLECTIONS.find((c) => c.id === id);
-  return collection ? photoById(collection.coverId) : photosByCollection(id)[0];
+  return (
+    maybePhotoById(collection?.coverId) ?? photosByCollection(id)[0]
+  );
 };
 
-export const HERO_PHOTO: Photo = photoById("iceland-aurora-kirk");
+const aspect = (p: Photo) => p.width / p.height;
 
-export const PANORAMA_PHOTO: Photo = photoById("iceland-day-8-dynjandi-beach");
+/** Pinned classic when present; otherwise the first landscape frame. */
+export const HERO_PHOTO: Photo =
+  maybePhotoById("iceland-aurora-kirk") ??
+  PHOTOS.find((p) => aspect(p) > 1.1) ??
+  PHOTOS[0];
 
-/** One frame per collection, mixed orientations for the masonry strip. */
-export const INSTAGRAM_PHOTOS: Photo[] = [
+/** Pinned classic when present; otherwise the widest frame available. */
+export const PANORAMA_PHOTO: Photo =
+  maybePhotoById("iceland-day-8-dynjandi-beach") ??
+  [...PHOTOS].sort((a, b) => aspect(b) - aspect(a))[0];
+
+/** Newest frames for the strip; falls back to the curated classics. */
+const CURATED_STRIP = [
   "iceland-day-7-godafoss",
   "spiti-dipper",
   "astro-neowisse",
   "moon-moonrise",
   "leh-umingla-bikes",
   "sikkim-sun600-2",
-].map(photoById);
+];
+
+export const INSTAGRAM_PHOTOS: Photo[] = CURATED_STRIP.every((id) =>
+  PHOTOS.some((p) => p.id === id),
+)
+  ? CURATED_STRIP.map(photoById)
+  : PHOTOS.slice(0, 6);
 
 export const formatExif = (e: Exif): string =>
   `${e.focal} · ${e.aperture} · ${e.shutter} · ISO ${e.iso}`;

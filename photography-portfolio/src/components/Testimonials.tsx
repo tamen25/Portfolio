@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { photoById } from "@/lib/photos";
+import { pinnedPhoto } from "@/lib/photos";
 import { Reveal } from "./Reveal";
 
 const STRIP = [
-  { photo: photoById("iceland-day-3-skoga"), className: "hidden w-40 lg:block" },
-  { photo: photoById("iceland-day-4-dbeach"), className: "hidden w-52 sm:block" },
-  { photo: photoById("iceland-aurora-kirk"), className: "w-full max-w-[26rem]", center: true },
-  { photo: photoById("spiti-key-1"), className: "hidden w-52 sm:block" },
-  { photo: photoById("sikkim-ravangla-buddha"), className: "hidden w-40 lg:block" },
+  { photo: pinnedPhoto("iceland-day-3-skoga", 0), className: "hidden w-40 lg:block" },
+  { photo: pinnedPhoto("iceland-day-4-dbeach", 1), className: "hidden w-52 sm:block" },
+  { photo: pinnedPhoto("iceland-aurora-kirk", 2), className: "w-full max-w-[26rem]", center: true },
+  { photo: pinnedPhoto("spiti-key-1", 3), className: "hidden w-52 sm:block" },
+  { photo: pinnedPhoto("sikkim-ravangla-buddha", 4), className: "hidden w-40 lg:block" },
 ];
 
 export function Testimonials() {

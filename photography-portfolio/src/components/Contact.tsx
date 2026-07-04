@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { SITE } from "@/lib/site";
-import { photoById } from "@/lib/photos";
+import { pinnedPhoto } from "@/lib/photos";
 import { Reveal } from "./Reveal";
 
 export function Contact() {
-  const photo = photoById("iceland-day-6-stongsunset");
+  const photo = pinnedPhoto("iceland-day-6-stongsunset", 5);
 
   return (
     <section id="contact" className="mx-auto max-w-[1400px] scroll-mt-24 px-6 pt-36">

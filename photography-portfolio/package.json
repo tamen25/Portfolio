@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test test/*.test.ts"
+    "test": "tsx --test test/*.test.ts",
+    "sync-instagram": "node scripts/sync-instagram.mjs"
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.76",
@@ -25,6 +26,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5"

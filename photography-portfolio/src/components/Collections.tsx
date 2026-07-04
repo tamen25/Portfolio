@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { COLLECTIONS, photoById, photosByCollection } from "@/lib/photos";
+import { COLLECTIONS, pinnedPhoto, photosByCollection } from "@/lib/photos";
 import { CollectionCard } from "./CollectionCard";
 import { Reveal } from "./Reveal";
 
 export function Collections() {
   const [iceland, ...others] = COLLECTIONS;
-  const feature = photoById("iceland-day-3-sei");
+  const feature = pinnedPhoto("iceland-day-3-sei", 9);
   const icelandCount = photosByCollection("iceland").length;
 
   return (

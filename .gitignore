@@ -16,6 +16,9 @@ build/
 !.env.example
 !.env.*.example
 
+# ---- Instagram sync token (auto-refreshed by scripts/sync-instagram.mjs) ----
+.instagram-token
+
 # ---- Framework generated ----
 next-env.d.ts
 

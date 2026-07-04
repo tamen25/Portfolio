@@ -20,7 +20,8 @@ test("site config is complete", () => {
   assert.ok(SITE.instagram === null || SITE.instagram.startsWith("https://"));
 });
 
-test("photo ids are unique", () => {
+test("photo ids are unique and manifest is non-empty", () => {
+  assert.ok(PHOTOS.length > 0);
   const ids = PHOTOS.map((p) => p.id);
   assert.equal(new Set(ids).size, ids.length);
 });
@@ -32,19 +33,24 @@ test("every photo has alt text and positive dimensions", () => {
   }
 });
 
-test("every collection has at least 4 photos and a cover", () => {
+test("every derived collection is non-empty and has a cover", () => {
   for (const c of COLLECTIONS) {
-    assert.ok(photosByCollection(c.id).length >= 4, c.id);
+    assert.ok(photosByCollection(c.id).length >= 1, c.id);
     assert.ok(collectionCover(c.id));
   }
 });
 
-test("panorama is actually wide", () => {
-  assert.ok(PANORAMA_PHOTO.width / PANORAMA_PHOTO.height >= 2);
+test("panorama is the pinned classic or the widest frame available", () => {
+  const ratio = (p: { width: number; height: number }) => p.width / p.height;
+  const widest = Math.max(...PHOTOS.map(ratio));
+  assert.ok(
+    PANORAMA_PHOTO.id === "iceland-day-8-dynjandi-beach" ||
+      ratio(PANORAMA_PHOTO) === widest,
+  );
 });
 
-test("instagram strip has 6 photos", () => {
-  assert.equal(INSTAGRAM_PHOTOS.length, 6);
+test("instagram strip has up to 6 photos", () => {
+  assert.equal(INSTAGRAM_PHOTOS.length, Math.min(6, PHOTOS.length));
 });
 
 test("curated ORDER only references real photo ids, no duplicates", () => {
