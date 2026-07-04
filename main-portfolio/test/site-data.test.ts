@@ -30,6 +30,17 @@ test("manifesto is non-empty", () => {
   assert.ok(MANIFESTO_LINES.length >= 4);
 });
 
+test("project preview images exist", () => {
+  for (const p of PROJECTS) {
+    if (p.preview) {
+      assert.ok(
+        existsSync(join(import.meta.dirname, "..", "public", p.preview)),
+        `missing preview: ${p.preview}`,
+      );
+    }
+  }
+});
+
 test("photo manifest: 9 gallery + 1 hero, files exist", () => {
   const photos = manifest as {
     id: string; src: string; width: number; height: number; caption: string; hero?: boolean;
