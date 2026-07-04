@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 export default function Contact() {
   return (
-    <section id="contact" className="scroll-mt-14 border-t border-line/60 py-20">
+    <section id="contact" className="scroll-mt-14 border-t border-line/60 py-28">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="flex flex-wrap items-baseline justify-between gap-4">
@@ -15,10 +15,10 @@ export default function Contact() {
           </h2>
         </Reveal>
 
-        <Reveal className="mt-8" delay={100}>
+        <Reveal className="mt-12" delay={100}>
           <a
             href={`mailto:${SITE.email}`}
-            className="group block border-y border-line/60 py-8 sm:py-10"
+            className="group block border-y border-line/60 py-10 sm:py-14"
           >
             <span className="block break-all font-display text-[clamp(2.25rem,7vw,5.5rem)] leading-none transition-colors duration-300 group-hover:text-dev">
               {SITE.email}
@@ -29,7 +29,7 @@ export default function Contact() {
           </a>
         </Reveal>
 
-        <Reveal className="mt-8" delay={160}>
+        <Reveal className="mt-12" delay={160}>
           <div className="flex flex-wrap gap-x-8 gap-y-4">
             {SITE.socials.map((s) => (
               <a
