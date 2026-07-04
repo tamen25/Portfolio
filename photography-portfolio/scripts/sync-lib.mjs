@@ -104,6 +104,39 @@ const graphImages = (post) => {
 };
 
 /**
+ * Instagram "Download your information" exports encode UTF-8 bytes as
+ * latin-1 escapes in JSON strings; undo that so captions read correctly.
+ */
+export const fixExportEncoding = (s) =>
+  s ? Buffer.from(s, "latin1").toString("utf8") : s;
+
+const IMAGE_EXT = /\.(jpe?g|png|webp)$/i;
+
+/**
+ * Normalize posts from the official data export
+ * (your_instagram_activity/media/posts_1.json). Media `uri`s are paths
+ * inside the export folder; the runner copies files instead of downloading.
+ * Exports carry no permalinks, so those stay null.
+ */
+export const normalizeExport = (posts) =>
+  posts.flatMap((post) => {
+    const media = (post.media ?? []).filter((m) => IMAGE_EXT.test(m.uri ?? ""));
+    if (media.length === 0) return [];
+    const caption = fixExportEncoding(post.title ?? media[0].title ?? "");
+    const stamp =
+      post.creation_timestamp ?? media[0].creation_timestamp ?? 0;
+    return media.map((m, i) => ({
+      key: media.length > 1 ? `${stamp}-${i + 1}` : String(stamp),
+      postId: String(stamp),
+      timestamp: new Date(stamp * 1000).toISOString(),
+      permalink: null,
+      caption,
+      hashtags: [],
+      file: m.uri,
+    }));
+  });
+
+/**
  * Build the new manifest: images from this sync plus previously synced
  * Instagram entries (recognizable by the "-ig-" id marker) whose files are
  * still wanted, newest first. Curated (non-Instagram) entries are dropped —

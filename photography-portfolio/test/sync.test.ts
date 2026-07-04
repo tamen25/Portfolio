@@ -4,7 +4,9 @@ import {
   altFrom,
   buildManifest,
   collectionFor,
+  fixExportEncoding,
   normalizeBehold,
+  normalizeExport,
   normalizeGraph,
   shortcodeOf,
 } from "../scripts/sync-lib.mjs";
@@ -93,6 +95,46 @@ test("shortcode extraction handles posts, reels, and missing permalinks", () => 
   assert.equal(shortcodeOf("https://www.instagram.com/p/AbC123/"), "abc123");
   assert.equal(shortcodeOf("https://www.instagram.com/reel/XyZ/"), "xyz");
   assert.equal(shortcodeOf(undefined, 42), "42");
+});
+
+test("export: expands carousels, skips videos, reads captions and timestamps", () => {
+  const posts = [
+    {
+      media: [
+        {
+          uri: "media/posts/202506/solo.jpg",
+          creation_timestamp: 1750000000,
+          title: "Aurora over Kirkjufell #iceland",
+        },
+      ],
+    },
+    {
+      title: "Milky Way over Langza #spiti",
+      creation_timestamp: 1750100000,
+      media: [
+        { uri: "media/posts/202506/a.jpg", creation_timestamp: 1750100000 },
+        { uri: "media/posts/202506/b.mp4", creation_timestamp: 1750100000 },
+        { uri: "media/posts/202506/c.jpg", creation_timestamp: 1750100000 },
+      ],
+    },
+  ];
+  const images = normalizeExport(posts);
+  assert.equal(images.length, 3);
+  assert.equal(images[0].key, "1750000000");
+  assert.deepEqual(
+    images.slice(1).map((i) => i.key),
+    ["1750100000-1", "1750100000-2"],
+  );
+  assert.equal(images[0].file, "media/posts/202506/solo.jpg");
+  assert.equal(collectionFor(images[0]), "iceland");
+  assert.equal(collectionFor(images[1]), "spiti");
+  assert.equal(images[1].timestamp, new Date(1750100000 * 1000).toISOString());
+  assert.equal(images[0].permalink, null);
+});
+
+test("export: fixes latin-1 mangled UTF-8 captions", () => {
+  assert.equal(fixExportEncoding("MÃ¥ne"), "Måne");
+  assert.equal(fixExportEncoding(""), "");
 });
 
 test("buildManifest replaces curated entries, keeps prior IG entries, newest first", () => {
