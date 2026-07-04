@@ -35,8 +35,11 @@ elevate typography/motion/craft, and replace all fake content with real content.
 - Dev port **3002** (`next dev -p 3002`). cloudops=3000, photography=3001.
 - Fonts via `next/font/google`: Playfair Display (display serif), Outfit (body sans),
   JetBrains Mono (labels/code).
-- Motion: CSS transitions, IntersectionObserver reveal hook, one typing animation.
-  No GSAP/framer-motion. Respect `prefers-reduced-motion`.
+- Motion & 3D: **Three.js via `@react-three/fiber` + `@react-three/drei`** for the hero
+  scene; **Lenis** smooth scrolling; IntersectionObserver reveal hook; typing animation.
+  No GSAP/framer-motion. Three.js is client-only via `next/dynamic` (no SSR), so the
+  initial HTML stays light. Respect `prefers-reduced-motion` and missing WebGL with
+  static fallbacks everywhere.
 - Scripts: `dev`, `build`, `lint`, `test` (`tsx --test test/*.test.ts`),
   `import-photos` (`node scripts/import-photos.mjs`).
 
@@ -68,11 +71,19 @@ sections, `Say hello` mailto button. Translucent blur over `--bg`.
 
 ### 01 — Hero (new design; emergent original lost)
 Full viewport. Giant Playfair Display "Tamen Dutta" with the line
-"Developer × Photographer". The screen carries a split identity treatment:
-left half cool (fine grid lines, mono glyphs, `--dev-accent` tint), right half warm
-(one real photo — Iceland aurora derivative — masked with grain). Desktop: subtle
-cursor-driven bias (hovering left intensifies dev side, right intensifies photo side).
-Mobile / reduced-motion: static balanced split. Mono label `01 — hello`, scroll cue.
+"Developer × Photographer" over a **Three.js particle scene** (single R3F canvas,
+~3–4k points, additive blending) that carries the split identity:
+
+- Left half: points settle into a structured lattice/grid (code), tinted `--dev-accent`.
+- Right half: points drift as an organic nebula/star cloud (his astro photography),
+  warm-neutral tint.
+- Cursor parallax biases the field toward whichever identity is hovered; gentle
+  continuous drift otherwise. Scroll fades/disperses the field into section 02.
+
+Fallbacks: mobile low-power, `prefers-reduced-motion`, or no WebGL → static split
+treatment (grid-line texture left, Iceland aurora photo masked with grain right).
+Mono label `01 — hello`, scroll cue. Type is DOM (not WebGL) — always crisp and
+selectable.
 
 ### 02 — Developer
 - Editor card `~/tamen/manifesto.ts`: typed-out principles with blinking cursor
@@ -80,12 +91,18 @@ Mobile / reduced-motion: static balanced split. Mono label `01 — hello`, scrol
 - Short bio (real copy, no invented numbers):
   "I build resilient interfaces and API-first systems. Comfortable across the stack —
   from low-level performance work to design-driven product engineering."
-- **Selected work = the two sub-sites** (per Tamen):
+- **Selected work = the two sub-sites + future placeholders** (per Tamen):
   - CloudOps Portfolio — observability console (traces, metrics, logs) —
-    Next.js / TypeScript / Tailwind — links to `CLOUDOPS_URL`. Primary card,
+    Next.js / TypeScript / Tailwind — card imagery is a **captured homepage
+    screenshot** of the real site; whole card links to `CLOUDOPS_URL`. Primary card,
     dev-accent treatment.
-  - Photography Portfolio — dark cinematic gallery of real frames — links to
-    `PHOTOS_URL`. Secondary card, warm treatment.
+  - Photography Portfolio — dark cinematic gallery of real frames — captured
+    homepage screenshot; whole card links to `PHOTOS_URL`. Secondary card,
+    warm treatment.
+  - 1–2 **placeholder cards for future projects** — dashed-border, muted
+    "in orbit — coming soon" treatment, non-clickable.
+  - Screenshots captured from the running sites during implementation, committed as
+    static images under `public/previews/`.
 - Stack chips (editable list in `site.ts`; initial: TypeScript, React, Next.js,
   Node.js, Python, PostgreSQL, Docker, AWS, TailwindCSS).
 
@@ -93,7 +110,8 @@ Mobile / reduced-motion: static balanced split. Mono label `01 — hello`, scrol
 - Statement: "A slow, patient practice…" (recovered copy).
 - Masonry gallery of ~9 real photos across collections (iceland, spiti, astro, moon,
   leh, sikkim), each with EXIF-style mono caption + real location. Curated list
-  finalized during implementation from the manifest.
+  finalized during implementation from the manifest. **Every photo is a link to the
+  photography site** (`PHOTOS_URL`) — hover shows "view on photography ↗".
 - CTA panel → photography-portfolio (`PHOTOS_URL`).
 
 ### 04 — About
@@ -122,12 +140,14 @@ Large mailto CTA (`jj794001@gmail.com`), social row, location line. No form.
 
 ## Sub-site wiring
 
-Links read from env with dev fallbacks:
+Links read from env; defaults depend on environment:
 
-- `NEXT_PUBLIC_CLOUDOPS_URL` — default `http://localhost:3000`
-- `NEXT_PUBLIC_PHOTOS_URL` — default `http://localhost:3001`
+- `NEXT_PUBLIC_CLOUDOPS_URL` — prod default `https://cloudops.tamendutta.com`,
+  dev default `http://localhost:3000`
+- `NEXT_PUBLIC_PHOTOS_URL` — prod default `https://photography.tamendutta.com`,
+  dev default `http://localhost:3001`
 
-`.env.example` committed with both. Real subdomains decided at deploy time.
+(`NODE_ENV`-based fallback when env unset.) `.env.example` committed with both.
 
 ## Photos pipeline
 
@@ -156,24 +176,27 @@ main-portfolio/
 │   │   ├── page.tsx        # section composition
 │   │   └── globals.css     # tokens, grain, utilities
 │   ├── components/
-│   │   ├── Nav.tsx  Hero.tsx  Developer.tsx  Photographer.tsx
+│   │   ├── Nav.tsx  Hero.tsx  HeroScene.tsx  Developer.tsx  Photographer.tsx
 │   │   ├── About.tsx  Contact.tsx  Footer.tsx
+│   │   ├── SmoothScroll.tsx # Lenis provider
 │   │   └── Reveal.tsx      # IntersectionObserver reveal wrapper
 │   └── lib/
 │       ├── site.ts         # all content
 │       └── photo-manifest.json
+├── public/previews/        # captured homepage screenshots of both sub-sites
 └── test/
     └── site-data.test.ts
 ```
 
-All components server components except leaf client components (`Hero` cursor bias,
-manifesto typing, `Reveal`).
+All components server components except leaf client components (`HeroScene` — R3F
+canvas, `next/dynamic` no-SSR; manifesto typing; `SmoothScroll`; `Reveal`).
 
 ## Error handling
 
 - Missing photo file for a manifest entry → build-time test failure (not runtime 404).
-- Env URLs absent → localhost fallbacks; links always render.
-- Reduced motion → typing renders full text instantly; hero static.
+- Env URLs absent → environment-based fallbacks; links always render.
+- Reduced motion → typing renders full text instantly; hero static; Lenis disabled.
+- No WebGL / canvas init failure → hero falls back to static split, page fully usable.
 
 ## Testing
 
