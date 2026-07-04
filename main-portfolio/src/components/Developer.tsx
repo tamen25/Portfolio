@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
 
 export default function Developer() {
   return (
-    <section id="developer" className="mx-auto max-w-6xl scroll-mt-14 px-6 py-28">
+    <section id="developer" className="mx-auto max-w-6xl scroll-mt-14 px-6 py-20">
       <Reveal>
         <p className="label-mono mb-4">02 — developer</p>
         <h2 className="font-display text-4xl sm:text-5xl">
@@ -14,7 +14,7 @@ export default function Developer() {
         </h2>
       </Reveal>
 
-      <div className="mt-12 grid items-start gap-10 lg:grid-cols-2">
+      <div className="mt-10 grid items-start gap-10 lg:grid-cols-2">
         <Reveal>
           <Manifesto />
         </Reveal>
@@ -33,8 +33,8 @@ export default function Developer() {
         </Reveal>
       </div>
 
-      <Reveal className="mt-20">
-        <h3 className="mb-8 font-mono text-sm uppercase tracking-widest text-fg3">
+      <Reveal className="mt-14">
+        <h3 className="mb-6 font-mono text-sm uppercase tracking-widest text-fg3">
           Selected work
         </h3>
       </Reveal>

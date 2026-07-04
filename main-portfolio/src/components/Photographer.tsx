@@ -7,7 +7,7 @@ const gallery = manifest.filter((p) => !("hero" in p && p.hero));
 
 export default function Photographer() {
   return (
-    <section id="photographer" className="scroll-mt-14 border-y border-line/60 bg-warm/20 py-28">
+    <section id="photographer" className="scroll-mt-14 border-y border-line/60 bg-warm/20 py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <p className="label-mono mb-4">03 — photographer</p>
@@ -17,7 +17,7 @@ export default function Photographer() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-fg2">{SITE.bio.photo}</p>
         </Reveal>
 
-        <div className="mt-14 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
+        <div className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
           {gallery.map((p, i) => (
             <Reveal key={p.id} delay={(i % 3) * 90}>
               <a
@@ -43,7 +43,7 @@ export default function Photographer() {
           ))}
         </div>
 
-        <Reveal className="mt-14">
+        <Reveal className="mt-10">
           <a
             href={PHOTOS_URL}
             className="group flex flex-col gap-4 rounded-xl border border-line bg-surface p-8 transition-colors hover:border-photo/60 sm:flex-row sm:items-center sm:justify-between"
