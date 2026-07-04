@@ -46,6 +46,22 @@ npm run lint           # eslint
 npm test               # tsx --test test/*.test.ts
 ```
 
+### main-portfolio (Next.js + TypeScript + Three.js)
+
+Hub site at the apex domain linking to the two sub-sites. Sub-site URLs come from
+`NEXT_PUBLIC_CLOUDOPS_URL` / `NEXT_PUBLIC_PHOTOS_URL` (dev defaults: localhost
+3000/3001). Ports: cloudops=3000, photography=3001, main=3002.
+
+```bash
+cd main-portfolio
+npm install            # install deps
+npm run dev            # start dev server (next dev -p 3002)
+npm run build          # production build
+npm run lint           # eslint
+npm test               # tsx --test test/*.test.ts
+npm run import-photos  # re-copy curated photos from ../photography-portfolio
+```
+
 ## Adding a new website
 
 1. Create a new top-level folder at the repo root.
