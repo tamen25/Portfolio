@@ -1,6 +1,7 @@
 import Image from "next/image";
 import manifest from "@/lib/photo-manifest.json";
 import { SITE } from "@/lib/site";
+import HeroCanvas from "./HeroCanvas";
 
 const heroPhoto = manifest.find((p) => "hero" in p && p.hero)!;
 
@@ -36,7 +37,9 @@ export default function Hero() {
       </div>
 
       {/* Three.js mount point (HeroScene) */}
-      <div id="hero-canvas" className="absolute inset-0" />
+      <div id="hero-canvas" className="absolute inset-0">
+        <HeroCanvas />
+      </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-14">
         <p className="label-mono mb-6">01 — hello</p>
