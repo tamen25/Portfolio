@@ -41,12 +41,12 @@ test("project preview images exist", () => {
   }
 });
 
-test("photo manifest: 9 gallery + 1 hero, files exist", () => {
+test("photo manifest: 1-9 gallery frames with captions, files exist", () => {
   const photos = manifest as {
     id: string; src: string; width: number; height: number; caption: string; hero?: boolean;
   }[];
-  assert.equal(photos.filter((p) => !p.hero).length, 9);
-  assert.equal(photos.filter((p) => p.hero).length, 1);
+  const gallery = photos.filter((p) => !p.hero);
+  assert.ok(gallery.length >= 1 && gallery.length <= 9);
   for (const p of photos) {
     assert.ok(p.caption.length > 0);
     assert.ok(p.width > 0 && p.height > 0);

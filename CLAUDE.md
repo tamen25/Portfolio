@@ -44,7 +44,13 @@ npm run dev            # start dev server (next dev; use -p 3001 if 3000 is busy
 npm run build          # production build
 npm run lint           # eslint
 npm test               # tsx --test test/*.test.ts
+npm run sync-instagram # regenerate photo manifest from Instagram (see .env.example)
 ```
+
+The photo manifest is Instagram-driven: `sync-instagram` fetches posts (Behold
+feed or Instagram Graph API), downloads new images to `public/photos/`, and
+rewrites `src/lib/photo-manifest.json`. After a sync, re-run
+`npm run import-photos` in `main-portfolio` to refresh its gallery.
 
 ### main-portfolio (Next.js + TypeScript + Three.js)
 

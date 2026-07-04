@@ -3,7 +3,18 @@ import manifest from "@/lib/photo-manifest.json";
 import { PHOTOS_URL, SITE } from "@/lib/site";
 import Reveal from "./Reveal";
 
-const gallery = manifest.filter((p) => !("hero" in p && p.hero));
+type Frame = {
+  id: string;
+  src: string;
+  width: number;
+  height: number;
+  caption: string;
+  hero?: boolean;
+  /** Instagram post URL on synced frames; falls back to the photo site. */
+  permalink?: string | null;
+};
+
+const gallery = (manifest as Frame[]).filter((p) => !p.hero);
 
 export default function Photographer() {
   return (
@@ -21,7 +32,7 @@ export default function Photographer() {
           {gallery.map((p, i) => (
             <Reveal key={p.id} delay={(i % 3) * 90}>
               <a
-                href={PHOTOS_URL}
+                href={p.permalink || PHOTOS_URL}
                 className="group relative block overflow-hidden rounded-lg border border-line/60"
               >
                 <Image
