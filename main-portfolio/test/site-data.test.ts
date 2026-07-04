@@ -1,6 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { SITE, PROJECTS, CLOUDOPS_URL, PHOTOS_URL, MANIFESTO_LINES } from "../src/lib/site";
+import manifest from "../src/lib/photo-manifest.json";
 
 test("site identity is real", () => {
   assert.equal(SITE.name, "Tamen Dutta");
@@ -25,4 +28,21 @@ test("projects: two real linked, placeholders unlinked", () => {
 
 test("manifesto is non-empty", () => {
   assert.ok(MANIFESTO_LINES.length >= 4);
+});
+
+test("photo manifest: 9 gallery + 1 hero, files exist", () => {
+  const photos = manifest as {
+    id: string; src: string; width: number; height: number; caption: string; hero?: boolean;
+  }[];
+  assert.equal(photos.filter((p) => !p.hero).length, 9);
+  assert.equal(photos.filter((p) => p.hero).length, 1);
+  for (const p of photos) {
+    assert.ok(p.caption.length > 0);
+    assert.ok(p.width > 0 && p.height > 0);
+    assert.ok(
+      existsSync(join(import.meta.dirname, "..", "public", p.src)),
+      `missing file: ${p.src}`,
+    );
+  }
+  assert.ok(existsSync(join(import.meta.dirname, "..", "public", "og.jpg")));
 });
