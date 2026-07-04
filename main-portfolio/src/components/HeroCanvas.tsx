@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
+const ShaderBackground = dynamic(() => import("./ShaderBackground"), { ssr: false });
 
 export default function HeroCanvas() {
-  return <HeroScene />;
+  return <ShaderBackground />;
 }

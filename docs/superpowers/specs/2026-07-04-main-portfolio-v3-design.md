@@ -69,21 +69,21 @@ Film-grain overlay on photographic surfaces.
 Fixed top bar: `tamen.dutta` wordmark (mono), `/ portfolio` label, anchor links to
 sections, `Say hello` mailto button. Translucent blur over `--bg`.
 
-### 01 — Hero (new design; emergent original lost)
-Full viewport. Giant Playfair Display "Tamen Dutta" with the line
-"Developer × Photographer" over a **Three.js particle scene** (single R3F canvas,
-~3–4k points, additive blending) that carries the split identity:
+### 01 — Hero (revised 2026-07-05)
+The original split particle scene was built and rejected by Tamen ("glowy design is
+so ugly"). Revised direction, referencing 21st.dev templates he supplied
+(@serafim/devfolio, @serafim/vercel-sanity-nextjs-personal-website): clean,
+type-forward, centered.
 
-- Left half: points settle into a structured lattice/grid (code), tinted `--dev-accent`.
-- Right half: points drift as an organic nebula/star cloud (his astro photography),
-  warm-neutral tint.
-- Cursor parallax biases the field toward whichever identity is hovered; gentle
-  continuous drift otherwise. Scroll fades/disperses the field into section 02.
+Full viewport. Giant centered Playfair Display "Tamen Dutta", mono
+"Developer × Photographer" line, location. Background is the **"Animated Shader
+Background" meteor shader from 21st.dev** (by minhxthanh, adapted in
+`ShaderBackground.tsx`) — sparse blue/cyan streaks over near-black, like a
+long-exposure meteor shower; plain Three.js fullscreen quad, no R3F.
 
-Fallbacks: mobile low-power, `prefers-reduced-motion`, or no WebGL → static split
-treatment (grid-line texture left, Iceland aurora photo masked with grain right).
-Mono label `01 — hello`, scroll cue. Type is DOM (not WebGL) — always crisp and
-selectable.
+Fallbacks: `prefers-reduced-motion` → single still frame; no WebGL → plain ink
+background, page fully usable. Mono label `01 — hello`, scroll cue. Type is DOM
+(not WebGL) — always crisp and selectable.
 
 ### 02 — Developer
 - Editor card `~/tamen/manifesto.ts`: typed-out principles with blinking cursor
