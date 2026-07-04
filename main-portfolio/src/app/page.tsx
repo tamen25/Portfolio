@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import Developer from "@/components/Developer";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -8,7 +9,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <section id="developer" className="min-h-screen" />
+        <Developer />
         <section id="photographer" className="min-h-screen" />
         <section id="about" />
         <section id="contact" />
