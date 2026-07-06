@@ -66,6 +66,29 @@ export const PSEUDO: Record<string, string[]> = {
     "for each: push as new interval, or",
     "extend the last if it overlaps",
   ],
+  "bfs": [
+    "queue = [start]",
+    "while queue: pop front, mark visited",
+    "push unseen neighbors",
+    "first arrival at end = shortest path",
+  ],
+  "dfs": [
+    "stack = [start]",
+    "while stack: pop top, mark visited",
+    "push unseen neighbors (go deep first)",
+  ],
+  "dijkstra": [
+    "dist[start] = 0, others = ∞",
+    "pop nearest unsettled node",
+    "relax edges: dist[v] = min(dist[v], dist[u]+w)",
+    "repeat until end settled",
+  ],
+  "astar": [
+    "f(n) = g(n) + h(n)  # h = manhattan",
+    "pop lowest f from open set",
+    "relax neighbors, push with new f",
+    "stop when end is expanded",
+  ],
 };
 
 export const PY: Record<string, string> = {
@@ -192,4 +215,63 @@ export const PY: Record<string, string> = {
         else:
             merged.append([s, e])
     return merged`,
+  "bfs": `from collections import deque
+
+def bfs(grid, start, end):
+    q = deque([start])
+    seen = {start}
+    prev = {}
+    while q:
+        r, c = q.popleft()
+        if (r, c) == end:
+            return reconstruct(prev, end)
+        for n in neighbors(grid, r, c):
+            if n not in seen:
+                seen.add(n); prev[n] = (r, c); q.append(n)
+    return []`,
+  "dfs": `def dfs(grid, start, end):
+    stack = [start]
+    seen = {start}
+    prev = {}
+    while stack:
+        r, c = stack.pop()
+        if (r, c) == end:
+            return reconstruct(prev, end)
+        for n in neighbors(grid, r, c):
+            if n not in seen:
+                seen.add(n); prev[n] = (r, c); stack.append(n)
+    return []`,
+  "dijkstra": `import heapq
+
+def dijkstra(grid, start, end):
+    dist = {start: 0}
+    prev = {}
+    pq = [(0, start)]
+    while pq:
+        d, (r, c) = heapq.heappop(pq)
+        if (r, c) == end:
+            return reconstruct(prev, end)
+        for n in neighbors(grid, r, c):
+            nd = d + weight(grid, n)
+            if nd < dist.get(n, float('inf')):
+                dist[n] = nd; prev[n] = (r, c)
+                heapq.heappush(pq, (nd, n))
+    return []`,
+  "astar": `import heapq
+
+def astar(grid, start, end):
+    def h(n): return abs(n[0]-end[0]) + abs(n[1]-end[1])
+    g = {start: 0}
+    prev = {}
+    open_set = [(h(start), start)]
+    while open_set:
+        _, (r, c) = heapq.heappop(open_set)
+        if (r, c) == end:
+            return reconstruct(prev, end)
+        for n in neighbors(grid, r, c):
+            t = g[(r, c)] + weight(grid, n)
+            if t < g.get(n, float('inf')):
+                g[n] = t; prev[n] = (r, c)
+                heapq.heappush(open_set, (t + h(n), n))
+    return []`,
 };

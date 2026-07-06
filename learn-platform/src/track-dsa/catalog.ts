@@ -11,10 +11,25 @@ import { binarySearch } from "./algorithms/array/binary-search";
 import { prefixSums } from "./algorithms/array/prefix-sums";
 import { fastSlowHasCycle } from "./algorithms/array/fast-slow";
 import { mergeIntervals } from "./algorithms/array/merge-intervals";
+import { makeGrid } from "./algorithms/pathfinding/grid";
+import { bfsPath } from "./algorithms/pathfinding/bfs";
+import { dfsPath } from "./algorithms/pathfinding/dfs";
+import { dijkstraPath } from "./algorithms/pathfinding/dijkstra";
+import { astarPath } from "./algorithms/pathfinding/astar";
 import { PSEUDO, PY } from "./content/pseudocode";
 
 // deterministic seed array (no Math.random inside run)
 const randArray = (n = 12) => Array.from({ length: n }, (_, i) => (i * 37 + 11) % 41);
+
+// deterministic demo grid: 8x8 with a partial wall column (gap at row 0 and row 7)
+const demoGrid = () =>
+  makeGrid(
+    8,
+    8,
+    [[1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4]] as [number, number][],
+    [0, 0],
+    [7, 7]
+  );
 
 export const CATALOG: AlgorithmEntry[] = [
   { slug: "bubble-sort", name: "Bubble Sort", category: "sorting", complexity: { time: "O(n²)", space: "O(1)" }, summary: "Repeatedly swap adjacent out-of-order pairs; the largest bubbles to the end each pass.", run: bubbleSort as AlgorithmEntry["run"], renderer: "bars", defaultInput: randArray, pseudocode: PSEUDO["bubble-sort"], code: { pseudo: PSEUDO["bubble-sort"].join("\n"), py: PY["bubble-sort"] }, comparableWith: ["insertion-sort", "selection-sort", "quick-sort", "merge-sort", "heap-sort"] },
@@ -29,6 +44,10 @@ export const CATALOG: AlgorithmEntry[] = [
   { slug: "prefix-sums", name: "Prefix Sums", category: "array-patterns", complexity: { time: "O(n)", space: "O(n)" }, summary: "Precompute cumulative sums for O(1) range queries.", run: prefixSums as AlgorithmEntry["run"], renderer: "bars", defaultInput: () => [1, 2, 3, 4, 5], pseudocode: PSEUDO["prefix-sums"], code: { py: PY["prefix-sums"] } },
   { slug: "fast-slow", name: "Fast & Slow Pointers", category: "array-patterns", complexity: { time: "O(n)", space: "O(1)" }, summary: "Two pointers at different speeds detect a cycle where they meet.", run: fastSlowHasCycle as AlgorithmEntry["run"], renderer: "bars", defaultInput: () => [1, 2, 3, 1], pseudocode: PSEUDO["fast-slow"], code: { py: PY["fast-slow"] } },
   { slug: "merge-intervals", name: "Merge Intervals", category: "array-patterns", complexity: { time: "O(n log n)", space: "O(n)" }, summary: "Sort by start, then absorb each overlapping interval into the last.", run: mergeIntervals as AlgorithmEntry["run"], renderer: "bars", defaultInput: () => [1, 3, 2, 6, 8, 10, 15, 18], pseudocode: PSEUDO["merge-intervals"], code: { py: PY["merge-intervals"] } },
+  { slug: "bfs", name: "Breadth-First Search", category: "pathfinding", complexity: { time: "O(V+E)", space: "O(V)" }, summary: "Explore in waves; the first time we reach the goal is a shortest path.", run: bfsPath as AlgorithmEntry["run"], renderer: "grid", defaultInput: demoGrid, pseudocode: PSEUDO["bfs"], code: { py: PY["bfs"] } },
+  { slug: "dfs", name: "Depth-First Search", category: "pathfinding", complexity: { time: "O(V+E)", space: "O(V)" }, summary: "Plunge deep along one branch before backtracking.", run: dfsPath as AlgorithmEntry["run"], renderer: "grid", defaultInput: demoGrid, pseudocode: PSEUDO["dfs"], code: { py: PY["dfs"] } },
+  { slug: "dijkstra", name: "Dijkstra", category: "pathfinding", complexity: { time: "O(E log V)", space: "O(V)" }, summary: "Grow shortest-known distances outward using a priority queue.", run: dijkstraPath as AlgorithmEntry["run"], renderer: "grid", defaultInput: demoGrid, pseudocode: PSEUDO["dijkstra"], code: { py: PY["dijkstra"] } },
+  { slug: "astar", name: "A*", category: "pathfinding", complexity: { time: "O(E)", space: "O(V)" }, summary: "Dijkstra guided by a heuristic toward the goal.", run: astarPath as AlgorithmEntry["run"], renderer: "grid", defaultInput: demoGrid, pseudocode: PSEUDO["astar"], code: { py: PY["astar"] } },
 ];
 
 export function bySlug(slug: string): AlgorithmEntry | undefined {
