@@ -117,6 +117,26 @@ export const PSEUDO: Record<string, string[]> = {
     "  sift-down i: swap with larger child",
     "  repeat until heap property holds",
   ],
+  "graph-bfs": [
+    "queue = [start]",
+    "while queue: pop front u, record u",
+    "enqueue unseen neighbors of u",
+  ],
+  "graph-dfs": [
+    "dfs(u): mark u, record u",
+    "  for each unseen neighbor v: dfs(v)",
+  ],
+  "toposort": [
+    "compute in-degree of every node",
+    "queue all in-degree-0 nodes",
+    "pop u, emit it, decrement neighbors",
+    "enqueue any that reach in-degree 0",
+  ],
+  "union-find": [
+    "parent[i] = i",
+    "find(x): follow parents, compress path",
+    "union(a, b): point root(a) at root(b)",
+  ],
 };
 
 export const PY: Record<string, string> = {
@@ -348,4 +368,54 @@ def astar(grid, start, end):
     for i in range(n // 2 - 1, -1, -1):
         sift(n, i)
     return a`,
+  "graph-bfs": `from collections import deque
+
+def bfs(adj, start):
+    order, seen = [], {start}
+    q = deque([start])
+    while q:
+        u = q.popleft()
+        order.append(u)
+        for v in adj[u]:
+            if v not in seen:
+                seen.add(v)
+                q.append(v)
+    return order`,
+  "graph-dfs": `def dfs(adj, start):
+    order, seen = [], set()
+    def go(u):
+        seen.add(u)
+        order.append(u)
+        for v in adj[u]:
+            if v not in seen:
+                go(v)
+    go(start)
+    return order`,
+  "toposort": `from collections import deque
+
+def toposort(adj):
+    indeg = [0] * len(adj)
+    for outs in adj:
+        for v in outs:
+            indeg[v] += 1
+    q = deque(i for i, d in enumerate(indeg) if d == 0)
+    order = []
+    while q:
+        u = q.popleft()
+        order.append(u)
+        for v in adj[u]:
+            indeg[v] -= 1
+            if indeg[v] == 0:
+                q.append(v)
+    return order`,
+  "union-find": `def union_find(n, unions):
+    parent = list(range(n))
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+    for a, b in unions:
+        parent[find(a)] = find(b)
+    return [find(i) for i in range(n)]`,
 };

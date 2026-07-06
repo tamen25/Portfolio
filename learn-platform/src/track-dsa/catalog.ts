@@ -20,6 +20,9 @@ import { bstInsertSequence } from "./algorithms/trees/bst";
 import { traversal } from "./algorithms/trees/traversal";
 import { trieInsert } from "./algorithms/trees/trie";
 import { heapSiftDemo } from "./algorithms/trees/heap";
+import { graphBFS, graphDFS } from "./algorithms/graphs/traverse";
+import { topoSort } from "./algorithms/graphs/toposort";
+import { unionFind } from "./algorithms/graphs/union-find";
 import { PSEUDO, PY } from "./content/pseudocode";
 
 // deterministic seed array (no Math.random inside run)
@@ -34,6 +37,31 @@ const demoGrid = () =>
     [0, 0],
     [7, 7]
   );
+
+// deterministic 6-node undirected demo graph for BFS/DFS
+const undirectedDemo = (): number[][] => [
+  [1, 2],       // 0
+  [0, 3, 4],    // 1
+  [0, 4],       // 2
+  [1, 5],       // 3
+  [1, 2, 5],    // 4
+  [3, 4],       // 5
+];
+
+// deterministic 6-node DAG for topological sort (edges point forward only)
+const dagDemo = (): number[][] => [
+  [1, 2],  // 0
+  [3],     // 1
+  [3, 4],  // 2
+  [5],     // 3
+  [5],     // 4
+  [],      // 5
+];
+
+// deterministic union sequence over 6 nodes
+const unionDemo = (): [number, number][] => [
+  [0, 1], [2, 3], [4, 5], [1, 3], [3, 5],
+];
 
 export const CATALOG: AlgorithmEntry[] = [
   { slug: "bubble-sort", name: "Bubble Sort", category: "sorting", complexity: { time: "O(n²)", space: "O(1)" }, summary: "Repeatedly swap adjacent out-of-order pairs; the largest bubbles to the end each pass.", run: bubbleSort as AlgorithmEntry["run"], renderer: "bars", defaultInput: randArray, pseudocode: PSEUDO["bubble-sort"], code: { pseudo: PSEUDO["bubble-sort"].join("\n"), py: PY["bubble-sort"] }, comparableWith: ["insertion-sort", "selection-sort", "quick-sort", "merge-sort", "heap-sort"] },
@@ -58,6 +86,10 @@ export const CATALOG: AlgorithmEntry[] = [
   { slug: "traversal-postorder", name: "Post-order Traversal", category: "trees", complexity: { time: "O(n)", space: "O(h)" }, summary: "Left, right, node.", run: ((v: number[]) => traversal(v, "post")) as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => [5, 3, 8, 1, 4, 7, 9], pseudocode: PSEUDO["traversal-postorder"], code: { py: PY["traversal-postorder"] } },
   { slug: "trie", name: "Trie Insert", category: "trees", complexity: { time: "O(L)", space: "O(ALPHABET·N)" }, summary: "Insert words character-by-character, sharing common prefixes.", run: (() => trieInsert(["cat", "car", "dog"])) as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => null, pseudocode: PSEUDO["trie"], code: { py: PY["trie"] } },
   { slug: "heap", name: "Binary Heap (sift-down)", category: "trees", complexity: { time: "O(n)", space: "O(1)" }, summary: "Heapify by sinking each parent below larger children.", run: heapSiftDemo as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => [3, 9, 2, 1, 7, 5, 8], pseudocode: PSEUDO["heap"], code: { py: PY["heap"] } },
+  { slug: "graph-bfs", name: "Graph BFS", category: "graphs", complexity: { time: "O(V+E)", space: "O(V)" }, summary: "Traverse an undirected graph in waves from a start node.", run: ((adj: number[][]) => graphBFS(adj, 0)) as AlgorithmEntry["run"], renderer: "graph", defaultInput: undirectedDemo, pseudocode: PSEUDO["graph-bfs"], code: { py: PY["graph-bfs"] }, comparableWith: ["graph-dfs"] },
+  { slug: "graph-dfs", name: "Graph DFS", category: "graphs", complexity: { time: "O(V+E)", space: "O(V)" }, summary: "Plunge deep along each branch of an undirected graph before backtracking.", run: ((adj: number[][]) => graphDFS(adj, 0)) as AlgorithmEntry["run"], renderer: "graph", defaultInput: undirectedDemo, pseudocode: PSEUDO["graph-dfs"], code: { py: PY["graph-dfs"] }, comparableWith: ["graph-bfs"] },
+  { slug: "toposort", name: "Topological Sort", category: "graphs", complexity: { time: "O(V+E)", space: "O(V)" }, summary: "Order a DAG so every edge points from earlier to later (Kahn's algorithm).", run: topoSort as AlgorithmEntry["run"], renderer: "graph", defaultInput: dagDemo, pseudocode: PSEUDO["toposort"], code: { py: PY["toposort"] } },
+  { slug: "union-find", name: "Union-Find", category: "graphs", complexity: { time: "O(α(n))", space: "O(n)" }, summary: "Merge disjoint sets with path compression; connected nodes share a root.", run: ((unions: [number, number][]) => unionFind(6, unions)) as AlgorithmEntry["run"], renderer: "graph", defaultInput: unionDemo, pseudocode: PSEUDO["union-find"], code: { py: PY["union-find"] } },
 ];
 
 export function bySlug(slug: string): AlgorithmEntry | undefined {
