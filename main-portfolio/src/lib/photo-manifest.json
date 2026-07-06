@@ -1,73 +1,74 @@
 [
   {
-    "id": "iceland-aurora-kirk",
-    "src": "/photos/iceland/aurora-kirk.jpg",
-    "width": 3840,
-    "height": 2824,
-    "caption": "Aurora over Kirkjufell — Iceland",
-    "hero": true
-  },
-  {
-    "id": "iceland-aurora-plane",
-    "src": "/photos/iceland/aurora-plane.jpg",
-    "width": 3840,
-    "height": 1746,
-    "caption": "Aurora from the plane — Iceland"
-  },
-  {
-    "id": "spiti-milky-pn-chand",
-    "src": "/photos/spiti/milky-pn-chand.jpg",
-    "width": 3840,
-    "height": 2458,
-    "caption": "Milky Way over Chandratal — Spiti"
-  },
-  {
-    "id": "spiti-langza-buddha",
-    "src": "/photos/spiti/langza-buddha.jpg",
-    "width": 2560,
-    "height": 3840,
-    "caption": "Langza Buddha — Spiti"
-  },
-  {
-    "id": "astro-andromeda-2022",
-    "src": "/photos/astro/andromeda-2022.jpg",
-    "width": 2153,
-    "height": 1684,
-    "caption": "Andromeda — deep sky"
-  },
-  {
-    "id": "moon-moonhdr",
-    "src": "/photos/moon/moonhdr.jpg",
-    "width": 3551,
-    "height": 3551,
-    "caption": "Moon, HDR composite"
-  },
-  {
-    "id": "leh-valley-01",
-    "src": "/photos/leh/valley-01.jpg",
+    "id": "journal-ig-dafjj_ng-iu",
+    "src": "/photos/journal/ig-dafjj_ng-iu.jpg",
     "width": 1440,
-    "height": 2560,
-    "caption": "Valley — Leh"
+    "height": 960,
+    "caption": "• — field notes",
+    "permalink": "https://www.instagram.com/p/DaFjj_ng-iU/"
   },
   {
-    "id": "sikkim-sun600-2",
-    "src": "/photos/sikkim/sun600-2.jpg",
-    "width": 3840,
-    "height": 2560,
-    "caption": "Sunrise at 600mm — Sikkim"
+    "id": "journal-ig-dwx6uawgmwd",
+    "src": "/photos/journal/ig-dwx6uawgmwd.jpg",
+    "width": 1440,
+    "height": 1440,
+    "caption": "• — field notes",
+    "permalink": "https://www.instagram.com/p/DWx6uAWgMwd/"
   },
   {
-    "id": "iceland-day-2-gulfoss",
-    "src": "/photos/iceland/day-2-gulfoss.jpg",
-    "width": 3827,
-    "height": 3840,
-    "caption": "Gullfoss — Iceland"
+    "id": "journal-ig-dwwefqle2v3",
+    "src": "/photos/journal/ig-dwwefqle2v3.jpg",
+    "width": 1440,
+    "height": 960,
+    "caption": "• — field notes",
+    "permalink": "https://www.instagram.com/p/DWWEFQlE2V3/"
   },
   {
-    "id": "spiti-key-1",
-    "src": "/photos/spiti/key-1.jpg",
-    "width": 3840,
-    "height": 2560,
-    "caption": "Key Monastery — Spiti"
+    "id": "journal-ig-dwlole3kegr",
+    "src": "/photos/journal/ig-dwlole3kegr.jpg",
+    "width": 1440,
+    "height": 1359,
+    "caption": "• — field notes",
+    "permalink": "https://www.instagram.com/p/DWLoLe3keGR/"
+  },
+  {
+    "id": "journal-ig-dvszjqletfy",
+    "src": "/photos/journal/ig-dvszjqletfy.jpg",
+    "width": 1440,
+    "height": 934,
+    "caption": "• — field notes",
+    "permalink": "https://www.instagram.com/p/DVszjQlETfy/"
+  },
+  {
+    "id": "iceland-ig-dpcqgpqe1o8",
+    "src": "/photos/iceland/ig-dpcqgpqe1o8.jpg",
+    "width": 1440,
+    "height": 959,
+    "caption": "Aurora and Kirkjufell just didn't seem to work with us. We gott maybe 1 or 2 shots each before it was completely hidden on the northern side — Iceland",
+    "permalink": "https://www.instagram.com/p/DPCQGpqE1o8/"
+  },
+  {
+    "id": "iceland-ig-do8ftb2kxsd",
+    "src": "/photos/iceland/ig-do8ftb2kxsd.jpg",
+    "width": 1440,
+    "height": 960,
+    "caption": "• — Iceland",
+    "permalink": "https://www.instagram.com/p/DO8ftb2kxSd/"
+  },
+  {
+    "id": "iceland-ig-dnsohx4tp7t",
+    "src": "/photos/iceland/ig-dnsohx4tp7t.jpg",
+    "width": 1440,
+    "height": 1400,
+    "caption": "• — Iceland",
+    "permalink": "https://www.instagram.com/p/DNSOhx4Tp7t/"
+  },
+  {
+    "id": "iceland-ig-dnlgkynt83m",
+    "src": "/photos/iceland/ig-dnlgkynt83m.jpg",
+    "width": 1440,
+    "height": 810,
+    "caption": "• — Iceland",
+    "permalink": "https://www.instagram.com/p/DNLgkYnT83m/"
   }
 ]
