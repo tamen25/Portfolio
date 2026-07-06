@@ -16,7 +16,7 @@ export function unionFind(n: number, unions: [number, number][]): Trace<GraphSta
     }
     tb.push(
       { nodes, edges: edges.slice(), visitedIds: [a, b], activeId: b },
-      { narration: `Union(${a}, ${b}) → root ${find(b)}`, highlights: [{ indices: [a, b], role: "swap" }] }
+      { narration: `Union(${a}, ${b}) → root ${find(b)}`, highlights: [{ indices: [a, b], role: "swap" }], pseudoLine: 2 }
     );
   }
   const root = Array.from({ length: n }, (_, i) => find(i));

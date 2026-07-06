@@ -19,7 +19,7 @@ export function graphBFS(adj: number[][], start: number): Trace<GraphState> {
     order.push(u);
     tb.push(
       { nodes, edges, visitedIds: order.slice(), activeId: u },
-      { narration: `Visit ${u}`, highlights: [{ indices: [u], role: "current" }] }
+      { narration: `Visit ${u}`, highlights: [{ indices: [u], role: "current" }], pseudoLine: 1 }
     );
     for (const v of adj[u]) if (!seen.has(v)) {
       seen.add(v);
@@ -39,7 +39,7 @@ export function graphDFS(adj: number[][], start: number): Trace<GraphState> {
     order.push(u);
     tb.push(
       { nodes, edges, visitedIds: order.slice(), activeId: u },
-      { narration: `Visit ${u}`, highlights: [{ indices: [u], role: "current" }] }
+      { narration: `Visit ${u}`, highlights: [{ indices: [u], role: "current" }], pseudoLine: 0 }
     );
     for (const v of adj[u]) if (!seen.has(v)) dfs(v);
   })(start);

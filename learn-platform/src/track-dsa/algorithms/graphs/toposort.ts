@@ -16,7 +16,7 @@ export function topoSort(adj: number[][]): Trace<GraphState> {
     order.push(u);
     tb.push(
       { nodes, edges, visitedIds: order.slice(), activeId: u },
-      { narration: `Emit ${u} (in-degree 0)`, highlights: [{ indices: [u], role: "current" }] }
+      { narration: `Emit ${u} (in-degree 0)`, highlights: [{ indices: [u], role: "current" }], pseudoLine: 2 }
     );
     for (const v of adj[u]) {
       if (--indeg[v] === 0) q.push(v);

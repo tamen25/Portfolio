@@ -29,8 +29,11 @@ export function playerReducer(
       return { ...state, index: clamp(state.index - 1, frameCount) };
     case "scrub":
       return { ...state, index: clamp(action.index, frameCount) };
-    case "play":
-      return { ...state, playing: true };
+    case "play": {
+      // restart from the beginning when play is pressed at the end
+      const atEnd = state.index >= frameCount - 1;
+      return { ...state, playing: true, index: atEnd ? 0 : state.index };
+    }
     case "pause":
       return { ...state, playing: false };
     case "reset":

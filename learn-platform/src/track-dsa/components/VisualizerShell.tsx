@@ -20,7 +20,14 @@ export function VisualizerShell({ slug }: { slug: string }) {
   return (
     <div className="flex h-[calc(100vh-57px)] flex-col">
       <div className="grid flex-1 grid-cols-[1fr_360px] overflow-hidden">
-        <div className="relative">{Renderer ? <Renderer frame={p.frame} /> : null}</div>
+        <div className="relative">
+          {Renderer ? <Renderer frame={p.frame} /> : null}
+          {p.frame.narration && (
+            <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded bg-[var(--color-panel)]/90 px-3 py-1 font-mono text-xs text-[var(--color-ink)]">
+              {p.frame.narration}
+            </div>
+          )}
+        </div>
         <aside className="space-y-4 overflow-auto border-l border-[var(--color-edge)] p-4">
           <div>
             <h1 className="font-mono text-lg text-[var(--color-ink)]">{entry.name}</h1>
