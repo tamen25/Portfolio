@@ -89,6 +89,34 @@ export const PSEUDO: Record<string, string[]> = {
     "relax neighbors, push with new f",
     "stop when end is expanded",
   ],
+  "bst-insert": [
+    "for each value:",
+    "  descend left if smaller, right if larger",
+    "  attach at the first empty slot",
+  ],
+  "traversal-inorder": [
+    "inorder(node):",
+    "  inorder(left); visit(node); inorder(right)",
+    "  # yields sorted order for a BST",
+  ],
+  "traversal-preorder": [
+    "preorder(node):",
+    "  visit(node); preorder(left); preorder(right)",
+  ],
+  "traversal-postorder": [
+    "postorder(node):",
+    "  postorder(left); postorder(right); visit(node)",
+  ],
+  "trie": [
+    "for each word:",
+    "  walk from root, following/creating a child per char",
+    "  shared prefixes reuse existing nodes",
+  ],
+  "heap": [
+    "for i from n//2-1 down to 0:",
+    "  sift-down i: swap with larger child",
+    "  repeat until heap property holds",
+  ],
 };
 
 export const PY: Record<string, string> = {
@@ -274,4 +302,50 @@ def astar(grid, start, end):
                 g[n] = t; prev[n] = (r, c)
                 heapq.heappush(open_set, (t + h(n), n))
     return []`,
+  "bst-insert": `def insert(root, value):
+    if root is None:
+        return Node(value)
+    if value < root.value:
+        root.left = insert(root.left, value)
+    else:
+        root.right = insert(root.right, value)
+    return root`,
+  "traversal-inorder": `def inorder(node, out):
+    if not node:
+        return
+    inorder(node.left, out)
+    out.append(node.value)
+    inorder(node.right, out)`,
+  "traversal-preorder": `def preorder(node, out):
+    if not node:
+        return
+    out.append(node.value)
+    preorder(node.left, out)
+    preorder(node.right, out)`,
+  "traversal-postorder": `def postorder(node, out):
+    if not node:
+        return
+    postorder(node.left, out)
+    postorder(node.right, out)
+    out.append(node.value)`,
+  "trie": `def insert(root, word):
+    node = root
+    for ch in word:
+        if ch not in node.children:
+            node.children[ch] = TrieNode()
+        node = node.children[ch]
+    node.is_word = True`,
+  "heap": `def heapify(a):
+    n = len(a)
+    def sift(size, root):
+        largest = root
+        l, r = 2 * root + 1, 2 * root + 2
+        if l < size and a[l] > a[largest]: largest = l
+        if r < size and a[r] > a[largest]: largest = r
+        if largest != root:
+            a[root], a[largest] = a[largest], a[root]
+            sift(size, largest)
+    for i in range(n // 2 - 1, -1, -1):
+        sift(n, i)
+    return a`,
 };

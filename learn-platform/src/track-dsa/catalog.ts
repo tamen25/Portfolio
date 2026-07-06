@@ -16,6 +16,10 @@ import { bfsPath } from "./algorithms/pathfinding/bfs";
 import { dfsPath } from "./algorithms/pathfinding/dfs";
 import { dijkstraPath } from "./algorithms/pathfinding/dijkstra";
 import { astarPath } from "./algorithms/pathfinding/astar";
+import { bstInsertSequence } from "./algorithms/trees/bst";
+import { traversal } from "./algorithms/trees/traversal";
+import { trieInsert } from "./algorithms/trees/trie";
+import { heapSiftDemo } from "./algorithms/trees/heap";
 import { PSEUDO, PY } from "./content/pseudocode";
 
 // deterministic seed array (no Math.random inside run)
@@ -48,6 +52,12 @@ export const CATALOG: AlgorithmEntry[] = [
   { slug: "dfs", name: "Depth-First Search", category: "pathfinding", complexity: { time: "O(V+E)", space: "O(V)" }, summary: "Plunge deep along one branch before backtracking.", run: dfsPath as AlgorithmEntry["run"], renderer: "grid", defaultInput: demoGrid, pseudocode: PSEUDO["dfs"], code: { py: PY["dfs"] } },
   { slug: "dijkstra", name: "Dijkstra", category: "pathfinding", complexity: { time: "O(E log V)", space: "O(V)" }, summary: "Grow shortest-known distances outward using a priority queue.", run: dijkstraPath as AlgorithmEntry["run"], renderer: "grid", defaultInput: demoGrid, pseudocode: PSEUDO["dijkstra"], code: { py: PY["dijkstra"] } },
   { slug: "astar", name: "A*", category: "pathfinding", complexity: { time: "O(E)", space: "O(V)" }, summary: "Dijkstra guided by a heuristic toward the goal.", run: astarPath as AlgorithmEntry["run"], renderer: "grid", defaultInput: demoGrid, pseudocode: PSEUDO["astar"], code: { py: PY["astar"] } },
+  { slug: "bst-insert", name: "BST Insert", category: "trees", complexity: { time: "O(h)", space: "O(1)" }, summary: "Insert values, descending left/right until an empty slot.", run: bstInsertSequence as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => [5, 3, 8, 1, 4, 7, 9], pseudocode: PSEUDO["bst-insert"], code: { py: PY["bst-insert"] } },
+  { slug: "traversal-inorder", name: "In-order Traversal", category: "trees", complexity: { time: "O(n)", space: "O(h)" }, summary: "Left, node, right — yields sorted order for a BST.", run: ((v: number[]) => traversal(v, "in")) as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => [5, 3, 8, 1, 4, 7, 9], pseudocode: PSEUDO["traversal-inorder"], code: { py: PY["traversal-inorder"] } },
+  { slug: "traversal-preorder", name: "Pre-order Traversal", category: "trees", complexity: { time: "O(n)", space: "O(h)" }, summary: "Node, left, right.", run: ((v: number[]) => traversal(v, "pre")) as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => [5, 3, 8, 1, 4, 7, 9], pseudocode: PSEUDO["traversal-preorder"], code: { py: PY["traversal-preorder"] } },
+  { slug: "traversal-postorder", name: "Post-order Traversal", category: "trees", complexity: { time: "O(n)", space: "O(h)" }, summary: "Left, right, node.", run: ((v: number[]) => traversal(v, "post")) as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => [5, 3, 8, 1, 4, 7, 9], pseudocode: PSEUDO["traversal-postorder"], code: { py: PY["traversal-postorder"] } },
+  { slug: "trie", name: "Trie Insert", category: "trees", complexity: { time: "O(L)", space: "O(ALPHABET·N)" }, summary: "Insert words character-by-character, sharing common prefixes.", run: (() => trieInsert(["cat", "car", "dog"])) as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => null, pseudocode: PSEUDO["trie"], code: { py: PY["trie"] } },
+  { slug: "heap", name: "Binary Heap (sift-down)", category: "trees", complexity: { time: "O(n)", space: "O(1)" }, summary: "Heapify by sinking each parent below larger children.", run: heapSiftDemo as AlgorithmEntry["run"], renderer: "tree", defaultInput: () => [3, 9, 2, 1, 7, 5, 8], pseudocode: PSEUDO["heap"], code: { py: PY["heap"] } },
 ];
 
 export function bySlug(slug: string): AlgorithmEntry | undefined {
