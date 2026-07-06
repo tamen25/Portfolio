@@ -1,7 +1,12 @@
 # DSA Visualizer — Design
 
+> **SUPERSEDED (2026-07-06)** by `2026-07-06-learn-platform-design.md`. The DSA
+> visualizer is now the DSA *track* of a multi-track learning platform. This
+> document is retained for the Trace/engine/renderer/catalog design detail,
+> which the platform spec incorporates by reference.
+
 **Date:** 2026-07-06
-**Status:** Approved (design), pending implementation plan
+**Status:** Superseded — see learn-platform design
 **Location:** new standalone site `dsa-visualizer/` at the repo root
 
 ## Purpose
