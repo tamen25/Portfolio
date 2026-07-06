@@ -47,3 +47,14 @@ test("bySlug resolves and misses correctly", () => {
   assert.ok(bySlug("bubble-sort"));
   assert.equal(bySlug("nope"), undefined);
 });
+
+test("every entry has code for all four languages", () => {
+  for (const e of CATALOG) {
+    for (const lang of ["py", "js", "cpp", "java"] as const) {
+      assert.ok(
+        e.code[lang] && e.code[lang]!.length > 0,
+        `${e.slug} missing ${lang} code`
+      );
+    }
+  }
+});
