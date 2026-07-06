@@ -1,0 +1,195 @@
+export const PSEUDO: Record<string, string[]> = {
+  "bubble-sort": [
+    "for i in 0..n:",
+    "  for j in 0..n-i-1:",
+    "    if a[j] > a[j+1]:",
+    "      swap(a[j], a[j+1])",
+    "  # a[n-i-1] settled",
+  ],
+  "insertion-sort": [
+    "for i in 1..n:",
+    "  key = a[i]",
+    "  shift larger elements right, insert key",
+  ],
+  "selection-sort": [
+    "for i in 0..n:",
+    "  min = i",
+    "  find min in a[i+1..n]",
+    "  swap(a[i], a[min])",
+  ],
+  "merge-sort": [
+    "sort(lo, hi):",
+    "  split into halves, sort each",
+    "  merge: compare fronts, take smaller",
+    "  copy merged back into a[lo..hi]",
+  ],
+  "quick-sort": [
+    "sort(lo, hi):",
+    "  pivot = a[hi]",
+    "  compare each a[j] with pivot",
+    "  place pivot at its final index, recurse",
+  ],
+  "heap-sort": [
+    "build max-heap",
+    "for end from n-1 down to 1:",
+    "  sift-down to restore heap",
+    "  move max to end",
+  ],
+  "two-pointers": [
+    "lo, hi = 0, n-1",
+    "while lo < hi: check a[lo]+a[hi] vs target",
+    "move the pointer that shrinks the gap",
+  ],
+  "sliding-window": [
+    "sum = sum of first k",
+    "best = sum",
+    "slide: add a[i], drop a[i-k]; track best",
+  ],
+  "binary-search": [
+    "lo, hi = 0, n-1",
+    "while lo <= hi:",
+    "  mid = (lo+hi)//2; compare a[mid] with target",
+  ],
+  "prefix-sums": [
+    "running = 0",
+    "for i: running += a[i]; prefix[i] = running",
+  ],
+  "fast-slow": [
+    "slow, fast = start, start",
+    "advance slow by 1, fast by 2",
+    "if slow == fast: cycle found",
+    "if fast hits end: no cycle",
+    "# terminate",
+  ],
+  "merge-intervals": [
+    "sort intervals by start",
+    "for each: push as new interval, or",
+    "extend the last if it overlaps",
+  ],
+};
+
+export const PY: Record<string, string> = {
+  "bubble-sort": `def bubble_sort(a):
+    n = len(a)
+    for i in range(n):
+        for j in range(n - i - 1):
+            if a[j] > a[j + 1]:
+                a[j], a[j + 1] = a[j + 1], a[j]
+    return a`,
+  "insertion-sort": `def insertion_sort(a):
+    for i in range(1, len(a)):
+        key = a[i]
+        j = i - 1
+        while j >= 0 and a[j] > key:
+            a[j + 1] = a[j]
+            j -= 1
+        a[j + 1] = key
+    return a`,
+  "selection-sort": `def selection_sort(a):
+    n = len(a)
+    for i in range(n):
+        m = i
+        for j in range(i + 1, n):
+            if a[j] < a[m]:
+                m = j
+        a[i], a[m] = a[m], a[i]
+    return a`,
+  "merge-sort": `def merge_sort(a):
+    if len(a) <= 1:
+        return a
+    mid = len(a) // 2
+    left, right = merge_sort(a[:mid]), merge_sort(a[mid:])
+    out, i, j = [], 0, 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            out.append(left[i]); i += 1
+        else:
+            out.append(right[j]); j += 1
+    return out + left[i:] + right[j:]`,
+  "quick-sort": `def quick_sort(a, lo=0, hi=None):
+    if hi is None:
+        hi = len(a) - 1
+    if lo >= hi:
+        return a
+    pivot, i = a[hi], lo
+    for j in range(lo, hi):
+        if a[j] < pivot:
+            a[i], a[j] = a[j], a[i]
+            i += 1
+    a[i], a[hi] = a[hi], a[i]
+    quick_sort(a, lo, i - 1)
+    quick_sort(a, i + 1, hi)
+    return a`,
+  "heap-sort": `def heap_sort(a):
+    n = len(a)
+    def sift(size, root):
+        largest = root
+        l, r = 2 * root + 1, 2 * root + 2
+        if l < size and a[l] > a[largest]: largest = l
+        if r < size and a[r] > a[largest]: largest = r
+        if largest != root:
+            a[root], a[largest] = a[largest], a[root]
+            sift(size, largest)
+    for i in range(n // 2 - 1, -1, -1):
+        sift(n, i)
+    for end in range(n - 1, 0, -1):
+        a[0], a[end] = a[end], a[0]
+        sift(end, 0)
+    return a`,
+  "two-pointers": `def pair_sum(a, target):
+    lo, hi = 0, len(a) - 1
+    while lo < hi:
+        s = a[lo] + a[hi]
+        if s == target:
+            return [lo, hi]
+        if s < target:
+            lo += 1
+        else:
+            hi -= 1
+    return []`,
+  "sliding-window": `def max_window_sum(a, k):
+    s = sum(a[:k])
+    best = s
+    for i in range(k, len(a)):
+        s += a[i] - a[i - k]
+        best = max(best, s)
+    return best`,
+  "binary-search": `def binary_search(a, target):
+    lo, hi = 0, len(a) - 1
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if a[mid] == target:
+            return mid
+        if a[mid] < target:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    return -1`,
+  "prefix-sums": `def prefix_sums(a):
+    out, running = [], 0
+    for x in a:
+        running += x
+        out.append(running)
+    return out`,
+  "fast-slow": `def has_cycle(nxt):
+    slow = fast = 0
+    while True:
+        if fast < 0 or nxt[fast] < 0:
+            return False
+        slow = nxt[slow]
+        fast = nxt[fast]
+        if fast < 0 or nxt[fast] < 0:
+            return False
+        fast = nxt[fast]
+        if slow == fast:
+            return True`,
+  "merge-intervals": `def merge_intervals(intervals):
+    intervals.sort()
+    merged = []
+    for s, e in intervals:
+        if merged and s <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], e)
+        else:
+            merged.append([s, e])
+    return merged`,
+};
