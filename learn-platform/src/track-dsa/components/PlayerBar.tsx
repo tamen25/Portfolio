@@ -5,7 +5,6 @@ export function PlayerBar(props: {
   total: number;
   playing: boolean;
   speed: number;
-  narration: string;
   meta?: Record<string, number>;
   onPrev: () => void;
   onNext: () => void;
@@ -44,12 +43,13 @@ export function PlayerBar(props: {
           <option value={4}>4×</option>
         </select>
       </div>
-      <div className="mt-2 flex items-center justify-between font-mono text-xs">
-        <span className="text-[var(--color-ink)]">{props.narration}</span>
-        <span className="text-[var(--color-muted)]">
-          {props.meta && Object.entries(props.meta).map(([k, v]) => `${k}: ${v}`).join("  ")}
-        </span>
-      </div>
+      {props.meta && Object.keys(props.meta).length > 0 && (
+        <div className="mt-2 flex justify-end font-mono text-xs">
+          <span className="text-[var(--color-muted)]">
+            {Object.entries(props.meta).map(([k, v]) => `${k}: ${v}`).join("  ")}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

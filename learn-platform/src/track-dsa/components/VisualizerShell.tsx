@@ -20,10 +20,10 @@ export function VisualizerShell({ slug }: { slug: string }) {
   return (
     <div className="flex h-[calc(100vh-57px)] flex-col">
       <div className="grid flex-1 grid-cols-[1fr_360px] overflow-hidden">
-        <div className="relative">
+        <div className="relative h-full min-h-0">
           {Renderer ? <Renderer frame={p.frame} /> : null}
           {p.frame.narration && (
-            <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded bg-[var(--color-panel)]/90 px-3 py-1 font-mono text-xs text-[var(--color-ink)]">
+            <div className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 rounded-md border border-[var(--color-edge)] bg-[var(--color-stage)]/90 px-3 py-1 font-mono text-xs text-[var(--color-ink)] backdrop-blur-sm">
               {p.frame.narration}
             </div>
           )}
@@ -63,7 +63,6 @@ export function VisualizerShell({ slug }: { slug: string }) {
         total={p.total}
         playing={p.playing}
         speed={p.speed}
-        narration={p.frame.narration}
         meta={p.frame.meta}
         onPrev={p.prev}
         onNext={p.next}
