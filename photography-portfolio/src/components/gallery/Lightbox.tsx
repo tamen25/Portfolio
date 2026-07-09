@@ -2,7 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { X, CaretLeft, CaretRight } from "@phosphor-icons/react";
+import {
+  X,
+  CaretLeft,
+  CaretRight,
+  InstagramLogo,
+} from "@phosphor-icons/react";
 import { formatExif, type Photo } from "@/lib/photos";
 
 type Props = {
@@ -96,7 +101,21 @@ export function Lightbox({ photos, index, onIndexChange, onClose }: Props) {
       onTouchEnd={onTouchEnd}
       className="fixed inset-0 z-50 flex flex-col bg-[#030507]/[0.98] outline-none backdrop-blur-md"
     >
-      <div className="flex justify-end p-4">
+      <div className="flex items-center justify-between p-4">
+        {photo.permalink ? (
+          <a
+            href={photo.permalink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View this photo on Instagram"
+            className="flex items-center gap-2 rounded-full px-3 py-2 text-sm text-overcast transition-colors hover:bg-ridge hover:text-snowlight active:scale-[0.98]"
+          >
+            <InstagramLogo size={20} />
+            <span className="hidden sm:inline">View on Instagram</span>
+          </a>
+        ) : (
+          <span />
+        )}
         <button
           type="button"
           onClick={onClose}

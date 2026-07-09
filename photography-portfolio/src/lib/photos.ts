@@ -1,4 +1,11 @@
 import manifest from "./photo-manifest.json";
+import savedOrder from "./photo-order.json";
+import savedOverrides from "./photo-overrides.json";
+import {
+  applyOverrides,
+  type Overrides,
+  type FeaturedSlot,
+} from "./arrange";
 
 /**
  * Collections are derived from the manifest (which `npm run sync-instagram`
@@ -82,19 +89,22 @@ const COLLECTION_META: Record<
     coverId: "sikkim-ravangla-buddha",
   },
   journal: {
-    name: "Field notes",
+    name: "Misc",
     blurb: "Everything else from the feed.",
   },
 };
 
-/** Known collections come first, in this order; new ones follow. */
-const COLLECTION_PREFERENCE = [
+/**
+ * Known collections, in display order. Every id here is offered as a move
+ * target on /arrange even when it currently has no photos, so you can sort
+ * frames into an empty category. New collections found in the manifest follow.
+ */
+export const COLLECTION_PREFERENCE = [
   "iceland",
+  "leh",
   "spiti",
   "astro",
   "moon",
-  "leh",
-  "sikkim",
   "journal",
 ];
 
@@ -265,7 +275,18 @@ const humanize = (id: string, collection: CollectionId): string => {
   return words.charAt(0).toUpperCase() + words.slice(1);
 };
 
-export const PHOTOS: Photo[] = (manifest as ManifestEntry[]).map((m) => ({
+/** Display name for any collection id, known or new. */
+export const collectionLabel = (id: string): string =>
+  COLLECTION_META[id]?.name ?? id.charAt(0).toUpperCase() + id.slice(1);
+
+/**
+ * Curation from the /arrange page (photo-overrides.json): hidden photos are
+ * dropped, moved photos change collection. Applied before anything derives
+ * from the manifest, so the whole site sees the curated view.
+ */
+export const OVERRIDES = savedOverrides as Overrides;
+
+const toPhoto = (m: ManifestEntry): Photo => ({
   id: m.id,
   src: m.src,
   collection: m.collection,
@@ -273,7 +294,17 @@ export const PHOTOS: Photo[] = (manifest as ManifestEntry[]).map((m) => ({
   height: m.height,
   alt: m.alt ?? ALT[m.id] ?? humanize(m.id, m.collection),
   permalink: m.permalink ?? null,
-}));
+});
+
+/**
+ * Every photo in the manifest, before curation — its own collection, nothing
+ * hidden. The /arrange board edits against this; the rest of the site uses
+ * PHOTOS (the curated view). Keep manifest order.
+ */
+export const BASE_PHOTOS: Photo[] = (manifest as ManifestEntry[]).map(toPhoto);
+
+/** The curated view: hidden photos dropped, moved photos re-collected. */
+export const PHOTOS: Photo[] = applyOverrides(BASE_PHOTOS, OVERRIDES);
 
 /** Collections present in the manifest, known ones first. */
 export const COLLECTIONS: Collection[] = [
@@ -284,15 +315,12 @@ export const COLLECTIONS: Collection[] = [
     const ib = COLLECTION_PREFERENCE.indexOf(b);
     return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib) || a.localeCompare(b);
   })
-  .map((id) => {
-    const meta = COLLECTION_META[id];
-    return {
-      id,
-      name: meta?.name ?? id.charAt(0).toUpperCase() + id.slice(1),
-      blurb: meta?.blurb ?? "",
-      coverId: meta?.coverId,
-    };
-  });
+  .map((id) => ({
+    id,
+    name: collectionLabel(id),
+    blurb: COLLECTION_META[id]?.blurb ?? "",
+    coverId: COLLECTION_META[id]?.coverId,
+  }));
 
 export const photoById = (id: string): Photo => {
   const photo = PHOTOS.find((p) => p.id === id);
@@ -309,19 +337,12 @@ export const pinnedPhoto = (id: string, fallbackIndex = 0): Photo =>
   PHOTOS.find((p) => p.id === id) ?? PHOTOS[fallbackIndex % PHOTOS.length];
 
 /**
- * Hand-curated display order per collection. List photo ids here in the
- * order they should appear on the site; anything not listed follows after
- * the curated ones, keeping import (filename) order. Edit freely; a test
- * fails on any id that does not exist.
+ * Curated display order per collection, loaded from photo-order.json.
+ * Arrange visually at /arrange (dev server only), or edit the JSON by hand:
+ * ids listed there lead their collection; anything not listed follows after,
+ * keeping import (filename) order. A test fails on any id that does not exist.
  */
-export const ORDER: Partial<Record<CollectionId, string[]>> = {
-  // Example:
-  // iceland: [
-  //   "iceland-aurora-kirk",
-  //   "iceland-day-10-kirk-au",
-  //   "iceland-day-5-vestra",
-  // ],
-};
+export const ORDER: Partial<Record<CollectionId, string[]>> = savedOrder;
 
 export const photosByCollection = (id: CollectionId): Photo[] => {
   const photos = PHOTOS.filter((p) => p.collection === id);
@@ -346,32 +367,62 @@ export const collectionCover = (id: CollectionId): Photo => {
 
 const aspect = (p: Photo) => p.width / p.height;
 
+/**
+ * Resolve a home-page image slot: the photo you picked on /arrange
+ * (photo-overrides.json `featured`) if it's still present, else the given
+ * fallback. Slots always resolve to a real photo so the page never breaks.
+ */
+export const featuredPhoto = (slot: FeaturedSlot, fallback: Photo): Photo =>
+  maybePhotoById(OVERRIDES.featured?.[slot]) ?? fallback;
+
 /** Pinned classic when present; otherwise the first landscape frame. */
 export const HERO_PHOTO: Photo =
   maybePhotoById("iceland-aurora-kirk") ??
   PHOTOS.find((p) => aspect(p) > 1.1) ??
   PHOTOS[0];
 
-/** Pinned classic when present; otherwise the widest frame available. */
-export const PANORAMA_PHOTO: Photo =
-  maybePhotoById("iceland-day-8-dynjandi-beach") ??
-  [...PHOTOS].sort((a, b) => aspect(b) - aspect(a))[0];
+/** Collections feature (tall card): chosen frame, else a deterministic one. */
+export const COLLECTIONS_FEATURE_PHOTO: Photo = featuredPhoto(
+  "collectionsFeature",
+  pinnedPhoto("iceland-day-3-sei", 9),
+);
 
-/** Newest frames for the strip; falls back to the curated classics. */
-const CURATED_STRIP = [
-  "iceland-day-7-godafoss",
-  "spiti-dipper",
-  "astro-neowisse",
-  "moon-moonrise",
-  "leh-umingla-bikes",
-  "sikkim-sun600-2",
+/** Wide panorama band: chosen frame, else pinned classic, else widest frame. */
+export const PANORAMA_PHOTO: Photo = featuredPhoto(
+  "wideFrame",
+  maybePhotoById("iceland-day-8-dynjandi-beach") ??
+    [...PHOTOS].sort((a, b) => aspect(b) - aspect(a))[0],
+);
+
+/** The six Instagram-strip slots, each a chosen frame or a newest-frame fallback. */
+const STRIP_SLOTS: FeaturedSlot[] = [
+  "strip1",
+  "strip2",
+  "strip3",
+  "strip4",
+  "strip5",
+  "strip6",
 ];
 
-export const INSTAGRAM_PHOTOS: Photo[] = CURATED_STRIP.every((id) =>
-  PHOTOS.some((p) => p.id === id),
-)
-  ? CURATED_STRIP.map(photoById)
-  : PHOTOS.slice(0, 6);
+const stripFallbacks = (() => {
+  const curated = [
+    "iceland-day-7-godafoss",
+    "spiti-dipper",
+    "astro-neowisse",
+    "moon-moonrise",
+    "leh-umingla-bikes",
+    "sikkim-sun600-2",
+  ];
+  const base = curated.every((id) => PHOTOS.some((p) => p.id === id))
+    ? curated.map(photoById)
+    : PHOTOS.slice(0, 6);
+  // Pad defensively so six slots always have a fallback on a small feed.
+  return base.length ? base : PHOTOS.slice(0, 6);
+})();
+
+export const INSTAGRAM_PHOTOS: Photo[] = STRIP_SLOTS.map((slot, i) =>
+  featuredPhoto(slot, stripFallbacks[i % stripFallbacks.length]),
+);
 
 export const formatExif = (e: Exif): string =>
   `${e.focal} · ${e.aperture} · ${e.shutter} · ISO ${e.iso}`;

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How STANZA was made</title>
+<meta name="description" content="Build guide for STANZA: kinetic typography where the motion is the meaning, with a hand-rolled text splitter and per-stanza page weather.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F1E8'/%3E%3Ctext x='16' y='24' font-family='serif' font-size='24' font-style='italic' text-anchor='middle' fill='%23191713'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=2">
+<style>
+  body{background:#F5F1E8;color:#191713}
+  .gw{max-width:820px;margin:0 auto;padding:90px 24px 90px}
+  .gw .kick{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--accent);display:block;margin-bottom:20px}
+  .gw h1{font-family:var(--fr);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.02;margin-bottom:18px}
+  .gw h1 em{font-variation-settings:"opsz" 144,"SOFT" 60,"WONK" 1}
+  .gw h2{font-family:var(--fr);font-weight:600;font-size:1.35rem;margin:52px 0 12px;padding-top:28px;border-top:1px solid rgba(25,23,19,.16)}
+  .gw p,.gw li{color:rgba(25,23,19,.72);font-size:.98rem;line-height:1.7;max-width:66ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:var(--mono);font-size:.78em;background:rgba(25,23,19,.07);padding:1px 6px}
+  .gw pre{background:#EDE8DC;border:1px solid rgba(25,23,19,.14);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.75rem;line-height:1.6}
+  .force-list li strong{font-family:var(--mono);font-size:.72em;letter-spacing:.2em}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 04 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How <em>Invisible Forces</em> was set in motion</h1>
+  <p>Written by Claude Fable 5, which wrote the poem, designed the type system and built
+  the site autonomously. The premise: motion is not decoration here — <strong>the motion is
+  the meaning</strong>. If an animation didn't enact its stanza's verb, it was cut.</p>
+
+  <h2>1 · One behavior per stanza</h2>
+  <ul class="force-list">
+    <li><strong>GRAVITY</strong> — chars drop from random heights with <code>bounce.out</code>; random stagger so the line lands like dropped cutlery.</li>
+    <li><strong>WIND</strong> — chars gust in from the left, then loop tiny random drifts forever: wind never finishes editing.</li>
+    <li><strong>TIDE</strong> — a sine wave staggered through the line (<code>yoyo</code> repeat), first verse flows out, the answer flows back.</li>
+    <li><strong>FOG</strong> — each char loops its own opacity/blur cycle at a random phase; legibility itself is the animation.</li>
+    <li><strong>HEAT</strong> — chars rise with <code>scaleY</code> stretch from the baseline, then shimmer with fast skew jitter.</li>
+    <li><strong>ECHO</strong> — the closing line exists three more times, blurred and fading, drifting away on slow loops.</li>
+    <li><strong>STILLNESS</strong> — everything converges from random scatter with <code>expo.out</code> and then nothing moves. Restraint as payoff.</li>
+  </ul>
+
+  <h2>2 · The page is weather too</h2>
+  <p>Each stanza carries a <code>data-theme</code>; an IntersectionObserver stamps it on
+  <code>&lt;body&gt;</code> and CSS custom properties crossfade the entire page — graphite for
+  gravity, sea-glass for tide, ember for heat, lavender dusk for echo, pure white for
+  stillness. Two rules, seven moods.</p>
+
+  <h2>3 · A splitter with typographic manners</h2>
+  <p>Pass 2 caught the classic kinetic-type bug: naive per-char spans let lines break
+  mid-word ("sho / re"). The fix is structural:</p>
+  <pre><code>text.split(/(\s+)/) → word spans {display:inline-block; white-space:nowrap}
+                       → char spans inside each word</code></pre>
+  <p>Words wrap; letters never separate. Screen readers get the original line via
+  <code>aria-label</code> while the spans are hidden from them.</p>
+
+  <h2>4 · Fraunces earns its axes</h2>
+  <p>The variable axes do real work: display sizes run <code>opsz 144</code>; the italic
+  cover word runs <code>WONK 1</code> (Fraunces' intentionally crooked alternates) and
+  <code>SOFT 60</code>. A typeface with opinions, given room to have them.</p>
+
+  <h2>5 · The three passes</h2>
+  <ol>
+    <li>Verified all seven behaviors with scrolled screenshots — the only honest way to QA motion.</li>
+    <li>Fixed the mid-word wrapping (structure, not patch).</li>
+    <li>Mobile: hid the spine numerals that collided with verses at 390px; confirmed the
+    reduced-motion poem reads perfectly with zero animation.</li>
+  </ol>
+
+  <h2>6 · Replicate it</h2>
+  <ul>
+    <li>Write the words first. Every animation must be justified by a verb in the text.</li>
+    <li>Loop what shouldn't finish (wind, fog, echo); play-once what should (gravity, stillness).</li>
+    <li>Zero images, zero build, ~200 lines of JS. Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Back to the poem</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

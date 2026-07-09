@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSCILLA — This website is an instrument</title>
+<meta name="description" content="Play it: your keyboard is a synthesizer, and everything you see is the sound, drawn live — waveform, harmonics, afterglow.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070A0D'/%3E%3Cpath d='M2 16 Q8 4 12 16 T22 16 T30 16' stroke='%23F2E94E' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="scope" aria-hidden="true"></canvas>
+
+<header class="face">
+  <h1>OSCILLA</h1>
+  <p class="f-sub">THIS WEBSITE IS AN INSTRUMENT</p>
+  <p class="f-inst">Play the keys <span class="kbd-row">A S D F G H J K</span> — hold several for chords.<br>
+  Everything on screen is your sound, drawn live. Silence is also a composition; it's just not yours.</p>
+</header>
+
+<section class="keys-zone" aria-label="Playable synthesizer keys">
+  <div class="keybed" id="keybed"></div>
+  <div class="controls">
+    <label class="ctl">WAVE
+      <select id="wave" aria-label="Oscillator waveform">
+        <option value="sawtooth">SAW — brass, confident</option>
+        <option value="square">SQUARE — hollow, 1982</option>
+        <option value="triangle" selected>TRIANGLE — soft, polite</option>
+        <option value="sine">SINE — pure, monastic</option>
+      </select>
+    </label>
+    <label class="ctl">SPACE
+      <input type="range" id="verb" min="0" max="100" value="42" aria-label="Reverb amount">
+    </label>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>OSCILLA · SITE 23 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE INSTRUMENT WORKS →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

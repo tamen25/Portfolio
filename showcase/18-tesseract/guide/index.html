@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — The TESSERACT projection math</title>
+<meta name="description" content="Build guide for TESSERACT: 16 vertices, an XOR edge trick, and two honest perspective divisions.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FBFAF7'/%3E%3Crect x='7' y='7' width='13' height='13' fill='none' stroke='%23111' stroke-width='1.6'/%3E%3Crect x='13' y='13' width='13' height='13' fill='none' stroke='%232B47FF' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:760px;margin:0 auto;padding:80px max(4vw,22px)}
+  .gw .kick{font-family:var(--mono);font-size:.6rem;letter-spacing:.3em;color:var(--blue);display:block;margin-bottom:18px;font-weight:600}
+  .gw h1{font-weight:300;font-size:clamp(2.2rem,6vw,3.6rem);letter-spacing:.06em;margin-bottom:16px}
+  .gw h2{font-weight:500;font-size:1.6rem;margin:48px 0 12px;padding-top:26px;border-top:1px solid var(--hair)}
+  .gw p,.gw li{color:var(--ink-dim);font-size:1.12rem;line-height:1.75;max-width:62ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:10px;margin:12px 0}
+  .gw code{font-family:var(--mono);font-size:.72em;background:rgba(43,71,255,.07);padding:1px 6px;color:#1F35C4}
+  .gw pre{background:#F4F2EC;border:1px solid var(--hair);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.74rem;line-height:1.75;color:var(--ink)}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 18 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>The projection math</h1>
+  <p>Written by Claude Fable 5, autonomously. Everything on the canvas follows from
+  four short ideas — no libraries, no smoke.</p>
+
+  <h2>1 · The shape is a binary counter</h2>
+  <pre><code>vertices: all 16 sign patterns of (±1, ±1, ±1, ±1)
+edges:    a—b is an edge  ⇔  (a XOR b) has exactly one bit
+          // one-liner: diff & (diff-1) === 0</code></pre>
+  <p>The XOR trick also classifies edges: if the differing bit is the w-bit (8),
+  the edge crosses into the fourth dimension — those are the ultramarine ones.</p>
+
+  <h2>2 · The dimension dial is coordinate fading</h2>
+  <p><code>z ×= clamp(d−2)</code>, <code>w ×= clamp(d−3)</code>. At d=2 the z and w axes are
+  flattened and the figure IS a square; sliding the dial literally un-flattens space one
+  axis at a time. The morph is the geometry, which is why it never looks wrong.</p>
+
+  <h2>3 · Two honest divisions</h2>
+  <pre><code>4D→3D:  scale by 1/(3.4 − 0.9w)   // camera on the w-axis
+3D→2D:  scale by 1/(4.2 − 1.1z)   // camera on the z-axis</code></pre>
+  <p>Perspective is just division by distance, twice. The inner cube is the half of
+  the shape farther away in w — not smaller, just further, in a direction the screen
+  doesn't have.</p>
+
+  <h2>4 · Rotation without deformation</h2>
+  <p>Each toggle applies a rigid rotation in one plane (X–W, Y–Z, X–Y). The famous
+  "self-swallowing" motion is the X–W spin — rigid as a turntable in 4D, hallucinatory
+  only in the shadow.</p>
+
+  <h2>5 · The three passes</h2>
+  <ol>
+    <li>Math + dial + census verified.</li>
+    <li>Containment: rotations compound to ×√2 amplitude — projection scale must
+    budget for the envelope, not the rest pose (caught when the figure clipped its frame).</li>
+    <li>Mobile + reduced motion (auto-spin off; drag remains).</li>
+  </ol>
+
+  <p style="margin-top:44px"><a href="../">← Back to the instrument</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

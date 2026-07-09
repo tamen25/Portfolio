@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEDGER — City of Vellum, Annual Report 1962</title>
+<meta name="description" content="The annual report of an imaginary city, taken absolutely seriously: population curves, umbrella sales, and the audit of streetlamps — charts as art, Swiss grid throughout.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F3F1EC'/%3E%3Crect x='6' y='18' width='5' height='8' fill='%23111'/%3E%3Crect x='13' y='10' width='5' height='16' fill='%23D0312D'/%3E%3Crect x='20' y='6' width='5' height='20' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-grid">
+    <p class="c-org">DEPARTMENT OF CIVIC ARITHMETIC</p>
+    <h1 class="c-title">CITY OF<br>VELLUM</h1>
+    <p class="c-report">ANNUAL REPORT<br><span>1962</span></p>
+    <div class="c-mark" aria-hidden="true"></div>
+    <p class="c-note">All figures audited. Some figures invented, then audited anyway.</p>
+  </div>
+</header>
+
+<main>
+<section class="fig" id="fig1">
+  <header class="fig-head">
+    <span class="f-no">FIG. 1</span>
+    <h2>POPULATION, 1900–1962</h2>
+    <span class="f-unit">THOUSANDS OF RESIDENTS</span>
+  </header>
+  <svg class="chart line-chart" viewBox="0 0 720 300" role="img"
+       aria-label="Line chart of Vellum's population rising from 41 thousand in 1900 to 187 thousand in 1962, with a dip in the 1930s">
+    <g class="grid"></g>
+    <path class="pop-line" d="" fill="none"/>
+    <g class="pop-dots"></g>
+    <g class="labels"></g>
+  </svg>
+  <p class="f-caption">The dip in 1931 corresponds to the Great Fog, during which an
+  estimated nine thousand residents relocated to towns they could see.</p>
+</section>
+
+<section class="fig" id="fig2">
+  <header class="fig-head">
+    <span class="f-no">FIG. 2</span>
+    <h2>UMBRELLA SALES BY MONTH</h2>
+    <span class="f-unit">UNITS, THOUSANDS · IT RAINS 300 DAYS A YEAR</span>
+  </header>
+  <svg class="chart bar-chart" viewBox="0 0 720 300" role="img"
+       aria-label="Bar chart of monthly umbrella sales, high all year with a spike in October and a mysterious dip in June">
+  </svg>
+  <p class="f-caption">The June dip remains unexplained. The umbrella-makers' guild
+  blames optimism.</p>
+</section>
+
+<section class="fig" id="fig3">
+  <header class="fig-head">
+    <span class="f-no">FIG. 3</span>
+    <h2>THE STREETLAMP AUDIT</h2>
+    <span class="f-unit">ONE DOT = 100 LAMPS · TOTAL 12,400</span>
+  </header>
+  <div class="waffle" role="img"
+       aria-label="Dot grid of 124 dots: 109 lit lamps in black, 11 flickering in red, 4 dark shown as outlines">
+  </div>
+  <div class="waffle-key">
+    <span><i class="k-lit"></i>LIT (10,900)</span>
+    <span><i class="k-flick"></i>FLICKERING (1,100)</span>
+    <span><i class="k-dark"></i>DARK (400)</span>
+  </div>
+  <p class="f-caption">The four hundred dark lamps are concentrated on Millward Hill,
+  whose residents have petitioned to keep them that way, citing the stars.</p>
+</section>
+
+<section class="fig" id="fig4">
+  <header class="fig-head">
+    <span class="f-no">FIG. 4</span>
+    <h2>LETTERS TO THE CITY, BY TONE</h2>
+    <span class="f-unit">COUNT · READ LEFT OF ZERO WITH SYMPATHY</span>
+  </header>
+  <svg class="chart div-chart" viewBox="0 0 720 320" role="img"
+       aria-label="Diverging bar chart of citizen letters: complaints on the left in red, praise on the right in black; pigeons receive both extremes">
+  </svg>
+  <p class="f-caption">The pigeons appear on both sides of zero, as pigeons do.</p>
+</section>
+
+<section class="closing">
+  <p class="close-line">The Department of Civic Arithmetic thanks the citizens of Vellum
+  for continuing to be countable.</p>
+  <p class="close-sig">— THE COMPTROLLER</p>
+</section>
+</main>
+
+<footer class="foot">
+  <p>LEDGER · SITE 16 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE CHARTS ASSEMBLE →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

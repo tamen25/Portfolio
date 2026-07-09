@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How OSCILLA works</title>
+<meta name="description" content="Build guide for OSCILLA: a polyphonic Web Audio synth whose entire visual layer is one AnalyserNode, drawn with afterglow.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070A0D'/%3E%3Cpath d='M2 16 Q8 4 12 16 T22 16 T30 16' stroke='%23F2E94E' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  #scope{display:none}
+  body{display:block}
+  .gw{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:80px max(4vw,22px)}
+  .gw .kick{font-family:var(--unb);font-weight:500;font-size:.58rem;letter-spacing:.34em;color:var(--signal);display:block;margin-bottom:18px}
+  .gw h1{font-family:var(--unb);font-weight:700;font-size:clamp(1.8rem,5vw,3rem);line-height:1.1;margin-bottom:16px}
+  .gw h2{font-family:var(--unb);font-weight:500;font-size:1.1rem;letter-spacing:.06em;margin:46px 0 12px;padding-top:24px;border-top:1px solid var(--hair);color:var(--signal)}
+  .gw p,.gw li{color:var(--bone-dim);font-size:1rem;line-height:1.75;max-width:66ch;font-weight:300}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.76em;color:var(--signal);background:rgba(242,233,78,.08);padding:1px 6px}
+  .gw pre{background:#0B0F13;border:1px solid var(--hair);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.72rem;line-height:1.7}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 23 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How the instrument works</h1>
+  <p>Written by Claude Fable 5, autonomously. There is no artwork on OSCILLA.
+  Everything you see is one <code>AnalyserNode</code>, read twice per frame.</p>
+
+  <h2>1 · The voice</h2>
+  <pre><code>2 oscillators per key, +7 cents detune  // instant width
+attack 20ms → sustain .22 → release via setTargetAtTime
+reverb: ConvolverNode fed a 2.2s noise burst with
+        a quadratic decay — a hall for free, no samples</code></pre>
+
+  <h2>2 · The view is the signal</h2>
+  <ul>
+    <li><strong>Waveform:</strong> <code>getByteTimeDomainData</code> → one polyline,
+    signal yellow, with canvas <code>shadowBlur</code> as phosphor bloom.</li>
+    <li><strong>Afterglow:</strong> never <code>clearRect</code> — wash the canvas with
+    16%-alpha black so every previous frame ghosts underneath, like a slow scope.</li>
+    <li><strong>Harmonics:</strong> <code>getByteFrequencyData</code> → 96 teal bars.
+    Chords visibly grow their partial stacks; a sine is one lonely bar, as it should be.</li>
+    <li>Idle amplitude is kept at 22% so silence still draws a calm line —
+    the instrument breathes even when unplayed.</li>
+  </ul>
+
+  <h2>3 · Playability details</h2>
+  <ul>
+    <li>Real keyboard (keydown/keyup, repeat-filtered) AND per-key pointer capture —
+    chords work with fingers on a phone.</li>
+    <li>The four waveforms come with honest menu copy ("SQUARE — hollow, 1982").</li>
+    <li>All sound is user-initiated; the page makes no noise on its own.</li>
+  </ul>
+
+  <h2>4 · The three passes</h2>
+  <ol>
+    <li>Chord verification — three held keys drew a composite waveform + correct partials.</li>
+    <li>Afterglow tuned from smear to phosphor.</li>
+    <li>Mobile keybed re-grid + touch capture.</li>
+  </ol>
+
+  <p style="margin-top:44px"><a href="../">← Back to the instrument</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

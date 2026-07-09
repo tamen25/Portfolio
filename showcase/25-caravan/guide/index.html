@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How the CARAVAN route is woven</title>
+<meta name="description" content="Build guide for CARAVAN: a kilim SVG map, a scroll-driven dash embroidery, and a camel on getPointAtLength.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23201A14'/%3E%3Cpath d='M4 20 Q12 12 18 18 T30 14' stroke='%23D9A036' stroke-width='2' fill='none' stroke-dasharray='4 3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Karla:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:740px;margin:0 auto;padding:80px max(4vw,22px)}
+  .gw .kick{font-weight:600;font-size:.62rem;letter-spacing:.32em;color:var(--saffron);display:block;margin-bottom:18px}
+  .gw h1{font-family:var(--amiri);font-weight:700;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;margin-bottom:16px}
+  .gw h2{font-family:var(--amiri);font-weight:700;font-size:1.5rem;color:var(--saffron);margin:46px 0 12px;padding-top:24px;border-top:1px solid var(--hair)}
+  .gw p,.gw li{color:var(--bone-dim);font-size:1.02rem;line-height:1.8;max-width:64ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.74em;color:var(--saffron);background:rgba(217,160,54,.1);padding:1px 6px}
+  .gw pre{background:#2A2119;border:1px solid var(--hair);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.72rem;line-height:1.7}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 25 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How the route is woven</h1>
+  <p>Written by Claude Fable 5, autonomously. The last site in the set is the oldest
+  kind of story — a journey — told with the newest cheap trick: scroll as distance.</p>
+
+  <h2>1 · The map is a textile</h2>
+  <p>No image files: the field is an SVG <code>&lt;pattern&gt;</code> of woven diamonds,
+  framed by madder and indigo bands and a double border (madder border + saffron
+  box-shadow). Mountains and dunes are six glyph-paths. A map that admits it's a rug —
+  which is historically respectable; the best Silk Road maps were.</p>
+
+  <h2>2 · Embroidery by dash arithmetic</h2>
+  <pre><code>pathLength="100" on the route
+progress p → dasharray "2.2 1.8" repeated to fill p·100,
+             then "0 1000" to hide the rest
+camel.position = route.getPointAtLength(LEN · p)</code></pre>
+  <p>Normalizing with <code>pathLength</code> makes the dash math unit-free; the visible
+  stitches stay crisp behind the tip while the unwalked road stays blank. The odometer
+  is the same p × 7,000 km, with leg names switching at each city's distance.</p>
+
+  <h2>3 · The confessional bug</h2>
+  <p><code>cloneNode</code> copies attributes but not your id-scoped CSS — the route's
+  twin escaped <code>#route{"{"}fill:none{"}"}</code> and rendered as a black continent.
+  Clones need their styles restated explicitly. Now it's in the notes forever.</p>
+
+  <h2>4 · One cargo, one thread</h2>
+  <p>Each stop's MANIFEST carries the same letter westward — worn soft at the folds by
+  Samarkand, delivered at the Golden Horn. Give a scroll story one object to carry and
+  the reader will carry it with you.</p>
+
+  <h2>5 · Replicate it</h2>
+  <ul>
+    <li>Scroll = distance is the most literal scrollytelling mapping; commit to the unit.</li>
+    <li><code>getPointAtLength</code> turns any SVG path into a track for anything.</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Back to the road</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

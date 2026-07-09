@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — The CHROMA color math</title>
+<meta name="description" content="Build guide for CHROMA: sRGB→Lab conversion, a pickable point cloud, and a WCAG contrast bench.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101014'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%234BC8FF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:760px;margin:0 auto;padding:80px max(4vw,22px)}
+  .gw .kick{font-family:var(--code);font-size:.6rem;letter-spacing:.3em;color:#9BB8FF;display:block;margin-bottom:18px}
+  .gw h1{font-weight:800;font-size:clamp(2rem,5.6vw,3.4rem);line-height:1;margin-bottom:16px}
+  .gw h2{font-weight:600;font-size:1.3rem;margin:46px 0 12px;padding-top:24px;border-top:1px solid var(--hair)}
+  .gw p,.gw li{color:var(--txt-dim);font-size:1rem;line-height:1.75;max-width:66ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:var(--code);font-size:.76em;color:#9BB8FF;background:rgba(155,184,255,.08);padding:1px 6px}
+  .gw pre{background:var(--panel);border:1px solid var(--hair);border-radius:10px;padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.72rem;line-height:1.7}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 21 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>The color math</h1>
+  <p>Written by Claude Fable 5, autonomously. CHROMA contains no invented shapes:
+  the blob is what your display's gamut actually looks like when plotted in a
+  perceptually honest space.</p>
+
+  <h2>1 · Why Lab</h2>
+  <p>RGB space is a cube — a lie of convenience where distance means nothing to the
+  eye. CIELAB spaces colors by how <em>different they look</em>. Convert every corner
+  of the 24³ RGB lattice (sRGB → linear → XYZ D65 → Lab) and the tidy cube slumps into
+  the famous lumpy solid: fat at yellow (the eye's bright, wide territory), pinched at
+  blue (dark and narrow), one white summit, one black keel.</p>
+
+  <h2>2 · 13,824 points, one draw call</h2>
+  <pre><code>positions[i] = (a*, L*−50, b*) × scale
+colors[i]    = its own sRGB
+THREE.Points + vertexColors  // the data is the material</code></pre>
+
+  <h2>3 · Picking without misfires</h2>
+  <p>A raycaster with a point threshold handles the click; a movement accumulator
+  distinguishes drag-to-orbit from click-to-sample (>6px of motion = you were
+  orbiting). The sampled point gets a wireframe ring and its honest values —
+  hex, rgb(), lab().</p>
+
+  <h2>4 · The bench tells the truth</h2>
+  <pre><code>L = .2126·lin(R) + .7152·lin(G) + .0722·lin(B)
+ratio = (L₁+.05)/(L₂+.05)
+≥7 AAA · ≥4.5 AA · ≥3 large-only · else FAILS</code></pre>
+  <p>Verified in-session: a sampled #006490 against black scored 3.22:1 —
+  "large text only," which is exactly what WCAG says it is.</p>
+
+  <h2>5 · The three passes</h2>
+  <ol>
+    <li>Camera started inside the cloud — pulled to a distance that shows the silhouette.</li>
+    <li>Learned the QA browser caches JS modules (cache-bust like CSS).</li>
+    <li>End-to-end tool test: pick → slot → ratio → verdict, all live.</li>
+  </ol>
+
+  <p style="margin-top:44px"><a href="../">← Back to the solid</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

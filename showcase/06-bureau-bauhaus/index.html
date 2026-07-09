@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUREAU BAUHAUS — Compose your own poster</title>
+<meta name="description" content="A working Bauhaus exhibition: the color-form theory, the timeline, and a live poster composer. Drag, recolor, rotate, download.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F2EFE9'/%3E%3Ccircle cx='13' cy='16' r='9' fill='%23D53A2F'/%3E%3Crect x='17' y='7' width='4' height='18' fill='%23111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-geo" aria-hidden="true">
+    <span class="g g-circle" data-px="18"></span>
+    <span class="g g-bar" data-px="-12"></span>
+    <span class="g g-tri" data-px="26"></span>
+    <span class="g g-arc" data-px="-20"></span>
+    <span class="g g-dot" data-px="10"></span>
+  </div>
+  <div class="hero-text">
+    <p class="over">DAS BÜRO FÜR GESTALTUNG · EST. 1919 · STILL OPEN</p>
+    <h1 class="mark">BUREAU<br>BAU<span class="mark-red">HAUS</span></h1>
+    <p class="lede">An exhibition you operate. The theory, the century,
+    and a printing table where <strong>you</strong> are the workshop.</p>
+    <a class="cta" href="#composer">TO THE PRINTING TABLE ↓</a>
+  </div>
+</header>
+
+<section class="strip" aria-label="Motto">
+  <div class="strip-track" aria-hidden="true">
+    <span>FORM FOLLOWS FUNCTION</span><i class="s-c"></i>
+    <span>ART INTO INDUSTRY</span><i class="s-t"></i>
+    <span>LESS, BUT BETTER MADE</span><i class="s-s"></i>
+    <span>FORM FOLLOWS FUNCTION</span><i class="s-c"></i>
+    <span>ART INTO INDUSTRY</span><i class="s-t"></i>
+    <span>LESS, BUT BETTER MADE</span><i class="s-s"></i>
+  </div>
+</section>
+
+<section class="theory" id="theory">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2>KANDINSKY'S BET</h2>
+    <p>In 1923 the Bauhaus polled the public: which color belongs to which form?
+    The answers became doctrine. Hover the doctrine.</p>
+  </div>
+  <div class="theory-grid">
+    <button class="th-card" type="button">
+      <span class="th-shape th-tri" aria-hidden="true"></span>
+      <span class="th-name">DAS DREIECK</span>
+      <span class="th-claim">The triangle is <em>yellow</em> — sharp, restless, thinking.</span>
+    </button>
+    <button class="th-card" type="button">
+      <span class="th-shape th-sq" aria-hidden="true"></span>
+      <span class="th-name">DAS QUADRAT</span>
+      <span class="th-claim">The square is <em>red</em> — heavy, earthbound, certain.</span>
+    </button>
+    <button class="th-card" type="button">
+      <span class="th-shape th-ci" aria-hidden="true"></span>
+      <span class="th-name">DER KREIS</span>
+      <span class="th-claim">The circle is <em>blue</em> — cosmic, calm, endless.</span>
+    </button>
+  </div>
+</section>
+
+<section class="composer" id="composer">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2>THE PRINTING TABLE</h2>
+    <p>Drag the forms. Click one to recolor it. Double-click to rotate.
+    When the composition is honest, take it with you.</p>
+  </div>
+
+  <div class="table-wrap">
+    <div class="stage-frame">
+      <div class="stage" id="stage" aria-label="Poster composition stage. Drag shapes; click to recolor; double-click to rotate.">
+        <div class="stage-caption" aria-hidden="true">
+          <span>BAUHAUS</span><span>100+</span>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="ctl" id="btnShuffle" type="button"><i class="ctl-ic ic-shuffle" aria-hidden="true"></i>NEW COMPOSITION</button>
+      <button class="ctl" id="btnAdd" type="button"><i class="ctl-ic ic-add" aria-hidden="true"></i>ADD FORM</button>
+      <button class="ctl ctl-dark" id="btnDownload" type="button"><i class="ctl-ic ic-dl" aria-hidden="true"></i>PRINT POSTER (PNG)</button>
+      <p class="ctl-note">Your poster renders at 1200×1800 — Meisterhaus quality.
+      The Bureau claims no rights. The Bureau claims no wrongs either.</p>
+    </div>
+  </div>
+</section>
+
+<section class="years" id="years">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2>FOURTEEN YEARS, ONE CENTURY</h2>
+    <p>The school survived 14 years and three cities. The idea never stopped.</p>
+  </div>
+  <ol class="year-row">
+    <li><span class="y">1919</span><span class="y-what">Weimar. Gropius opens a school where painters share benches with plumbers.</span></li>
+    <li><span class="y">1925</span><span class="y-what">Dessau. The building becomes the manifesto — glass curtain walls, workshop wings.</span></li>
+    <li><span class="y">1932</span><span class="y-what">Berlin. A school in a telephone factory, running on stubbornness.</span></li>
+    <li><span class="y">1933</span><span class="y-what">Closed by the regime. The faculty scatters — and accidentally teaches the world.</span></li>
+    <li><span class="y">2026</span><span class="y-what">You are dragging rectangles on a website because of them.</span></li>
+  </ol>
+</section>
+
+<footer class="foot">
+  <div class="foot-geo" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="foot-cols">
+    <p>BUREAU BAUHAUS · SITE 06 / 25 · FABLE SHOWCASE<br>Built autonomously by Claude Fable 5</p>
+    <p><a href="guide/">HOW IT WAS BUILT →</a><br><a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

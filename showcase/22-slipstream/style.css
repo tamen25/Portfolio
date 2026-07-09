@@ -1,0 +1,97 @@
+/* SLIPSTREAM — cyanotype to golden hour. Poiret One / Public Sans */
+:root{
+  --print:#16324F;
+  --print-2:#0F2438;
+  --line:#EAF2FA;
+  --line-dim:rgba(234,242,250,.65);
+  --gold:#D9A441;
+  --cream:#F4EDDF;
+  --hair:rgba(234,242,250,.2);
+  --deco:"Poiret One",cursive;
+  --pub:"Public Sans",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--print);
+  background-image:
+    radial-gradient(circle at 50% 0%, #1C3E60, transparent 60%),
+    repeating-linear-gradient(0deg, rgba(234,242,250,.03) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(90deg, rgba(234,242,250,.03) 0 1px, transparent 1px 34px);
+  color:var(--line);
+  font-family:var(--pub);
+  overflow-x:hidden;
+}
+a{color:var(--gold);text-decoration:none}
+.mono{font-family:ui-monospace,monospace;letter-spacing:.16em;font-size:.66rem}
+:focus-visible{outline:2.5px solid var(--gold);outline-offset:3px}
+
+/* ---------- mast ---------- */
+.mast{text-align:center;padding:80px 20px 30px}
+.m-over{font-weight:600;font-size:.66rem;letter-spacing:.4em;color:var(--gold);margin-bottom:26px}
+.mast h1{
+  font-family:var(--deco);font-weight:400;
+  font-size:clamp(3.2rem,11vw,7.6rem);letter-spacing:.18em;line-height:1;
+  padding-left:.18em;
+}
+.m-sub{margin-top:22px;font-weight:300;font-size:1.1rem;line-height:1.7;color:var(--line-dim)}
+
+/* ---------- morph ---------- */
+.morph-zone{height:260vh;position:relative}
+.morph-sticky{
+  position:sticky;top:0;height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;
+  padding:20px;
+}
+.stage{
+  position:relative;width:min(960px,94vw);aspect-ratio:16/9;
+  border:1px solid var(--hair);
+  overflow:hidden;
+  background:var(--print-2);
+  box-shadow:0 30px 70px rgba(0,0,0,.45);
+}
+.photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  clip-path:inset(0 100% 0 0);
+}
+.print{position:absolute;inset:0;width:100%;height:100%}
+.ln{
+  fill:none;stroke:var(--line);stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.dim{fill:none;stroke:var(--gold);stroke-width:1;opacity:.8}
+.dtx{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.18em;fill:var(--gold)}
+.scan{
+  position:absolute;top:0;bottom:0;width:2px;left:0;
+  background:linear-gradient(180deg,transparent,var(--gold),transparent);
+  opacity:0;
+}
+.morph-cap{color:var(--line-dim)}
+
+/* ---------- board ---------- */
+.board{max-width:1020px;margin:0 auto;padding:110px max(4vw,20px) 70px}
+.b-head{font-family:var(--deco);font-size:clamp(1.9rem,4.6vw,3.1rem);letter-spacing:.14em;margin-bottom:36px;text-align:center}
+.routes{width:100%;border-collapse:collapse}
+.routes th{
+  font-family:ui-monospace,monospace;font-size:.58rem;letter-spacing:.26em;
+  color:var(--gold);text-align:left;
+  border-bottom:2px solid var(--gold);padding:10px 14px;
+}
+.routes td{
+  border-bottom:1px solid var(--hair);
+  padding:18px 14px;font-weight:300;font-size:.98rem;
+}
+.routes td:first-child{font-weight:600;letter-spacing:.06em}
+.routes td:last-child{color:var(--line-dim);font-style:italic}
+
+/* ---------- creed / foot ---------- */
+.creed{text-align:center;padding:40px 22px 110px}
+.creed p{font-family:var(--deco);font-size:clamp(1.4rem,3.4vw,2.2rem);line-height:1.65;letter-spacing:.05em}
+.foot{
+  border-top:1px solid var(--hair);padding:28px max(4vw,20px) 40px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--line-dim);
+}
+@media (max-width:700px){
+  .routes thead{display:none}
+  .routes tr{display:block;border-bottom:1px solid var(--hair);padding:12px 0}
+  .routes td{display:block;border:none;padding:4px 8px}
+}

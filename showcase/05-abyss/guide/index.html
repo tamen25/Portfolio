@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How ABYSS was built</title>
+<meta name="description" content="Build guide for ABYSS: scroll mapped to real ocean depth, a canvas ocean engine, and hand-drawn bioluminescent SVG creatures.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23020810'/%3E%3Ccircle cx='16' cy='12' r='5' fill='none' stroke='%235FF2D2' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Martian+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  body{background:#04121E}
+  .gw{position:relative;z-index:5;max-width:820px;margin:0 auto;padding:90px 24px}
+  .gw .kick{font-family:var(--mono);font-size:.6rem;letter-spacing:.3em;color:var(--biolum);display:block;margin-bottom:20px;font-weight:600}
+  .gw h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:400;line-height:1.04;margin-bottom:16px}
+  .gw h2{font-size:1.5rem;font-weight:400;margin:50px 0 12px;padding-top:26px;border-top:1px solid rgba(95,242,210,.18)}
+  .gw p,.gw li{color:var(--foam-dim);font-size:1rem;line-height:1.7;max-width:66ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:var(--mono);font-size:.72em;color:var(--biolum);background:rgba(95,242,210,.08);padding:1px 6px}
+  .gw pre{background:rgba(2,10,18,.7);border:1px solid rgba(95,242,210,.16);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.72rem;line-height:1.7}
+</style>
+</head>
+<body>
+<canvas id="sea" aria-hidden="true"></canvas>
+<main class="gw">
+  <span class="kick">SITE 05 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How ABYSS was built</h1>
+  <p>Written by Claude Fable 5, which designed and built the descent autonomously.
+  The whole site is one idea taken seriously: <em>scroll is depth</em>. Everything else
+  follows from picking a scale — 1.7 pixels per meter — and refusing to lie about the data.</p>
+
+  <h2>1 · Scroll as a unit of measurement</h2>
+  <pre><code>depth = (scrollY + viewport/2 − surfaceHeight) / SCALE
+card.style.top = surfaceHeight + trueDepth × SCALE</code></pre>
+  <p>Because the HUD and the milestone cards derive from the same equation, the depth
+  readout always agrees with the card you're facing. The pressure is just depth/10+1 atm;
+  temperature is a piecewise lerp through real thermocline values; sunlight decays
+  exponentially and the HUD gives up honestly at 1,000 m: <code>NONE · BIOLUM</code>.</p>
+
+  <h2>2 · A canvas ocean in three layers</h2>
+  <ul>
+    <li><strong>Water:</strong> a vertical gradient whose two stops are interpolated
+    through five keyframes (sunlit teal → twilight slate → black). No images.</li>
+    <li><strong>Marine snow:</strong> ~180 particles that fall slowly AND parallax
+    against your scroll — descending feels like sinking past them.</li>
+    <li><strong>Bioluminescence:</strong> below 600 m, plankton dots pulse with random
+    phases and canvas <code>shadowBlur</code> glow. Every light below 1,000 m is alive on purpose.</li>
+  </ul>
+
+  <h2>3 · The flare</h2>
+  <p>One interactive gift: press <code>F</code>. A flare spawns, sinks, and lights the
+  water with a radial gradient scaled by its remaining life. It's ten lines of code and
+  it's the moment people remember — darkness you can push back briefly.</p>
+
+  <h2>4 · Creatures without image models</h2>
+  <p>The squid, anglerfish, dumbo octopus and snailfish are hand-written SVG paths —
+  single-stroke line art with a Gaussian-blur glow filter, colored like the plankton.
+  Drawing them as neon wireframes keeps them in the site's world (a generated photo
+  would have broken the darkness).</p>
+
+  <h2>5 · The three passes</h2>
+  <ol>
+    <li>Verified render at surface / 1,500 m / bottom; checked HUD physics against the cards.</li>
+    <li>Tested the flare stationary (parallax flings it during jump-scrolls — fine in real scrolling); verified zone changes.</li>
+    <li>Mobile: HUD becomes a bottom strip and stays truthful; cards go full-width; reduced motion stops the snowfall.</li>
+  </ol>
+
+  <h2>6 · Replicate it</h2>
+  <ul>
+    <li>Pick a physical unit and bind scroll to it honestly — the credibility of the whole page comes from that one equation.</li>
+    <li>Use real facts at real positions; the design becomes a museum, not a mood board.</li>
+    <li>Zero images, zero build. Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Return to the surface</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+<script>
+/* tiny ambient version of the ocean for the guide page */
+const c=document.getElementById('sea'),x=c.getContext('2d');let W,H;
+const rs=()=>{W=c.width=innerWidth;H=c.height=innerHeight};rs();addEventListener('resize',rs);
+const P=Array.from({length:70},()=>({a:Math.random(),b:Math.random(),r:.5+Math.random()*1.5,v:.00008+Math.random()*.0002}));
+(function f(){requestAnimationFrame(f);const g=x.createLinearGradient(0,0,0,H);
+g.addColorStop(0,'#04121E');g.addColorStop(1,'#020A12');x.fillStyle=g;x.fillRect(0,0,W,H);
+x.fillStyle='#DCEDEA';P.forEach(p=>{p.b+=p.v;if(p.b>1.02)p.b=-.02;x.globalAlpha=.3;
+x.beginPath();x.arc(p.a*W,p.b*H,p.r,0,7);x.fill()});x.globalAlpha=1})();
+</script>
+</body>
+</html>

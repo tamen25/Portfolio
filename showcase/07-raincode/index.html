@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAINCODE — The city through a wet window</title>
+<meta name="description" content="A cyberpunk megacity behind fogged glass. Wipe the window with your cursor; the rain never stops writing.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060B12'/%3E%3Cpath d='M8 4 L8 20 M16 8 L16 26 M24 2 L24 16' stroke='%2338E8D4' stroke-width='2' stroke-linecap='round' opacity='.9'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ THE WINDOW (hero) ============ -->
+<header class="window" id="window">
+  <video class="city" id="cityVideo" autoplay muted loop playsinline poster="assets/city.webp" aria-hidden="true">
+    <source src="assets/city.mp4" type="video/mp4">
+  </video>
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <canvas id="fog" aria-label="Fogged window glass. Move your cursor to wipe it clear."></canvas>
+
+  <div class="win-ui">
+    <p class="win-kanji" aria-hidden="true">雨のコード</p>
+    <h1 class="win-title">RAIN<span>CODE</span></h1>
+    <p class="win-sub">Sector 7 housing block · 41st floor · the heating works, mostly</p>
+    <p class="win-hint" id="winHint">— wipe the glass —</p>
+  </div>
+
+  <div class="win-frame" aria-hidden="true"></div>
+</header>
+
+<!-- ============ TRANSMISSION ============ -->
+<main>
+<section class="feed">
+  <div class="feed-head">
+    <span class="f-tag">LIVE FEED</span>
+    <h2>TONIGHT, IN THE SPRAWL</h2>
+    <span class="f-time" id="feedTime">--:--</span>
+  </div>
+  <div class="feed-rows">
+    <article class="f-row">
+      <span class="f-id">RC-2041</span>
+      <p>Rain continuing through the night. The weather bureau's apology, autotranslated
+      from corporate, reads: <em>"the sky is undergoing maintenance."</em></p>
+    </article>
+    <article class="f-row">
+      <span class="f-id">RC-2042</span>
+      <p>Neon sign repair backlog reaches 44 days. The noodle bar on Level 3 has been
+      flickering <em>OPEN / OPE / OPEN</em> long enough that regulars now call it "Ope's."</p>
+    </article>
+    <article class="f-row">
+      <span class="f-id">RC-2043</span>
+      <p>A street vendor sells umbrellas that whisper traffic predictions.
+      They are wrong exactly often enough to stay interesting.</p>
+    </article>
+    <article class="f-row">
+      <span class="f-id">RC-2044</span>
+      <p>Someone on the 41st floor keeps wiping their window to watch the city.
+      The city, for what it's worth, has noticed.</p>
+    </article>
+  </div>
+</section>
+
+<section class="specs">
+  <div class="spec"><span class="s-k">PRECIPITATION</span><span class="s-v">100% · PERMANENT</span></div>
+  <div class="spec"><span class="s-k">NEON UPTIME</span><span class="s-v">87.3%</span></div>
+  <div class="spec"><span class="s-k">VISIBILITY</span><span class="s-v">DEPENDS ON YOU</span></div>
+  <div class="spec"><span class="s-k">MOOD</span><span class="s-v">BLUE-GREEN, HOPEFUL</span></div>
+</section>
+</main>
+
+<footer class="foot">
+  <p>RAINCODE · SITE 07 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE WINDOW WORKS →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

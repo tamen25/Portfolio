@@ -1,0 +1,90 @@
+/* OSCILLA — signal yellow on oscilloscope black. Unbounded / Sora */
+:root{
+  --void:#070A0D;
+  --signal:#F2E94E;
+  --signal-dim:rgba(242,233,78,.55);
+  --ghost:#3AF2C5;
+  --bone:#F2F4F5;
+  --bone-dim:rgba(242,244,245,.6);
+  --hair:rgba(242,233,78,.2);
+  --unb:"Unbounded",sans-serif;
+  --sora:"Sora",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--bone);font-family:var(--sora);overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--signal);text-decoration:none}
+:focus-visible{outline:2.5px solid var(--signal);outline-offset:3px}
+#scope{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+
+/* ---------- face ---------- */
+.face{position:relative;z-index:2;text-align:center;padding:9vh 20px 4vh;pointer-events:none}
+.face h1{
+  font-family:var(--unb);font-weight:700;
+  font-size:clamp(2.8rem,9vw,6.4rem);letter-spacing:.06em;line-height:1;
+  text-shadow:0 0 40px rgba(242,233,78,.35);
+}
+.f-sub{font-weight:600;font-size:.66rem;letter-spacing:.44em;color:var(--signal);margin-top:16px}
+.f-inst{margin-top:22px;font-weight:300;font-size:1rem;line-height:1.8;color:var(--bone-dim)}
+.kbd-row{
+  font-family:var(--unb);font-weight:500;font-size:.85em;color:var(--void);
+  background:var(--signal);border-radius:6px;padding:2px 12px;letter-spacing:.3em;
+}
+
+/* ---------- keys ---------- */
+.keys-zone{position:relative;z-index:2;margin-top:auto;padding:0 max(4vw,16px) 26px}
+.keybed{
+  display:grid;grid-template-columns:repeat(8,1fr);gap:10px;
+  max-width:980px;margin:0 auto 18px;
+}
+.key{
+  font-family:var(--unb);font-weight:500;font-size:clamp(.8rem,2vw,1.1rem);
+  background:rgba(242,244,245,.05);
+  border:1.5px solid var(--hair);
+  border-radius:12px 12px 18px 18px;
+  color:var(--bone-dim);
+  padding:34px 0 16px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  transition:background .12s, border-color .12s, transform .06s;
+  touch-action:none;user-select:none;
+}
+.key small{font-family:var(--sora);font-weight:300;font-size:.62rem;letter-spacing:.18em;color:var(--bone-dim)}
+.key.down{
+  background:rgba(242,233,78,.18);
+  border-color:var(--signal);
+  color:var(--signal);
+  transform:translateY(3px);
+  box-shadow:0 0 30px rgba(242,233,78,.25);
+}
+.controls{
+  display:flex;gap:26px;justify-content:center;align-items:center;flex-wrap:wrap;
+  max-width:980px;margin:0 auto;
+}
+.ctl{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--unb);font-weight:500;font-size:.6rem;letter-spacing:.3em;color:var(--signal);
+}
+.ctl select{
+  font-family:var(--sora);font-size:.8rem;
+  background:var(--void);color:var(--bone);
+  border:1.5px solid var(--hair);border-radius:8px;padding:9px 12px;
+}
+.ctl input[type=range]{
+  -webkit-appearance:none;appearance:none;width:170px;height:3px;background:var(--hair);border-radius:2px;
+}
+.ctl input::-webkit-slider-thumb{
+  -webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+  background:var(--signal);cursor:ew-resize;
+}
+.ctl input::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--signal);cursor:ew-resize;border:none}
+
+/* ---------- foot ---------- */
+.foot{
+  position:relative;z-index:2;
+  border-top:1px solid var(--hair);
+  padding:20px max(4vw,16px) 26px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-size:.66rem;letter-spacing:.14em;color:var(--bone-dim);
+}
+@media (max-width:700px){
+  .keybed{grid-template-columns:repeat(4,1fr)}
+}

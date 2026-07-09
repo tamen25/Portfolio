@@ -5,7 +5,6 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "motion/react";
-import { PANORAMA_PHOTO, formatExif } from "@/lib/photos";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,7 +17,7 @@ export function WideFrame() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".wide-frame-img",
-        { scale: 1.18 },
+        { scale: 1.14 },
         {
           scale: 1,
           ease: "none",
@@ -38,19 +37,17 @@ export function WideFrame() {
     <section className="pt-32">
       <div ref={wrap} className="relative aspect-[2.4/1] w-full overflow-hidden">
         <Image
-          src={PANORAMA_PHOTO.src}
-          alt={PANORAMA_PHOTO.alt}
+          src="/hero/panorama-4k.png"
+          alt="Low sun breaking through cloud over an Icelandic valley"
           fill
           sizes="100vw"
-          quality={90}
-          className="wide-frame-img object-cover"
+          quality={95}
+          className="wide-frame-img object-cover will-change-transform"
         />
       </div>
-      {PANORAMA_PHOTO.exif && (
-        <p className="mx-auto max-w-[1400px] px-6 pt-3 font-exif text-xs text-overcast">
-          {formatExif(PANORAMA_PHOTO.exif)}
-        </p>
-      )}
+      <p className="mx-auto max-w-[1400px] px-6 pt-3 font-exif text-xs text-overcast">
+        Iceland · at the edge of the light
+      </p>
     </section>
   );
 }

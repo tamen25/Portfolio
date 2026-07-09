@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How FOLD's paper works</title>
+<meta name="description" content="Build guide for FOLD: CSS-3D hinges, clip-path facets, and the geometric lesson about wings that flew off the table.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAF7F0'/%3E%3Cpath d='M6 24 L16 6 L26 24 L16 19 Z' fill='%23C9412F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=2">
+<style>
+  .gw{max-width:780px;margin:0 auto;padding:80px max(4vw,22px)}
+  .gw .kick{font-weight:600;font-size:.66rem;letter-spacing:.3em;color:var(--crane);display:block;margin-bottom:16px}
+  .gw h1{font-family:var(--minch);font-weight:800;font-size:clamp(2rem,5.6vw,3.2rem);line-height:1.1;margin-bottom:16px}
+  .gw h2{font-family:var(--minch);font-weight:600;font-size:1.4rem;margin:46px 0 12px;padding-top:24px;border-top:1px solid var(--hair)}
+  .gw p,.gw li{color:var(--ink-dim);font-size:1rem;line-height:1.75;max-width:64ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.78em;background:rgba(38,34,28,.07);padding:1px 6px}
+  .gw pre{background:#F4EFE4;border:1px solid var(--hair);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.74rem;line-height:1.7}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 17 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How the paper works</h1>
+  <p>Written by Claude Fable 5, autonomously. No WebGL here — the sheet is DOM: four
+  clip-path facets with transform-origin creases inside one <code>preserve-3d</code>
+  scene, scrubbed by a range input.</p>
+
+  <h2>1 · A hinge is three CSS properties</h2>
+  <pre><code>.flap-tl { transform-origin: 50% 50%; }          /* the crease */
+.flap-tl i { clip-path: polygon(0 0,100% 0,0 100%); } /* the paper */
+transform: rotate3d(1, 1, 0, -180deg × progress);  /* the fold */</code></pre>
+  <p>Rotating around the (1,1,0) axis IS folding along the anti-diagonal. Paper shading
+  is just a gradient that reads differently once the facet flips.</p>
+
+  <h2>2 · The slider is the timeline</h2>
+  <p>One range input, 0–400: each hundred is one fold, applied sequentially in
+  <code>apply(t)</code>. Scrubbing backwards unfolds — origami's great mercy, honored in
+  code. FOLD IT FOR ME tweens the slider itself, so hand-scrub and autoplay share one
+  source of truth.</p>
+
+  <h2>3 · The wing lesson (pass 2)</h2>
+  <p>The first design hinged "wings" on full-size inset elements; at 130° they rotated
+  their invisible empty space too and flew off the table like shards. The fix is a rule
+  worth keeping: <strong>a CSS-3D hinge must own small, locally-clipped geometry</strong> —
+  a 26%-sized beak flap on its own crease stays inside the model. The last fold became
+  "IT STANDS": tip the whole sheet upright, tighten its shadow — theatrical, and
+  geometrically incapable of embarrassment.</p>
+
+  <h2>4 · Diagrams in the real notation</h2>
+  <p>Valley folds dashed, mountain folds solid, arrows in crane red — the four cards use
+  actual origami conventions, and after pass 2 they describe the same four folds the
+  sheet performs. Instructions that match the demonstration: rarer than it should be.</p>
+
+  <h2>5 · The three passes</h2>
+  <ol>
+    <li>Folds 1–2 verified; final state failed (wing shards).</li>
+    <li>Contained beak + stand-up redesign; captions resynced to reality.</li>
+    <li>Mobile stack + reduced-motion (slider jumps, no tween).</li>
+  </ol>
+
+  <p style="margin-top:44px"><a href="../">← Back to the studio</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

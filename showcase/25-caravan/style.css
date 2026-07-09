@@ -1,0 +1,109 @@
+/* CARAVAN — kilim textiles. Amiri / Karla */
+:root{
+  --loom:#201A14;
+  --sand:#E8DCC3;
+  --madder:#A03A2A;
+  --indigo:#2C3A63;
+  --saffron:#D9A036;
+  --bone:#F2EAD8;
+  --bone-dim:rgba(242,234,216,.68);
+  --hair:rgba(217,160,54,.28);
+  --amiri:"Amiri",serif;
+  --karla:"Karla",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--loom);
+  background-image:
+    repeating-linear-gradient(90deg, rgba(217,160,54,.03) 0 2px, transparent 2px 24px),
+    repeating-linear-gradient(0deg, rgba(160,58,42,.03) 0 2px, transparent 2px 24px);
+  color:var(--bone);font-family:var(--karla);font-weight:300;
+  overflow-x:hidden;
+}
+a{color:var(--saffron);text-decoration:none}
+:focus-visible{outline:2.5px solid var(--saffron);outline-offset:3px}
+
+/* ---------- gate ---------- */
+.gate{text-align:center;padding:84px 20px 40px}
+.g-over{font-weight:600;font-size:.64rem;letter-spacing:.34em;color:var(--saffron);margin-bottom:26px}
+.gate h1{
+  font-family:var(--amiri);font-weight:700;
+  font-size:clamp(3.4rem,12vw,8.4rem);line-height:1;letter-spacing:.08em;
+  color:var(--bone);
+  text-shadow:0 0 50px rgba(217,160,54,.25);
+}
+.g-sub{margin-top:20px;font-size:1.12rem;line-height:1.75;color:var(--bone-dim)}
+.g-sub em{color:var(--saffron);font-style:italic;font-family:var(--amiri)}
+
+/* ---------- journey ---------- */
+.journey{position:relative}
+.loom{
+  position:sticky;top:0;
+  padding:12px max(3vw,10px) 6px;
+  background:linear-gradient(180deg,var(--loom) 82%,transparent);
+  z-index:5;
+}
+#map{
+  display:block;width:min(1000px,100%);margin:0 auto;
+  border:6px solid var(--madder);
+  box-shadow:0 0 0 3px var(--saffron), 0 24px 50px rgba(0,0,0,.5);
+}
+.band.b1{fill:var(--madder)}
+.band.b2{fill:var(--indigo)}
+.terrain path{fill:none;stroke:rgba(44,58,99,.55);stroke-width:2.4}
+.terrain .dunes{stroke:rgba(160,58,42,.5)}
+#route{
+  fill:none;stroke:var(--madder);stroke-width:3.4;
+  stroke-dasharray:9 7;stroke-linecap:round;
+}
+.camel-dot{fill:var(--indigo)}
+.camel-ring{fill:none;stroke:var(--indigo);stroke-width:1.6;opacity:.5}
+.city circle{fill:var(--indigo);stroke:var(--sand);stroke-width:2}
+.city text{
+  font-family:var(--karla);font-weight:600;font-size:13px;letter-spacing:.14em;
+  fill:#3A2E1E;
+}
+.odometer{
+  text-align:center;margin:10px auto 0;
+  font-weight:600;font-size:.66rem;letter-spacing:.3em;color:var(--saffron);
+}
+
+/* stops */
+.stop{
+  min-height:88vh;
+  max-width:520px;
+  margin:0 auto;
+  padding:24vh 22px 10vh;
+  opacity:0;transform:translateY(22px);
+  transition:opacity .8s, transform .8s;
+}
+.stop.here{opacity:1;transform:none}
+.stop:nth-child(odd of .stop){margin-left:max(6vw,20px)}
+.stop:nth-child(even of .stop){margin-right:max(6vw,20px);margin-left:auto;text-align:right}
+.stop h2{
+  font-family:var(--amiri);font-weight:700;font-size:clamp(2rem,4.6vw,3rem);
+  margin-bottom:14px;color:var(--saffron);
+}
+.stop h2 [lang="zh"]{font-size:.7em;color:var(--bone-dim)}
+.cargo{
+  font-weight:600;font-size:.72rem;letter-spacing:.14em;line-height:1.8;
+  color:var(--bone-dim);text-transform:uppercase;
+  border-block:1px solid var(--hair);
+  padding:10px 0;margin-bottom:16px;
+}
+.stop p{font-size:1.08rem;line-height:1.8;color:var(--bone-dim)}
+.stop p:last-child{font-family:var(--amiri);font-size:1.18rem;color:var(--bone)}
+
+/* ---------- foot ---------- */
+.foot{
+  border-top:1px solid var(--hair);padding:30px 22px 44px;text-align:center;
+  font-size:.72rem;font-weight:600;letter-spacing:.16em;color:var(--bone-dim);
+  display:flex;flex-direction:column;gap:10px;
+}
+@media (max-width:700px){
+  .stop{padding-top:16vh}
+  .stop:nth-child(odd of .stop),.stop:nth-child(even of .stop){margin:0 auto;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){
+  .stop{transition:opacity .3s}
+}

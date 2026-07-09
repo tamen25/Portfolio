@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHISEL — An atelier for light and stone</title>
+<meta name="description" content="One statue, dreamed as an image, lifted into a real 3D mesh, and lit by you. Your cursor is the key light. The marble is just where it lands.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101012'/%3E%3Cpath d='M16 5 L23 26 L9 26 Z' fill='%23EDEDEA'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Figtree:wght@300;400;500&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="atelier" id="atelier">
+  <canvas id="room" aria-label="A marble statue in a dark room. Move your cursor to light it; drag to walk around it."></canvas>
+  <div class="loading" id="loading"><span class="mono">CARVING — THE MESH IS REAL, GIVE IT A MOMENT</span></div>
+
+  <div class="marque">
+    <h1>CHISEL</h1>
+    <p class="strap mono">AN ATELIER FOR LIGHT &amp; STONE</p>
+  </div>
+
+  <p class="thesis">We sell light.<br>The marble is just<br>where it lands.</p>
+  <p class="op-hint mono" id="opHint">YOUR CURSOR IS THE KEY LIGHT · DRAG TO CIRCLE THE PIECE</p>
+</header>
+
+<main>
+<section class="placard-band">
+  <div class="placard">
+    <span class="p-no mono">CAT. 001</span>
+    <h2 class="p-title">Veil Study Nº 7</h2>
+    <dl class="p-meta mono">
+      <div><dt>MEDIUM</dt><dd>Neural marble, single block</dd></div>
+      <div><dt>DIMENSIONS</dt><dd id="pDims">measuring…</dd></div>
+      <div><dt>POLYGONS</dt><dd id="pPolys">counting…</dd></div>
+      <div><dt>YEAR</dt><dd>2026</dd></div>
+    </dl>
+    <p class="p-story">She began as a sentence — <em>a veiled woman, the stone thin enough
+    to breathe through</em> — became an image, and then the image was lifted into geometry:
+    a mesh with a front, a back, and a shadow it earns in real time. The veil survived
+    all three translations. Walk around her; the back of a dream is usually unfinished,
+    but hers isn't.</p>
+    <a class="dl mono" id="dlMesh" href="assets/statue.glb" download="chisel-veil-study-7.glb">
+      ⭳ TAKE THE MARBLE (GLB, YOURS)
+    </a>
+  </div>
+</section>
+
+<section class="process">
+  <h2 class="pr-head">HOW A STATUE HAPPENS NOW</h2>
+  <div class="pr-grid">
+    <div class="pr">
+      <span class="pr-no mono">I — DRAWN</span>
+      <p>A prompt becomes a photograph of a sculpture that never existed:
+      Carrara light, black room, one key from the upper left.</p>
+    </div>
+    <div class="pr">
+      <span class="pr-no mono">II — LIFTED</span>
+      <p>The image goes to an image-to-3D model and returns as honest geometry —
+      tens of thousands of triangles that hold up from every angle, not just the one
+      that was dreamed.</p>
+    </div>
+    <div class="pr">
+      <span class="pr-no mono">III — LIT</span>
+      <p>The mesh is loaded raw, given a marble skin in the browser, and handed to you.
+      Every shadow on this page is computed the moment you make it.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot mono">
+  <p>CHISEL · SITE 11 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW IT WAS CARVED →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+} }
+</script>
+<script type="module" src="main.js"></script>
+</body>
+</html>

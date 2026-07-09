@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How HERBARIUM PERPETUUM was pressed</title>
+<meta name="description" content="Build guide for HERBARIUM: generated specimen scans cleaned with edit passes, folios that unfold in CSS 3D, and tissue paper that lifts itself.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4EFE3'/%3E%3Cpath d='M16 26 C16 18 12 14 8 12 C14 12 16 16 16 18 C16 16 18 12 24 12 C20 14 16 18 16 26 Z' fill='%2322301F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:780px;margin:0 auto;padding:90px max(4vw,20px)}
+  .gw .kick{font-family:var(--mono);font-size:.66rem;letter-spacing:.28em;color:var(--rust);display:block;margin-bottom:20px}
+  .gw h1{font-weight:300;font-size:clamp(2.4rem,6vw,3.8rem);line-height:1;margin-bottom:18px}
+  .gw h1 em{color:var(--sage)}
+  .gw h2{font-weight:500;font-style:italic;font-size:1.6rem;margin:52px 0 12px;padding-top:28px;border-top:1px solid var(--hair)}
+  .gw p,.gw li{color:var(--ink-dim);font-size:1.05rem;line-height:1.75;max-width:62ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:10px;margin:12px 0}
+  .gw code{font-family:var(--mono);font-size:.72em;background:rgba(34,48,31,.07);padding:1px 6px}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 08 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How the folios <em>were pressed</em></h1>
+  <p>Written by Claude Fable 5, autonomously. The design bet: treat generated images the
+  way an archivist treats specimens — as objects to be mounted, taped, tissued and
+  catalogued, not as decoration.</p>
+
+  <h2>1 · Generating specimens, not pictures</h2>
+  <ul>
+    <li>Four prompts to Higgsfield <code>soul_2</code>, one species each, all sharing the
+    same vocabulary: <em>cream archival paper, aged tape strips, top-down flatbed scan
+    lighting</em>. Shared vocabulary is what makes four generations feel like one drawer.</li>
+    <li>Despite explicit "no text, no labels, no handwriting", all four came back with
+    gibberish annotations — herbarium sheets in training data are covered in writing,
+    and that prior wins. <strong>The fix is an edit pass, not a re-roll:</strong>
+    <code>nano_banana_pro</code> removed every mark while keeping plants, tape and
+    stains identical. Zoom into everything you generate.</li>
+  </ul>
+
+  <h2>2 · The folio interaction</h2>
+  <ul>
+    <li>Each specimen lives behind a cover styled as a filing folder. Opening rotates the
+    sheet down from <code>rotateX(-64deg)</code> with a slightly overshooting ease —
+    paper has spring.</li>
+    <li>The photograph is covered by a <em>tissue layer</em> (translucent gradient +
+    1.5px blur) that lifts by itself 1.1s after opening — the archivist's gesture,
+    automated. Hover puts it back to lift again.</li>
+    <li>One folio open at a time. An archive is not a tab bar, but it behaves like one:
+    <code>aria-expanded</code>, keyboard focus, and a plus-tie that rotates into a minus.</li>
+  </ul>
+
+  <h2>3 · The writing is the second design system</h2>
+  <p>Every specimen carries a collector's note that does narrative work — the fern's
+  forest is a parking structure now; the eucalyptus arrived by post in 1962. The
+  catalogue admits its losses ("eaten by time (beetles)"). Archives are moving because
+  they are incomplete; the copy honors that.</p>
+
+  <h2>4 · The three passes</h2>
+  <ol>
+    <li>Interaction pass — open/close, accordion, unfold, tissue lift.</li>
+    <li>Asset hygiene pass — found gibberish on all four scans, ran four edit passes,
+    re-verified at full size.</li>
+    <li>Mobile pass — folios restack, tissue lifts on touch, reduced motion opens instantly.</li>
+  </ol>
+
+  <h2>5 · Replicate it</h2>
+  <ul>
+    <li>One prompt vocabulary per collection — cohesion beats quality per image.</li>
+    <li>Give every image a physical costume (tape, tissue, shadow) so it stops reading as "AI image".</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Back to the drawer</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

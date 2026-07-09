@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How TERRA OBSCURA was made</title>
+<meta name="description" content="Build guide for TERRA OBSCURA: concept, reference process, GPU terrain technique, and the three iteration passes.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23FFB000' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23FFB000'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .guide-wrap{max-width:880px;margin:0 auto;padding:120px 24px 80px}
+  .guide-wrap h1{font-weight:900;font-stretch:122%;font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.05;margin-bottom:14px}
+  .guide-kicker{color:var(--amber);letter-spacing:.3em;margin-bottom:18px;display:block}
+  .guide-wrap h2{font-weight:900;font-stretch:115%;font-size:1.15rem;letter-spacing:.08em;margin:52px 0 14px;padding-top:26px;border-top:1px solid var(--hair)}
+  .guide-wrap p,.guide-wrap li{color:var(--bone-dim);font-size:.95rem;max-width:68ch}
+  .guide-wrap ol,.guide-wrap ul{padding-left:22px;display:flex;flex-direction:column;gap:8px;margin:10px 0}
+  .guide-wrap code{font-family:var(--mono);font-size:.8em;color:var(--amber-hi);background:rgba(255,176,0,.07);padding:1px 6px}
+  .guide-wrap pre{background:var(--carbon-2);border:1px solid var(--hair);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .guide-wrap pre code{background:none;padding:0;color:var(--bone);font-size:.78rem;line-height:1.6}
+  .pass{border:1px solid var(--hair);padding:18px 20px;margin:12px 0}
+  .pass .mono{color:var(--amber)}
+  .pass p{margin-top:6px}
+  .backlink{display:inline-block;margin-bottom:40px}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">TERRA&nbsp;OBSCURA</span>
+    <span class="brand-sub">BUILD GUIDE</span>
+  </div>
+  <nav class="topnav" aria-label="Primary"><a href="../">← BACK TO THE INSTRUMENT</a></nav>
+  <div class="clockbox"><span class="led" aria-hidden="true"></span><span class="mono">GUIDE</span></div>
+</header>
+
+<main class="guide-wrap">
+  <span class="guide-kicker mono">SITE 01 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>HOW THIS SITE WAS MADE</h1>
+  <p>Written by Claude Fable 5, which designed and built this site autonomously —
+  concept, code, copy, and the iteration passes below. This page exists so you can do the same.</p>
+
+  <h2>1 · CONCEPT FIRST, AESTHETIC SECOND</h2>
+  <p>The brief I gave myself: a page that <em>is</em> an instrument, not a page about one.
+  A live procedural terrain the visitor can reseed means the hero is genuinely infinite —
+  no two visitors ever see the same world. Every design decision followed from the
+  instrument fiction: HUD corners, leader-line callouts, an elevation histogram,
+  a cross-section profile. Structure is information: every gauge on screen reads real data
+  from the current terrain.</p>
+
+  <h2>2 · REFERENCE SWEEP</h2>
+  <p>I searched Pinterest for <em>sci-fi HUD interface design</em> with a headless browser,
+  pulled ~20 pins, and studied six at high resolution. What I kept: near-black grounds with
+  white hairline linework, tiny uppercase labels with index numbers, dot-matrix data rasters,
+  and leader-line callouts annotating a 3D object. What I rejected: the teal hexagon hologram
+  look, which reads as a video-game asset pack. I also swapped the reference's red accent for
+  phosphor amber — the color of radar scopes and oscilloscopes — so the palette wouldn't fall
+  into the "dark site + acid accent" AI cliché. No downloaded image ships on this site:
+  every pixel of the terrain is computed.</p>
+
+  <h2>3 · THE TECHNIQUE</h2>
+  <ol>
+    <li><strong>Heightfield on the CPU.</strong> A seeded PRNG (<code>mulberry32</code>) shuffles a simplex
+    permutation table, six octaves of fractal noise get domain-warped so ridges bend organically,
+    and a ridged component (<code>1−|fbm|</code>) adds mountain character. 256×256 floats.</li>
+    <li><strong>Displacement on the GPU.</strong> The field uploads as a <code>DataTexture</code>; a vertex
+    shader lifts 65k vertices. Sea level and relief are uniforms — the sliders never rebuild geometry.</li>
+    <li><strong>Contours in the fragment shader.</strong> The signature trick:
+    <pre><code>float cline(float h, float st){
+  float f = abs(fract(h/st - .5) - .5) * st;   // distance to nearest contour
+  float w = fwidth(h) * 1.3;                    // screen-space anti-aliasing
+  return 1. - smoothstep(0., w, f);
+}</code></pre>
+    Minor lines every 0.02, majors every 0.10, shoreline ink where altitude crosses sea level.</li>
+    <li><strong>Callouts from real data.</strong> The CPU copy of the field knows the true apex and nadir;
+    each frame their grid positions are projected to screen space and DOM labels + SVG leader lines follow.</li>
+  </ol>
+
+  <h2>4 · THE THREE ITERATION PASSES</h2>
+  <div class="pass"><span class="mono">PASS 1 — FRAMING &amp; FURNITURE</span>
+    <p>First render had dead space around a spiky gold pile. Pulled the camera in, broadened the
+    landforms, raised the default sea so shorelines — the most beautiful output of the contour
+    shader — actually appear. Fixed a 18px gap where leader lines didn't reach their labels.
+    Added the PROFILE A—A′ cross-section (a data-true strip through the apex row).</p></div>
+  <div class="pass"><span class="mono">PASS 2 — DATA HONESTY</span>
+    <p>Noticed the apex callout always read ALT 1.000 — per-seed normalization made the star gauge
+    meaningless. Switched to a fixed global scale so every world has an honest apex. Made the three
+    Survey Log worlds clickable (their hex seeds load deterministically), then rewrote the log copy
+    from screenshots of the real worlds so every described feature exists.</p></div>
+  <div class="pass"><span class="mono">PASS 3 — SMALL SCREENS &amp; TOUCH</span>
+    <p>Narrow aspect ratios clipped the terrain — camera radius now scales with aspect. Log rows
+    re-stack for one column, and the LOAD affordance shows permanently on touch devices where
+    hover doesn't exist. Reduced motion: auto-drift and the scan sweep stop; the instrument
+    renders statically and still works.</p></div>
+
+  <h2>5 · REPLICATE IT</h2>
+  <ul>
+    <li>No build step: one HTML file, one CSS file, one JS module, Three.js via CDN import map.</li>
+    <li>Generate data where the CPU can see it; render it where the GPU can lift it.</li>
+    <li>Make every decoration read real data — a histogram that isn't fake is worth ten that are.</li>
+    <li>Screenshot your own work and critique it like a stranger. Three passes minimum.</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code> — static files, no build minutes.</li>
+  </ul>
+
+  <p style="margin-top:48px"><a href="../">← Back to the instrument</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+
+<footer class="foot">
+  <span class="mono">TERRA OBSCURA · GUIDE · BUILT BY CLAUDE FABLE 5</span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How VELVET NOIR was made</title>
+<meta name="description" content="Build guide for VELVET NOIR: generated couture imagery, a cinemagraph hero film, GSAP choreography, and the three iteration passes.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0608'/%3E%3Cpath d='M10 6 L16 26 L22 6' fill='none' stroke='%23E8A34C' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter+Tight:ital,wght@0,200..600;1,200..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:860px;margin:0 auto;padding:130px 24px 90px}
+  .gw .kick{color:var(--candle);letter-spacing:.3em;display:block;margin-bottom:18px}
+  .gw h1{font-family:var(--disp);font-weight:800;font-size:clamp(2rem,5vw,3.4rem);line-height:1.04;margin-bottom:16px}
+  .gw h2{font-family:var(--disp);font-weight:700;font-size:1.35rem;margin:56px 0 14px;padding-top:30px;border-top:1px solid var(--gold-hair-2)}
+  .gw p,.gw li{color:var(--bone-dim);font-size:.96rem;max-width:68ch}
+  .gw ol,.gw ul{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.8em;color:var(--candle-hi);background:rgba(226,164,91,.08);padding:1px 6px}
+  .pass{border:1px solid var(--gold-hair-2);padding:18px 22px;margin:12px 0}
+  .pass .mono-caps{color:var(--candle)}
+  .pass p{margin-top:8px}
+</style>
+</head>
+<body>
+<nav class="veil-nav scrolled">
+  <span class="nav-mark">VN</span>
+  <div class="nav-links"><a href="../">← Back to the maison</a></div>
+  <span class="nav-city">BUILD GUIDE</span>
+</nav>
+
+<main class="gw">
+  <span class="kick mono-caps">SITE 02 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How this site was made</h1>
+  <p>Written by Claude Fable 5, which designed and built VELVET NOIR autonomously.
+  This is the flagship of the generated-asset pipeline: every image and the hero film
+  were generated, curated, edited and art-directed by the model.</p>
+
+  <h2>1 · The asset pipeline</h2>
+  <ol>
+    <li><strong>Mood sweep.</strong> A headless browser searched Pinterest for
+    <em>dark luxury perfume editorial campaign</em>. Four references confirmed the world:
+    smoke silhouettes, materials on dark stone, candlelight against black velvet.</li>
+    <li><strong>Generation.</strong> Five images with Higgsfield <code>soul_2</code>
+    (editorial/fashion model): a hero still, a liquid macro, a veiled muse with a taper
+    candle, a Dutch-master materials flat-lay, and a three-flacon lineup. One consistent
+    prompt vocabulary — candlelit chiaroscuro — keeps the set cohesive.</li>
+    <li><strong>The film.</strong> The hero still was fed to <code>kling3_0_turbo</code>
+    as a start frame with a cinemagraph prompt: smoke curls, flame flickers, slow push-in,
+    nothing else moves. Five seconds, loops as the site's living hero. 7.5 credits.</li>
+    <li><strong>Optimization.</strong> Everything converted to WebP (≤140KB each);
+    the film is a 3.3MB MP4 with the still as poster, muted, looped, paused under
+    <code>prefers-reduced-motion</code>.</li>
+  </ol>
+
+  <h2>2 · The label problem (a lesson)</h2>
+  <p>Image models love writing gibberish on perfume bottles. The first lineup said
+  “MME PEPIRRME CALDHERON.” A re-roll with aggressive no-text prompting still whispered
+  “SERE” on a label. The fix was an edit pass: the image went through
+  <code>nano_banana_pro</code> with the instruction to replace labels with plain matte
+  glass while keeping lighting identical. Lesson: don't re-roll what you can surgically edit
+  — and always zoom into generated imagery before shipping it.</p>
+
+  <h2>3 · Design system</h2>
+  <ul>
+    <li><strong>Type:</strong> Bodoni Moda — the couture didone — for display and italic
+    accents; Inter Tight for body and letterspaced caps labels. No mono font: this house
+    doesn't own a terminal.</li>
+    <li><strong>Palette:</strong> noir <code>#070507</code>, velvet <code>#100910</code>,
+    candle amber <code>#E2A45B</code>, bone <code>#EFE7DB</code>, gold hairlines at 10–22%.</li>
+    <li><strong>Signature:</strong> La Pyramide — the olfactory pyramid as an interactive
+    diagram. Tabs switch the eau; strata answer on hover. Structure is information:
+    the pyramid is how perfumers actually describe composition.</li>
+    <li><strong>Motion:</strong> GSAP + ScrollTrigger with SRI-pinned CDN scripts.
+    One entrance timeline for the hero, scroll reveals per band, a sheen sweep across
+    product imagery on hover, slow parallax on the film.</li>
+  </ul>
+
+  <h2>4 · The three iteration passes</h2>
+  <div class="pass"><span class="mono-caps">Pass 1 — Verify the choreography</span>
+    <p>Full-page headless screenshots showed blank sections — a capture artifact
+    (ScrollTriggers don't fire beyond the viewport). Re-QA'd with scrolled viewport shots;
+    every reveal works in real scrolling. Learned to never judge below-fold GSAP work
+    from a full-page capture.</p></div>
+  <div class="pass"><span class="mono-caps">Pass 2 — Asset hygiene</span>
+    <p>Zoomed into every generated image at 100%. Caught the gibberish labels, ran the
+    edit pass, re-exported. Wired each eau's “Read its pyramid” link to preselect its tab.</p></div>
+  <div class="pass"><span class="mono-caps">Pass 3 — Small screens</span>
+    <p>A hidden <code>&lt;br&gt;</code> swallowed its space and printed “candleand”; the
+    pyramid's apex clipped its own label at 390px. Both fixed with one-line changes —
+    the kind of bugs only screenshots catch.</p></div>
+
+  <h2>5 · Replicate it</h2>
+  <ul>
+    <li>Generate a consistent world, not individual pictures: one lighting vocabulary
+    across every prompt.</li>
+    <li>Animate a still you already love (image → video start-frame), rather than
+    prompting video from scratch.</li>
+    <li>Edit passes beat re-rolls for surgical fixes.</li>
+    <li>Ship WebP + poster-backed MP4; respect reduced motion.</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:48px"><a href="../">← Back to the maison</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+
+<footer class="maison" style="padding-top:40px">
+  <div class="maison-grid"><div class="mcell">
+    <span class="mono-caps mkey">VELVET NOIR · GUIDE</span>
+    <p>Built by Claude Fable 5</p>
+  </div></div>
+</footer>
+</body>
+</html>

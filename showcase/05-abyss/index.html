@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABYSS — A descent to 10,935 meters</title>
+<meta name="description" content="Scroll is depth. Descend from sunlight to the Challenger Deep past creatures and records at their true depths. Drop a flare when it gets dark.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23020810'/%3E%3Ccircle cx='16' cy='12' r='5' fill='none' stroke='%235FF2D2' stroke-width='1.5'/%3E%3Cpath d='M12 16 Q13 24 11 28 M16 17 Q16 25 15 29 M20 16 Q19 24 21 28' stroke='%235FF2D2' stroke-width='1.2' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Martian+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="sea" aria-hidden="true"></canvas>
+
+<!-- fixed instrument HUD -->
+<aside class="hud" aria-label="Dive instruments">
+  <div class="hud-cell"><span class="hk">DEPTH</span><span class="hv" id="hDepth">0 m</span></div>
+  <div class="hud-cell"><span class="hk">PRESSURE</span><span class="hv" id="hPress">1 atm</span></div>
+  <div class="hud-cell"><span class="hk">TEMP</span><span class="hv" id="hTemp">22°C</span></div>
+  <div class="hud-cell"><span class="hk">SUNLIGHT</span><span class="hv" id="hLight">100%</span></div>
+  <div class="hud-cell hud-zone"><span class="hk">ZONE</span><span class="hv" id="hZone">SURFACE</span></div>
+</aside>
+
+<button class="flare-btn" id="flareBtn" type="button" aria-label="Drop a flare">DROP FLARE <kbd>F</kbd></button>
+
+<div class="descent" id="descent">
+
+  <header class="surface" data-depth="0">
+    <p class="kicker">AN EXPEDITION IN ONE SCROLL</p>
+    <h1 class="title">ABYSS</h1>
+    <p class="sub">Below this line the planet keeps most of itself.<br>
+    Scroll is depth. The bottom is 10,935 meters down.<br>
+    <em>It gets dark. You have flares.</em></p>
+    <div class="wave-rule" aria-hidden="true"></div>
+  </header>
+
+  <!-- milestones (true depths) -->
+  <section class="mile" data-depth="200" data-side="left">
+    <span class="m-depth">−200 m</span>
+    <h2>The sunlight ends its shift</h2>
+    <p>Photosynthesis stops here. Everything below this line runs on what
+    sinks, swims down, or makes its own light.</p>
+    <span class="m-zone">ENTERING THE TWILIGHT ZONE</span>
+  </section>
+
+  <section class="mile" data-depth="332" data-side="right">
+    <span class="m-depth">−332 m</span>
+    <h2>The deepest scuba dive</h2>
+    <p>Ahmed Gabr, 2014. Twelve minutes down — nearly fifteen hours coming
+    back up, so his blood didn't turn to foam.</p>
+  </section>
+
+  <section class="mile" data-depth="535" data-side="left">
+    <span class="m-depth">−535 m</span>
+    <h2>Emperor penguin, maximum</h2>
+    <p>A bird. Holding its breath. Deeper than three Eiffel Towers,
+    hunting in the dark in a dinner jacket.</p>
+  </section>
+
+  <section class="mile creature" data-depth="800" data-side="right">
+    <span class="m-depth">−800 m</span>
+    <figure class="cfig" data-creature="squid" aria-label="Line drawing of a giant squid"></figure>
+    <h2>Giant squid country</h2>
+    <p>Architeuthis hunts through here on eyes the size of dinner plates —
+    the largest eyes evolution has ever built, for the dimmest light there is.</p>
+  </section>
+
+  <section class="mile" data-depth="1000" data-side="left">
+    <span class="m-depth">−1,000 m</span>
+    <h2>The last photon gives up</h2>
+    <p>No sunlight past this point. Ever. From here on, every light you see
+    is something alive, deciding to glow.</p>
+    <span class="m-zone">ENTERING THE MIDNIGHT ZONE</span>
+  </section>
+
+  <section class="mile creature" data-depth="1500" data-side="right">
+    <span class="m-depth">−1,500 m</span>
+    <figure class="cfig" data-creature="angler" aria-label="Line drawing of an anglerfish with glowing lure"></figure>
+    <h2>The anglerfish's porch light</h2>
+    <p>She fishes with a lantern of glowing bacteria on a rod grown from her
+    own skull. It is the only warm color for miles.</p>
+  </section>
+
+  <section class="mile" data-depth="2250" data-side="left">
+    <span class="m-depth">−2,250 m</span>
+    <h2>Sperm whale, hunting depth</h2>
+    <p>Two thousand meters on one lungful, clicking louder than a jet engine
+    to see with sound. The squid hear it coming and cannot hide.</p>
+  </section>
+
+  <section class="mile" data-depth="2992" data-side="right">
+    <span class="m-depth">−2,992 m</span>
+    <h2>The deepest mammal ever recorded</h2>
+    <p>A Cuvier's beaked whale, tagged off California. Science still argues
+    about how its ribcage survives folding shut.</p>
+  </section>
+
+  <section class="mile wreck" data-depth="3840" data-side="left">
+    <span class="m-depth">−3,840 m</span>
+    <h2>RMS Titanic</h2>
+    <p>Resting on the abyssal plain since 1912, rusting one flake at a time.
+    The iron will be gone before the shoes are.</p>
+    <span class="m-zone">ENTERING THE ABYSSAL ZONE</span>
+  </section>
+
+  <section class="mile creature" data-depth="4300" data-side="right">
+    <span class="m-depth">−4,300 m</span>
+    <figure class="cfig" data-creature="dumbo" aria-label="Line drawing of a dumbo octopus"></figure>
+    <h2>Dumbo octopus</h2>
+    <p>The deepest octopus we know flaps along on ear-like fins, unbothered,
+    at pressures that would crush a submarine from the last century.</p>
+  </section>
+
+  <section class="mile" data-depth="6000" data-side="left">
+    <span class="m-depth">−6,000 m</span>
+    <h2>The hadal zone</h2>
+    <p>Named after Hades, honestly. Only trenches go deeper — cracks in the
+    planet where the sea floor itself is being swallowed.</p>
+    <span class="m-zone">ENTERING THE HADAL ZONE</span>
+  </section>
+
+  <section class="mile creature" data-depth="8178" data-side="right">
+    <span class="m-depth">−8,178 m</span>
+    <figure class="cfig" data-creature="snailfish" aria-label="Line drawing of a hadal snailfish"></figure>
+    <h2>The deepest fish ever filmed</h2>
+    <p>A Mariana snailfish — pale, soft, almost transparent. At this pressure
+    its body is mostly a gel that cannot be squeezed smaller.</p>
+  </section>
+
+  <section class="mile bottom" data-depth="10935" data-side="center">
+    <span class="m-depth">−10,935 m</span>
+    <h2>Challenger Deep</h2>
+    <p>The floor of the planet. Three people in 1960 and 2012 spent minutes here;
+    the pressure is a thousand atmospheres — an elephant standing on your thumbnail,
+    everywhere, forever.</p>
+    <p class="bottom-line"><em>You are the deepest thing with a scrollbar.</em></p>
+    <div class="bottom-links">
+      <a href="guide/">HOW THIS WAS BUILT →</a>
+      <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a>
+      <span>SITE 05 / 25 · BUILT BY CLAUDE FABLE 5</span>
+    </div>
+  </section>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

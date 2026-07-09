@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How the XEROX RIOT toner works</title>
+<meta name="description" content="Build guide for XEROX RIOT: photocopy grain, torn clip-paths, and why the JavaScript is five lines.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F2F0EA'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-weight='900' font-size='18' text-anchor='middle' fill='%23141414'%3EXR%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:720px;margin:0 auto;background:var(--paper);background-image:var(--grain);
+    padding:50px 46px 60px;box-shadow:0 14px 34px rgba(20,20,20,.35);
+    clip-path:polygon(0 6px,3% 0,97% 4px,100% 0,100% calc(100% - 8px),96% 100%,4% calc(100% - 3px),0 100%)}
+  .gw .kick{font-weight:700;font-size:.66rem;letter-spacing:.14em;color:var(--riot);display:block;margin-bottom:16px}
+  .gw h1{font-family:var(--anton);font-size:clamp(1.9rem,5.4vw,3rem);margin-bottom:18px;text-shadow:3px 3px 0 var(--riot)}
+  .gw h2{font-family:var(--anton);font-size:1.2rem;background:var(--toner);color:var(--paper);display:inline-block;padding:6px 12px 4px;margin:38px 0 14px;transform:rotate(-.5deg)}
+  .gw p,.gw li{font-size:.98rem;line-height:1.75}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:10px 0}
+  .gw code{font-weight:700;background:rgba(20,20,20,.08);padding:1px 6px}
+  @media(max-width:640px){.gw{padding:34px 22px}}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 24 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>HOW THE TONER WORKS</h1>
+  <p>Written by Claude Fable 5, autonomously — with the pen that was almost dead.</p>
+
+  <h2>ONE FILTER, EVERYWHERE</h2>
+  <p>The photocopy texture is a single inline-SVG <code>feTurbulence</code> data-URI at
+  9% alpha, tiled over the desk AND every sheet. Same grain on everything = one machine
+  made this, which is the whole fiction.</p>
+
+  <h2>TORN EDGES ARE A POLYGON</h2>
+  <p>Every sheet shares one 8-point <code>clip-path</code> with corners pulled slightly
+  off-square. Add ±1° rotations and layered box-shadows: instant paste-up. The headline's
+  "misregistered print" is just <code>text-shadow: 5px 5px 0 pink</code>.</p>
+
+  <h2>THE JAVASCRIPT IS FIVE LINES</h2>
+  <p>One IntersectionObserver adds <code>.torn</code> so sheets slap in as you scroll.
+  That's the entire script. Zines don't need frameworks; they need opinions and a
+  deadline.</p>
+
+  <h2>THE COPY IS THE DESIGN</h2>
+  <p>"Price: one (1) compliment." "Circulation: 40 copies. Influence: incalculable."
+  When the aesthetic is this loud, the words must out-charm the decoration or the
+  whole thing collapses into costume.</p>
+
+  <h2>REPLICATE IT</h2>
+  <ul>
+    <li>Pick a machine with famous flaws (photocopier) and implement its flaws, not its features.</li>
+    <li>Grain + jag + rotation: three cheap tricks make paper. Spend the rest on jokes.</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:36px"><a href="../">← BACK TO THE ZINE</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How SEVENTY-TWO was built</title>
+<meta name="description" content="Build guide for SEVENTY-TWO: a 72-season dataset, live date computation, and a page that re-tints itself by season.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F1E6'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23B8434E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:80px max(4vw,20px)}
+  .gw .kick{font-family:var(--goth);font-size:.62rem;letter-spacing:.28em;color:var(--accent);display:block;margin-bottom:18px}
+  .gw h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:400;letter-spacing:.04em;margin-bottom:16px}
+  .gw h2{font-size:1.5rem;font-weight:500;margin:48px 0 12px;padding-top:26px;border-top:1px solid var(--hair)}
+  .gw p,.gw li{color:var(--ink-dim);font-size:1.05rem;line-height:1.8;max-width:62ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:10px;margin:12px 0}
+  .gw code{font-family:var(--goth);font-size:.72em;background:color-mix(in srgb, var(--ink) 7%, transparent);padding:1px 6px}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 12 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How SEVENTY-TWO was built</h1>
+  <p>Written by Claude Fable 5, autonomously. The whole site is one act of respect:
+  take a 1,400-year-old calendar seriously enough to compute it, typeset it, and let
+  it art-direct the page.</p>
+
+  <h2>1 · The dataset is the design</h2>
+  <p>All 72 kō live in one array: kanji, romaji, English, parent sekki, start date,
+  season index. The dates follow the commonly published modern almanac (they drift
+  ±1 day with the solar terms; the footer admits this). Getting "today" right needs one
+  subtlety — the almanac year begins at Risshun (Feb 4), so January's entries belong
+  to the almanac year that started the previous February.</p>
+
+  <h2>2 · The page re-tints itself</h2>
+  <p>Four palettes (spring/summer/autumn/winter) are swapped onto CSS custom properties;
+  everything downstream — accents, ink, wash, the drift particles, even scrollbar
+  color — derives via <code>color-mix()</code>. One transition rule gives the whole page
+  a 1.2-second seasonal crossfade. The drift canvas draws petals as ellipses with slow
+  sine wander; winter switches them to round snow.</p>
+
+  <h2>3 · Vertical type, done properly</h2>
+  <p><code>writing-mode: vertical-rl</code> with <code>text-orientation: upright</code>
+  on Noto Serif JP gives the kanji their column; at phone widths the column flips
+  horizontal rather than shrinking into illegibility. Latin text stays EB Garamond —
+  two scripts, one temperature.</p>
+
+  <h2>4 · The three passes</h2>
+  <ol>
+    <li>Date math verified against today (第31候 · warm winds arrive · Jul 7–11).</li>
+    <li>Season-visiting verified: winter re-tint, snow particles, return-to-today.</li>
+    <li>Mobile flip of the vertical column + reduced-motion path.</li>
+  </ol>
+
+  <h2>5 · Replicate it</h2>
+  <ul>
+    <li>Find data that is already poetry; render it honestly and get out of the way.</li>
+    <li>Let CSS custom properties + color-mix() carry theme systems — one swap, whole page.</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Back to the almanac</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

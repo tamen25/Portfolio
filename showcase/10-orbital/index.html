@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORBITAL — A private space line</title>
+<meta name="description" content="Choose your orbit. Three itineraries drawn around a live Earth, with honest orbital mechanics — your sunrise count is computed, not promised.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305070F'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%234F7BD9' stroke-width='1.6'/%3E%3Cellipse cx='16' cy='16' rx='13' ry='5' fill='none' stroke='%23D8B25C' stroke-width='1.4' transform='rotate(-18 16 16)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@200;300;400;500&family=Spline+Sans+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="stage-wrap">
+  <canvas id="space" aria-label="Earth with three orbits drawn around it. Select an itinerary to travel one."></canvas>
+
+  <header class="brand">
+    <h1 class="wordmark">ORBITAL</h1>
+    <p class="strap">A PRIVATE SPACE LINE · BOARDED QUARTERLY</p>
+  </header>
+
+  <nav class="itins" aria-label="Itineraries">
+    <button class="itin" data-orbit="0" aria-pressed="true" type="button">
+      <span class="i-name">The Weekender</span>
+      <span class="i-alt mono">LEO · 400 KM</span>
+      <span class="i-price">€ 1.2 M</span>
+    </button>
+    <button class="itin" data-orbit="1" aria-pressed="false" type="button">
+      <span class="i-name">Polar Sunrise Line</span>
+      <span class="i-alt mono">SSO · 800 KM</span>
+      <span class="i-price">€ 2.8 M</span>
+    </button>
+    <button class="itin" data-orbit="2" aria-pressed="false" type="button">
+      <span class="i-name">The Long Way Home</span>
+      <span class="i-alt mono">LUNAR FREE-RETURN</span>
+      <span class="i-price">€ 40 M</span>
+    </button>
+  </nav>
+
+  <aside class="manifest" aria-live="polite">
+    <div class="m-cell"><span class="m-k mono">ALTITUDE</span><span class="m-v" id="mAlt">400 km</span></div>
+    <div class="m-cell"><span class="m-k mono">PERIOD</span><span class="m-v" id="mPeriod">92.6 min</span></div>
+    <div class="m-cell"><span class="m-k mono">SUNRISES / DAY</span><span class="m-v" id="mSun">15.5</span></div>
+    <div class="m-cell"><span class="m-k mono">VELOCITY</span><span class="m-v" id="mVel">7.67 km/s</span></div>
+    <div class="m-cell"><span class="m-k mono">DURATION</span><span class="m-v" id="mDur">3 days</span></div>
+  </aside>
+
+  <p class="hint mono" id="stageHint">DRAG TO TURN THE EARTH · THE NUMBERS ARE REAL PHYSICS</p>
+</div>
+
+<main>
+<section class="service">
+  <div class="svc-head">
+    <span class="svc-no mono">THE SERVICE</span>
+    <h2>What the brochure cannot photograph</h2>
+  </div>
+  <div class="svc-grid">
+    <div class="svc">
+      <h3>The Cabin</h3>
+      <p>Four meters of window. One chair that took three years to design because
+      in freefall a chair is a philosophical position, not furniture.</p>
+    </div>
+    <div class="svc">
+      <h3>The Table</h3>
+      <p>Dinner is served at apogee, when the planet fills the glass. Our sommelier
+      insists Burgundy behaves differently above 400 kilometers. He is not wrong;
+      nothing behaves.</p>
+    </div>
+    <div class="svc">
+      <h3>The Silence</h3>
+      <p>The loudest thing on board is your own heartbeat, which you will hear,
+      and forgive us — we cannot turn it off. Passengers report this as the amenity
+      they remember.</p>
+    </div>
+  </div>
+</section>
+
+<section class="honesty">
+  <p class="h-line">Your sunrise count is computed, not promised.<br>
+  <em>T = 2π √(a³/μ)</em> — the same equation the cabin obeys.</p>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="mono">ORBITAL · SITE 10 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p class="mono"><a href="guide/">FLIGHT MANUAL (HOW IT'S BUILT) →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" } }
+</script>
+<script type="module" src="main.js"></script>
+</body>
+</html>

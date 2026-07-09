@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARAVAN — Chang'an to Constantinople, one scroll</title>
+<meta name="description" content="A Silk Road travelogue woven in CSS. Scroll, and the route embroiders itself across the map, city by city, cargo by cargo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23201A14'/%3E%3Cpath d='M4 20 Q12 12 18 18 T30 14' stroke='%23D9A036' stroke-width='2' fill='none' stroke-dasharray='4 3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Karla:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="gate">
+  <p class="g-over">A TRAVELOGUE IN ONE SCROLL · 7,000 KM · TWO YEARS, IF THE WEATHER AGREES</p>
+  <h1>CARAVAN</h1>
+  <p class="g-sub">Chang'an to Constantinople. The route below embroiders itself
+  as you travel — <em>scroll gently; camels resent urgency.</em></p>
+</header>
+
+<div class="journey" id="journey">
+  <div class="loom">
+    <svg id="map" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet"
+         aria-label="A woven map. The caravan route draws across it from east to west as you scroll.">
+      <defs>
+        <pattern id="kilim" width="26" height="26" patternUnits="userSpaceOnUse">
+          <rect width="26" height="26" fill="#E8DCC3"/>
+          <path d="M0 13 L13 0 L26 13 L13 26 Z" fill="#E2D2B2" opacity=".7"/>
+        </pattern>
+      </defs>
+      <rect width="1000" height="520" fill="url(#kilim)"/>
+      <rect x="0" y="0" width="1000" height="14" class="band b1"/>
+      <rect x="0" y="506" width="1000" height="14" class="band b1"/>
+      <rect x="0" y="18" width="1000" height="5" class="band b2"/>
+      <rect x="0" y="497" width="1000" height="5" class="band b2"/>
+      <!-- terrain glyphs -->
+      <g class="terrain">
+        <path d="M240 190 l16 -24 l16 24 Z M280 196 l13 -20 l13 20 Z M212 200 l12 -18 l12 18 Z"/>
+        <path d="M470 320 h14 M492 328 h14 M514 320 h14 M480 338 h14 M502 346 h14" class="dunes"/>
+        <path d="M640 180 l14 -22 l14 22 Z M672 186 l11 -17 l11 17 Z"/>
+      </g>
+      <!-- the route -->
+      <path id="route" d="M920 150 C 840 220, 780 180, 700 230 S 560 300, 480 280 S 330 220, 260 280 S 140 330, 80 300"/>
+      <g id="camel" aria-hidden="true">
+        <circle r="7" class="camel-dot"/>
+        <circle r="13" class="camel-ring"/>
+      </g>
+      <!-- cities -->
+      <g class="city" transform="translate(920 150)"><circle r="5"/><text x="-12" y="-14" text-anchor="end">CHANG'AN 長安</text></g>
+      <g class="city" transform="translate(700 230)"><circle r="5"/><text x="0" y="-14" text-anchor="middle">KASHGAR</text></g>
+      <g class="city" transform="translate(480 280)"><circle r="5"/><text x="0" y="-14" text-anchor="middle">SAMARKAND</text></g>
+      <g class="city" transform="translate(260 280)"><circle r="5"/><text x="0" y="-14" text-anchor="middle">BAGHDAD</text></g>
+      <g class="city" transform="translate(80 300)"><circle r="5"/><text x="14" y="-14">CONSTANTINOPLE</text></g>
+    </svg>
+    <p class="odometer" id="odometer">0 KM · THE GATE OF CHANG'AN</p>
+  </div>
+
+  <section class="stop" data-km="0">
+    <h2>Chang'an <span lang="zh">長安</span></h2>
+    <p class="cargo">MANIFEST: silk (obviously), paper (the real treasure), one letter
+    the merchant has promised to deliver and already regrets.</p>
+    <p>Every journey west begins as a rumor about how far west it is possible to go.
+    The city wall is the last thing that agrees with you for two years.</p>
+  </section>
+
+  <section class="stop" data-km="1800">
+    <h2>Kashgar</h2>
+    <p class="cargo">MANIFEST: silk, paper, the letter, plus jade, dried melons,
+    and a new argument about the correct price of jade.</p>
+    <p>The desert has two exits and both of them are stories. Merchants trade routes
+    here the way they trade goods — slightly dishonestly, with great ceremony.</p>
+  </section>
+
+  <section class="stop" data-km="3400">
+    <h2>Samarkand</h2>
+    <p class="cargo">MANIFEST: the letter (worn soft at the folds), glass beads,
+    a recipe for plov that will be argued about for twelve centuries.</p>
+    <p>Halfway. The city where east and west stop being directions and become
+    accents. Everything blue in this city is bluer than it needs to be, which is
+    the correct amount.</p>
+  </section>
+
+  <section class="stop" data-km="5200">
+    <h2>Baghdad</h2>
+    <p class="cargo">MANIFEST: the letter, astronomy (loose), algebra (contagious),
+    and paper — which the merchant now realizes was never his to sell.</p>
+    <p>The House of Wisdom buys ideas by weight and sells them by the century.
+    A city where the maps are so good they make the journey feel plagiarized.</p>
+  </section>
+
+  <section class="stop" data-km="7000">
+    <h2>Constantinople</h2>
+    <p class="cargo">MANIFEST: one letter, delivered. Everything else was spent
+    on the way, which the accountants call loss and the poets call the point.</p>
+    <p>The bells argue with the gulls above the Golden Horn. The merchant reads the
+    sea like a final page — and, being a merchant, immediately asks what it costs
+    to go back.</p>
+  </section>
+</div>
+
+<footer class="foot">
+  <p>CARAVAN · SITE 25 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE ROUTE IS WOVEN →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js?v=2"></script>
+</body>
+</html>

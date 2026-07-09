@@ -1,0 +1,122 @@
+/* SEVENTY-TWO — washi, sumi, one seasonal accent. Noto Serif JP / EB Garamond / Zen Kaku */
+:root{
+  --wash:#F7F0E9;
+  --ink:#2A2320;
+  --accent:#C4707F;
+  --ink-dim:color-mix(in srgb, var(--ink) 62%, var(--wash));
+  --hair:color-mix(in srgb, var(--ink) 16%, transparent);
+  --jp:"Noto Serif JP",serif;
+  --serif:"EB Garamond",serif;
+  --goth:"Zen Kaku Gothic New",sans-serif;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .035 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--wash);
+  background-image:var(--grain);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:18px;
+  transition:background-color 1.2s ease, color 1.2s ease;
+  overflow-x:hidden;
+}
+a{color:var(--accent)}
+.mono{font-family:var(--goth);font-size:.66rem;letter-spacing:.24em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+#drift{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+
+/* ---------- masthead ---------- */
+.masthead{position:relative;z-index:2;text-align:center;padding:76px 20px 30px}
+.mast-jp{font-family:var(--jp);font-weight:500;font-size:1.05rem;letter-spacing:1.1em;padding-left:1.1em;color:var(--accent);transition:color 1.2s}
+.mast-en{font-size:clamp(2.6rem,8.5vw,5.4rem);font-weight:400;letter-spacing:.16em;margin-top:16px}
+.mast-sub{margin-top:18px;font-style:italic;font-size:1.08rem;color:var(--ink-dim);line-height:1.7}
+
+/* ---------- the current season ---------- */
+.now{position:relative;z-index:2;display:grid;place-items:center;padding:56px 20px 80px}
+.now-frame{
+  position:relative;
+  display:grid;grid-template-columns:auto auto;gap:0 64px;align-items:center;
+  padding:64px 72px;
+  border:1px solid var(--hair);
+  background:color-mix(in srgb, var(--wash) 82%, white);
+  background-image:var(--grain);
+  max-width:900px;
+}
+.ink-blob{
+  position:absolute;width:280px;height:280px;right:-60px;top:-70px;z-index:-1;
+  background:var(--accent);opacity:.12;
+  border-radius:58% 42% 55% 45% / 48% 55% 45% 52%;
+  filter:blur(2px);
+  transition:background 1.2s;
+}
+.now-idx{position:absolute;top:22px;left:26px;color:var(--accent);transition:color 1.2s}
+.now-jp{
+  font-family:var(--jp);font-weight:400;
+  writing-mode:vertical-rl;text-orientation:upright;
+  font-size:clamp(4rem,11vmin,7.2rem);
+  letter-spacing:.14em;line-height:1;
+  border-right:1px solid var(--hair);padding-right:34px;
+}
+.now-west{display:flex;flex-direction:column;gap:10px;max-width:400px}
+.now-romaji{font-style:italic;font-size:1.15rem;color:var(--ink-dim)}
+.now-en{font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:500;line-height:1.15}
+.now-dates{color:var(--accent);margin-top:6px;transition:color 1.2s}
+.now-sekki{font-size:1rem;color:var(--ink-dim);line-height:1.7;margin-top:10px}
+.now-sekki [lang="ja"]{font-family:var(--jp);color:var(--ink)}
+.today-btn{
+  align-self:flex-start;margin-top:14px;
+  background:none;border:1px solid var(--accent);color:var(--accent);
+  padding:9px 16px;cursor:pointer;
+}
+.today-btn:hover{background:var(--accent);color:var(--wash)}
+
+/* ---------- the river ---------- */
+.river-zone{position:relative;z-index:2;padding:10px 0 70px}
+.river-head{text-align:center;color:var(--ink-dim);margin-bottom:22px}
+.river{
+  display:flex;gap:10px;overflow-x:auto;padding:8px max(5vw,20px) 26px;
+  scroll-snap-type:x proximity;
+  scrollbar-width:thin;scrollbar-color:var(--accent) transparent;
+}
+.card{
+  flex:0 0 auto;scroll-snap-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  width:120px;padding:18px 10px 16px;
+  background:color-mix(in srgb, var(--wash) 80%, white);
+  border:1px solid var(--hair);
+  font-family:var(--serif);cursor:pointer;color:var(--ink);
+  transition:transform .25s, border-color .25s;
+}
+.card:hover{transform:translateY(-5px);border-color:var(--c)}
+.card.is-shown{border-color:var(--c);box-shadow:0 6px 18px color-mix(in srgb, var(--c) 30%, transparent)}
+.card.is-now .c-no::after{content:" · NOW";color:var(--c)}
+.c-no{font-family:var(--goth);font-size:.56rem;letter-spacing:.2em;color:var(--ink-dim)}
+.c-jp{
+  font-family:var(--jp);writing-mode:vertical-rl;text-orientation:upright;
+  font-size:1.25rem;letter-spacing:.12em;min-height:96px;
+}
+.c-en{font-size:.72rem;text-align:center;color:var(--ink-dim);line-height:1.4;font-style:italic}
+
+/* ---------- about / foot ---------- */
+.about{position:relative;z-index:2;max-width:620px;margin:0 auto;padding:20px 22px 90px;text-align:center}
+.about p{font-size:1.18rem;line-height:1.85;color:var(--ink-dim)}
+.about em{color:var(--ink)}
+.foot{
+  position:relative;z-index:2;border-top:1px solid var(--hair);
+  padding:30px 22px 44px;text-align:center;color:var(--ink-dim);
+  display:flex;flex-direction:column;gap:9px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:760px){
+  .now-frame{grid-template-columns:1fr;gap:34px;padding:44px 26px;justify-items:center;text-align:center}
+  .now-jp{border-right:none;padding-right:0;font-size:3.4rem;writing-mode:horizontal-tb;letter-spacing:.2em}
+  .now-west{align-items:center}
+  .today-btn{align-self:center}
+  .ink-blob{right:-40px;top:-50px;width:200px;height:200px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  body{transition:none}
+}

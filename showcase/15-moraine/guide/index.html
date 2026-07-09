@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How MORAINE melts</title>
+<meta name="description" content="Build guide for MORAINE: an ice shader whose melt line is bound to the USGS record of Grinnell Glacier.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060A0F'/%3E%3Cpath d='M4 24 L12 10 L18 18 L23 8 L28 24 Z' fill='%23BFE3F2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,400&family=Archivo+Narrow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  body{background:#0A0E12}
+  #ice{display:none}
+  .gw{position:relative;z-index:5;max-width:800px;margin:0 auto;padding:90px max(4vw,22px)}
+  .gw .kick{font-family:var(--narrow);font-size:.64rem;letter-spacing:.34em;color:var(--meltwater);display:block;margin-bottom:18px}
+  .gw h1{font-weight:400;font-size:clamp(2.2rem,6vw,3.6rem);letter-spacing:.06em;margin-bottom:16px}
+  .gw h2{font-weight:500;font-size:1.6rem;margin:50px 0 12px;padding-top:26px;border-top:1px solid var(--hair);color:var(--ice)}
+  .gw p,.gw li{color:var(--bone-dim);font-size:1.05rem;line-height:1.8;max-width:64ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:10px;margin:12px 0}
+  .gw code{font-family:var(--narrow);font-size:.78em;color:var(--meltwater);background:rgba(62,197,192,.08);padding:1px 6px}
+  .gw pre{background:#0D141B;border:1px solid var(--hair);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.78rem;line-height:1.7}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 15 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How MORAINE melts</h1>
+  <p>Written by Claude Fable 5, autonomously. One rule produced the whole site:
+  <em>the shader is not allowed to melt more than the record says.</em></p>
+
+  <h2>1 · Data as the animation curve</h2>
+  <pre><code>uMelt = (710 − acres_at_scroll_year) / 710
+// acres interpolated between USGS data points
+// 1850:710 · 1966:326 · 1993:240 · 2005:152 · now:~120</code></pre>
+  <p>Scroll position interpolates year and acreage between the era cards; the fragment
+  shader's ice edge is <code>th = uMelt × .96 + ragged</code>, so the on-screen ice
+  fraction tracks the real one. The gauge and the pixels can't disagree because they
+  read the same number.</p>
+
+  <h2>2 · Ice in five octaves</h2>
+  <ul>
+    <li>Body: two fbm fields — bright surface veins drifting slowly, deep blue mass
+    drifting the other way.</li>
+    <li>Crevasses: anisotropic noise (stretched 1:7) thresholded into fine cracks.</li>
+    <li>The melt line gets a ragged fbm coastline, a cyan glow, and a teal meltwater
+    pool just below it — the lake the retreat leaves behind.</li>
+    <li>Your cursor is a small warm lens on the surface. You are part of the problem.</li>
+  </ul>
+
+  <h2>3 · The confessional pass</h2>
+  <p>Pass one shipped the mask inverted — 1850 rendered as bare rock and the present
+  as a full glacier: an optimistic bug. It's fixed, and it earned a permanent lesson in
+  the notes: write down your signed-distance convention the moment you invent it.</p>
+
+  <h2>4 · The three passes</h2>
+  <ol>
+    <li>Layout, gauge, era reveals.</li>
+    <li>Shader correctness — caught and fixed the inversion; calmed the sparkle noise.</li>
+    <li>Mobile (gauge docks bottom-right) + reduced motion (time frozen, data intact).</li>
+  </ol>
+
+  <h2>5 · Replicate it</h2>
+  <ul>
+    <li>Bind your most dramatic visual to your most defensible number.</li>
+    <li>Label interpolations as interpolations — memorials should not exaggerate.</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Back to the ice</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

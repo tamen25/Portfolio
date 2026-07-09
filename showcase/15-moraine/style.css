@@ -1,0 +1,85 @@
+/* MORAINE — glacial blue on dark rock. Cormorant / Archivo Narrow */
+:root{
+  --rock:#0A0E12;
+  --ice:#BFE3F2;
+  --ice-deep:#5FA8C7;
+  --bone:#EAF2F5;
+  --bone-dim:rgba(234,242,245,.62);
+  --meltwater:#3EC5C0;
+  --hair:rgba(191,227,242,.2);
+  --serif:"Cormorant",serif;
+  --narrow:"Archivo Narrow",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--rock);color:var(--bone);font-family:var(--serif);overflow-x:hidden}
+a{color:var(--meltwater);text-decoration:none}
+a:hover{color:#7FE0DC}
+:focus-visible{outline:2px solid var(--meltwater);outline-offset:3px}
+
+#ice{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+
+/* ---------- gauge ---------- */
+.gauge{
+  position:fixed;top:20px;right:20px;z-index:10;
+  display:flex;flex-direction:column;gap:3px;align-items:flex-end;
+  background:rgba(10,14,18,.6);backdrop-filter:blur(8px);
+  border:1px solid var(--hair);
+  padding:14px 18px;
+  font-family:var(--narrow);
+  text-align:right;
+}
+.g-year{font-family:var(--serif);font-weight:500;font-size:2rem;line-height:1;letter-spacing:.04em}
+.g-area{font-size:.78rem;letter-spacing:.1em;color:var(--ice)}
+.g-pct{font-size:.66rem;letter-spacing:.16em;color:var(--bone-dim);text-transform:uppercase}
+
+/* ---------- timeline ---------- */
+.timeline{position:relative;z-index:5}
+.tl-head{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:30px 22px;
+}
+.kicker{font-family:var(--narrow);font-size:.7rem;letter-spacing:.4em;color:var(--ice);margin-bottom:26px}
+.tl-head h1{
+  font-weight:300;font-size:clamp(3.6rem,13vw,9rem);letter-spacing:.22em;line-height:1;
+  text-shadow:0 0 60px rgba(191,227,242,.3);
+  padding-left:.22em;
+}
+.lede{margin-top:28px;font-size:clamp(1.1rem,2.4vw,1.5rem);line-height:1.7;color:var(--bone-dim)}
+.lede em{color:var(--bone);font-style:italic}
+.cue{margin-top:56px;color:var(--ice);animation:sink 2.4s ease-in-out infinite}
+@keyframes sink{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(9px);opacity:.4}}
+
+.era{
+  min-height:92vh;
+  display:flex;flex-direction:column;justify-content:center;
+  max-width:520px;
+  padding:60px max(6vw,26px);
+  opacity:0;transform:translateY(20px);
+  transition:opacity .9s ease,transform .9s ease;
+}
+.era:nth-child(even){margin-left:auto;text-align:right}
+.era.seen{opacity:1;transform:none}
+.era h2{
+  font-weight:500;font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1.1;margin-bottom:16px;
+  text-shadow:0 2px 26px rgba(10,14,18,.9);
+}
+.era p{
+  font-size:1.12rem;line-height:1.75;color:var(--bone-dim);
+  text-shadow:0 2px 20px rgba(10,14,18,.95);
+}
+.era-note{margin-top:18px;font-family:var(--narrow);font-size:.72rem !important;letter-spacing:.08em;color:rgba(234,242,245,.45) !important}
+
+.tl-foot{min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:20px;padding:40px 22px 80px}
+.foot-line{font-size:clamp(1.3rem,3vw,2rem);line-height:1.6;color:var(--bone)}
+.foot-meta{font-family:var(--narrow);font-size:.7rem;letter-spacing:.18em;color:var(--bone-dim)}
+
+/* ---------- responsive ---------- */
+@media (max-width:700px){
+  .gauge{top:auto;bottom:14px;right:14px;padding:10px 14px}
+  .g-year{font-size:1.5rem}
+  .era:nth-child(even){margin-left:0;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){
+  .cue{animation:none}
+  .era{transition:opacity .3s}
+}

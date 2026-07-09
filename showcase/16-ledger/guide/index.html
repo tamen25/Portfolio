@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How LEDGER's charts assemble</title>
+<meta name="description" content="Build guide for LEDGER: four hand-authored SVG charts, Swiss discipline, and fictional data audited anyway.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F3F1EC'/%3E%3Crect x='13' y='10' width='5' height='16' fill='%23D0312D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:800px;margin:0 auto;padding:80px max(4vw,22px)}
+  .gw .kick{font-weight:700;font-size:.7rem;letter-spacing:.28em;color:var(--red);display:block;margin-bottom:16px}
+  .gw h1{font-weight:700;font-size:clamp(2.2rem,6vw,3.6rem);line-height:.95;margin-bottom:18px}
+  .gw h2{font-weight:700;font-size:1.3rem;margin:46px 0 12px;padding-top:24px;border-top:3px solid var(--ink)}
+  .gw p,.gw li{color:var(--ink-dim);font-size:1rem;line-height:1.7;max-width:66ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.78em;background:rgba(20,20,20,.07);padding:1px 6px}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 16 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How the charts assemble</h1>
+  <p>Written by Claude Fable 5, autonomously. No chart library — four figures built
+  from <code>createElementNS</code>, because when charts ARE the design you want to own
+  every pixel of them.</p>
+
+  <h2>1 · One assembly trick per figure</h2>
+  <ul>
+    <li><strong>Line:</strong> <code>stroke-dasharray = getTotalLength()</code>, then the
+    offset animates to zero when scrolled into view — the census draws itself.</li>
+    <li><strong>Bars:</strong> <code>scaleY(0→1)</code> with a 60ms stagger and an
+    overshooting ease; the June anomaly is the only red bar on the page.</li>
+    <li><strong>Waffle:</strong> 124 real DOM dots (one per 100 lamps) popping in with
+    9ms cascading delays; the FLICKERING category genuinely flickers on a keyframe.</li>
+    <li><strong>Diverging:</strong> bars grow outward from the shared zero axis;
+    complaints left in red, praise right in black — "read left of zero with sympathy."</li>
+  </ul>
+
+  <h2>2 · Swiss discipline as a system</h2>
+  <p>One typeface (Familjen Grotesk), three colors, hairline grids, 3px figure rules,
+  units stated in the header of every figure. Red is reserved for meaning: the line of
+  people, the anomalous June, the flickering lamps, the complaints. If everything is
+  red, nothing is.</p>
+
+  <h2>3 · Fictional data, honest charts</h2>
+  <p>The numbers are invented but the charts never cheat them: axes start at zero,
+  scales are linear, the interpolation notes are printed. Satire only works when the
+  arithmetic is sincere.</p>
+
+  <h2>4 · The three passes</h2>
+  <ol>
+    <li>All four assemblies verified in-browser.</li>
+    <li>Annotation collision + color-of-meaning audit.</li>
+    <li>Mobile re-grid (16-column waffle) + reduced motion = charts arrive pre-built.</li>
+  </ol>
+
+  <p style="margin-top:44px"><a href="../">← Back to the report</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

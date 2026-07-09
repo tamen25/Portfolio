@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How the MYCELIUM network grows</title>
+<meta name="description" content="Build guide for MYCELIUM: document-space random walkers, a scroll-driven growth budget, and sections that get colonized when read.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312100C'/%3E%3Cpath d='M16 4 L16 14 M16 14 L9 22 M16 14 L23 22' stroke='%23B8E986' stroke-width='1.6' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{position:relative;z-index:2;max-width:740px;margin:0 auto;padding:80px max(4vw,22px)}
+  .gw .kick{font-family:var(--grot);font-weight:600;font-size:.64rem;letter-spacing:.32em;color:var(--spore);display:block;margin-bottom:18px}
+  .gw h1{font-family:var(--grot);font-weight:700;font-size:clamp(2rem,5.6vw,3.2rem);line-height:1.05;margin-bottom:16px}
+  .gw h2{font-family:var(--grot);font-weight:600;font-size:1.3rem;margin:46px 0 12px;padding-top:24px;border-top:1px solid var(--hair)}
+  .gw p,.gw li{color:var(--bone-dim);font-size:1.05rem;line-height:1.8;max-width:64ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:10px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.74em;color:var(--spore);background:rgba(184,233,134,.08);padding:1px 6px}
+  .gw pre{background:var(--humus-2);border:1px solid var(--hair);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.74rem;line-height:1.7}
+</style>
+</head>
+<body>
+<canvas id="net" aria-hidden="true"></canvas>
+<main class="gw">
+  <span class="kick">SITE 20 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How the network grows</h1>
+  <p>Written by Claude Fable 5, autonomously. The organism is ~130 lines of vanilla
+  canvas; the trick is which coordinate space it lives in.</p>
+
+  <h2>1 · Walkers live in document space</h2>
+  <pre><code>segment = {x, docY}            // document coordinates
+paint:   y = docY − scrollY    // viewport space, repainted on scroll
+budget:  walkers pause below scrollY + 1.15 × viewport</code></pre>
+  <p>Because the history is kept in document space, scrolling re-paints the whole
+  organism in the right place — and because growth is budgeted by scroll depth,
+  the network only ever grows <em>just ahead of your reading</em>. Refuse to scroll
+  and it politely waits.</p>
+
+  <h2>2 · Branching, gravity, apology</h2>
+  <ul>
+    <li>Each walker wanders (±0.25 rad), leans back toward "down" (2% per step),
+    and branches with p=.024 at ~40° — the daughter inherits reduced energy and a
+    thinner stroke.</li>
+    <li>Pass 2 lesson: branch-point pulses at full opacity stack into blobs. Fungal
+    delicacy = fewer pulses (30%), smaller radii, faster fades.</li>
+  </ul>
+
+  <h2>3 · Colonization</h2>
+  <p>Every section carries an anchor dot. When it enters view, the nearest recent
+  thread-tip spawns a <em>steering</em> walker (turns ~14% toward the target per step,
+  plus tremble). On arrival the anchor lights up and rings. The metaphor is honest:
+  the page only connects to what you've actually read.</p>
+
+  <h2>4 · The words hold the science loosely</h2>
+  <p>The wood-wide-web literature is genuinely contested, so the copy hedges where
+  scientists hedge — "may" does honest work, and the mother-tree gets called
+  "a hypothesis with excellent marketing." Charm must not outrun evidence.</p>
+
+  <h2>5 · The three passes</h2>
+  <ol>
+    <li>Growth + colonization verified in-browser.</li>
+    <li>Pulse-blob fix (delicacy pass).</li>
+    <li>Reduced-motion (slow growth, never blocking) + mobile widths.</li>
+  </ol>
+
+  <p style="margin-top:44px"><a href="../">← Back to the institute</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+<script src="../main.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DYNASTY ARCADE — One cabinet. One game. Forever.</title>
+<meta name="description" content="A game studio with a single arcade cabinet. MOTH & LANTERN is playable right now — steer the moth, gather embers, dodge the gusts.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23191036'/%3E%3Crect x='8' y='8' width='16' height='12' fill='%230A0714' stroke='%2335E5DC' stroke-width='2'/%3E%3Crect x='14' y='22' width='4' height='4' fill='%23FF3D8B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hall">
+  <p class="hall-over">DYNASTY ARCADE · EST. IN AN ERA WE INVENTED</p>
+  <h1 class="hall-name">ONE CABINET.<br>ONE GAME.<br><span>FOREVER.</span></h1>
+</header>
+
+<!-- ============ THE CABINET ============ -->
+<section class="cab-zone">
+  <div class="cabinet">
+    <div class="marquee"><span>MOTH ★ LANTERN</span></div>
+    <div class="bezel">
+      <div class="crt" id="crt">
+        <canvas id="game" width="192" height="144" aria-label="Moth and Lantern, a playable arcade game. Move with mouse, touch, or arrow keys."></canvas>
+        <div class="scanlines" aria-hidden="true"></div>
+        <div class="crt-glass" aria-hidden="true"></div>
+        <div class="attract" id="attract">
+          <p class="a-title">MOTH &amp; LANTERN</p>
+          <p class="a-cta blink">CLICK TO INSERT COIN</p>
+          <p class="a-hi" id="attractHi">HI-SCORE 0</p>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="hud-line">
+        <span id="hudScore">SCORE 0</span>
+        <span id="hudLives">♥♥♥</span>
+      </div>
+      <p class="controls-note">MOUSE / TOUCH / ARROWS · GATHER EMBERS · THE GUSTS DO NOT NEGOTIATE</p>
+    </div>
+    <div class="coin-door" aria-hidden="true"><i></i><i></i></div>
+  </div>
+</section>
+
+<!-- ============ UNSHIPPED ============ -->
+<section class="unshipped">
+  <h2 class="un-head">GAMES WE NEVER SHIPPED</h2>
+  <p class="un-sub">The catalogue of an ambitious studio is mostly ghosts. Ours are at least well-dressed.</p>
+  <div class="un-grid">
+    <article class="un-card">
+      <div class="un-art" style="--a:#FF3D8B"><span>◢◤</span></div>
+      <h3>GRAVITY PLUMBER</h3>
+      <p>Fix the leaks in a space station where the water falls in six directions.
+      Cancelled when the physics started leaking too.</p>
+      <span class="un-tag">CANCELLED 198X</span>
+    </article>
+    <article class="un-card">
+      <div class="un-art" style="--a:#35E5DC"><span>♞</span></div>
+      <h3>KNIGHT SHIFT</h3>
+      <p>A chess knight works nights as a taxi. Every fare moves in an L.
+      Focus groups asked for "fewer rules and more horse."</p>
+      <span class="un-tag">CANCELLED 199X</span>
+    </article>
+    <article class="un-card">
+      <div class="un-art" style="--a:#FFB454"><span>☄</span></div>
+      <h3>SLOWER THAN LIGHT</h3>
+      <p>A space race at regulation speed. The ships arrive in 40 real years.
+      Two players are, as far as we know, still playing.</p>
+      <span class="un-tag">TECHNICALLY LIVE</span>
+    </article>
+  </div>
+</section>
+
+<section class="creed">
+  <p>We make games for machines that no longer exist,<br>
+  in the sincere belief that they might come back.</p>
+</section>
+
+<footer class="foot">
+  <p>DYNASTY ARCADE · SITE 14 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE CABINET WORKS →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

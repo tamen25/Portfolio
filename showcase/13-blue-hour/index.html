@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUE HOUR — a jazz room</title>
+<meta name="description" content="An after-hours jazz room. The trio is synthesized live — walking bass, swung ride, rootless piano — and the record scratches when you drag it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230D0A08'/%3E%3Ccircle cx='16' cy='16' r='11' fill='%231A1512'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23E0A458'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="doors">
+  <video class="club" autoplay muted loop playsinline poster="assets/club.webp" aria-hidden="true" id="clubVideo">
+    <source src="assets/club.mp4" type="video/mp4">
+  </video>
+  <div class="doors-shade" aria-hidden="true"></div>
+  <div class="doors-copy">
+    <p class="over">A JAZZ ROOM · DOORS AT DUSK · NO COVER, NO MERCY</p>
+    <h1 class="name"><em>Blue</em> Hour</h1>
+    <p class="sub">The trio is not a recording. It is synthesized the moment you ask for it —
+    which is also true of most good evenings.</p>
+    <a class="cta" href="#turntable">TO THE TURNTABLE ↓</a>
+  </div>
+</header>
+
+<main>
+<section class="stage" id="turntable">
+  <div class="stage-grid">
+
+    <div class="tt-zone">
+      <div class="tt">
+        <div class="platter" id="platter">
+          <div class="vinyl" id="vinyl">
+            <div class="v-label">
+              <span class="v-side">BH·33⅓</span>
+              <span class="v-title" id="vTitle">Blue Hour Blues</span>
+            </div>
+          </div>
+        </div>
+        <div class="tonearm" id="tonearm" aria-hidden="true"><i class="ta-pivot"></i><i class="ta-arm"></i><i class="ta-head"></i></div>
+      </div>
+      <div class="tt-controls">
+        <button class="listen" id="btnListen" type="button" aria-pressed="false">▶&nbsp;&nbsp;START THE TRIO</button>
+        <p class="tt-hint" id="ttHint">DRAG THE RECORD TO SCRATCH IT · THE BAND WILL FORGIVE YOU</p>
+      </div>
+    </div>
+
+    <div class="set-zone">
+      <h2 class="set-head">TONIGHT'S SET</h2>
+      <ol class="setlist">
+        <li><button class="tune" data-tune="0" aria-pressed="true" type="button">
+          <span class="t-no">01</span>
+          <span class="t-name">Blue Hour Blues</span>
+          <span class="t-meta">F blues · 132 · the opener that lies about being easy</span>
+        </button></li>
+        <li><button class="tune" data-tune="1" aria-pressed="false" type="button">
+          <span class="t-no">02</span>
+          <span class="t-name">Half Past Midnight</span>
+          <span class="t-meta">D minor · 92 · brushes; someone's coat is still on the chair</span>
+        </button></li>
+        <li><button class="tune" data-tune="2" aria-pressed="false" type="button">
+          <span class="t-no">03</span>
+          <span class="t-name">Last Train Swing</span>
+          <span class="t-meta">B♭ · 168 · played faster than the schedule requires</span>
+        </button></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rules">
+  <h2 class="rules-head">HOUSE RULES</h2>
+  <div class="rules-row">
+    <p><span>I.</span> No photography. The music is not on your phone; that is the point of it.</p>
+    <p><span>II.</span> Applause is optional. Attention is mandatory.</p>
+    <p><span>III.</span> The blue hour is the one between the last set and the first excuse to leave. We are open exactly then.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p>BLUE HOUR · SITE 13 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE TRIO IS SYNTHESIZED →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

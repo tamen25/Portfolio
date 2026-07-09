@@ -1,0 +1,99 @@
+/* RAINCODE — wet glass over neon. Chakra Petch / Noto Sans JP */
+:root{
+  --void:#060B12;
+  --glass:#0B1520;
+  --neon:#38E8D4;
+  --mag:#F056C7;
+  --fogc:#9FB4C4;
+  --txt:#DCE9F2;
+  --txt-dim:rgba(220,233,242,.6);
+  --hair:rgba(56,232,212,.2);
+  --chakra:"Chakra Petch",sans-serif;
+  --jp:"Noto Sans JP",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--txt);font-family:var(--chakra);overflow-x:hidden}
+a{color:var(--neon);text-decoration:none}
+a:hover{color:#8FF5E8}
+:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
+
+/* ---------- the window ---------- */
+.window{position:relative;height:100vh;min-height:560px;overflow:hidden;cursor:crosshair}
+.city{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#rain,#fog{position:absolute;inset:0;width:100%;height:100%}
+#fog{touch-action:none}
+
+.win-ui{
+  position:absolute;left:0;right:0;bottom:8vh;z-index:6;pointer-events:none;
+  text-align:center;
+  text-shadow:0 2px 30px rgba(6,11,18,.9);
+}
+.win-kanji{font-family:var(--jp);font-weight:300;letter-spacing:1.2em;color:var(--neon);font-size:.9rem;margin-bottom:14px;opacity:.9;padding-left:1.2em}
+.win-title{
+  font-weight:700;font-size:clamp(3rem,10vw,7.5rem);line-height:.95;letter-spacing:.06em;
+  color:var(--txt);
+  text-shadow:0 0 34px rgba(56,232,212,.4),0 2px 30px rgba(6,11,18,.9);
+}
+.win-title span{color:var(--mag);text-shadow:0 0 34px rgba(240,86,199,.55)}
+.win-sub{margin-top:14px;color:var(--txt-dim);font-weight:300;font-size:.95rem;letter-spacing:.08em;padding:0 24px}
+.win-hint{
+  margin-top:26px;color:var(--neon);font-size:.72rem;letter-spacing:.5em;
+  animation:hintPulse 2.8s ease-in-out infinite;
+}
+@keyframes hintPulse{0%,100%{opacity:.9}50%{opacity:.3}}
+.win-hint.gone{opacity:0;transition:opacity 1s}
+
+.win-frame{
+  position:absolute;inset:0;z-index:7;pointer-events:none;
+  box-shadow:inset 0 0 0 14px #05080D, inset 0 0 80px rgba(2,5,9,.75);
+}
+/* (the generated plate carries its own mullions — CSS adds only the vignette) */
+
+/* ---------- feed ---------- */
+.feed{max-width:980px;margin:0 auto;padding:100px max(5vw,24px) 60px}
+.feed-head{
+  display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;
+  border-bottom:1px solid var(--hair);padding-bottom:16px;margin-bottom:8px;
+}
+.f-tag{
+  font-size:.62rem;letter-spacing:.3em;color:var(--void);
+  background:var(--neon);padding:4px 10px;font-weight:700;
+}
+.feed-head h2{font-weight:700;font-size:clamp(1.4rem,3.4vw,2.2rem);letter-spacing:.06em}
+.f-time{margin-left:auto;color:var(--mag);font-weight:600;letter-spacing:.14em}
+.f-row{
+  display:grid;grid-template-columns:110px 1fr;gap:26px;
+  padding:26px 0;border-bottom:1px solid rgba(56,232,212,.09);
+}
+.f-id{color:var(--neon);font-weight:600;font-size:.8rem;letter-spacing:.12em}
+.f-row p{color:var(--txt-dim);font-weight:300;line-height:1.75;max-width:64ch}
+.f-row em{color:var(--txt);font-style:normal;font-weight:600}
+
+/* ---------- specs ---------- */
+.specs{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--hair);border-block:1px solid var(--hair);
+  max-width:980px;margin:0 auto 90px;
+}
+.spec{background:var(--void);padding:22px 20px;display:flex;flex-direction:column;gap:8px}
+.s-k{font-size:.58rem;letter-spacing:.26em;color:var(--txt-dim)}
+.s-v{font-weight:600;font-size:.95rem;color:var(--neon);letter-spacing:.06em}
+.spec:nth-child(2) .s-v{color:var(--mag)}
+.spec:nth-child(4) .s-v{color:var(--mag)}
+
+/* ---------- footer ---------- */
+.foot{
+  border-top:1px solid var(--hair);padding:30px max(5vw,24px) 40px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  color:var(--txt-dim);font-size:.78rem;letter-spacing:.1em;font-weight:300;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:760px){
+  .specs{grid-template-columns:1fr 1fr}
+  .f-row{grid-template-columns:1fr;gap:8px}
+  .win-kanji{letter-spacing:.7em;padding-left:.7em}
+}
+@media (prefers-reduced-motion:reduce){
+  .win-hint{animation:none}
+}

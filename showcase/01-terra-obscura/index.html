@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERRA OBSCURA — Planetary Survey Instrument</title>
+<meta name="description" content="TSK-01 'Cartograph' — a live procedural terrain observatory. Reseed a world, move the sea, raise the relief. Every contour is computed in front of you.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23FFB000' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23FFB000'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">TERRA&nbsp;OBSCURA</span>
+    <span class="brand-sub">SYNTHETIC TERRAIN OBSERVATORY</span>
+  </div>
+  <nav class="topnav" aria-label="Primary">
+    <a href="#log">SURVEY LOG</a>
+    <a href="#method">METHOD</a>
+    <a href="guide/">GUIDE</a>
+  </nav>
+  <div class="clockbox">
+    <span class="led" aria-hidden="true"></span>
+    <span id="clock" class="mono">--:--:--Z</span>
+  </div>
+</header>
+
+<main>
+<section class="instrument" id="instrument" aria-label="Live terrain instrument">
+  <div class="stage" id="stage">
+    <canvas id="scene" aria-label="Procedurally generated terrain, rotating slowly. Drag to orbit."></canvas>
+
+    <!-- leader-line callouts -->
+    <svg class="leaders" id="leaders" aria-hidden="true"></svg>
+    <div class="callout" id="calloutApex" aria-hidden="true">
+      <span class="co-key">APEX</span>
+      <span class="co-val mono" id="apexVal">—</span>
+    </div>
+    <div class="callout" id="calloutNadir" aria-hidden="true">
+      <span class="co-key">NADIR</span>
+      <span class="co-val mono" id="nadirVal">—</span>
+    </div>
+
+    <!-- HUD corners -->
+    <div class="hud hud-tl">
+      <div class="hud-title">INSTRUMENT TSK-01 “CARTOGRAPH”</div>
+      <div class="hud-line mono">MODE&nbsp;&nbsp;ORTHO-SURVEY / FBM-6</div>
+      <div class="hud-line mono">BODY&nbsp;&nbsp;<span id="seedLabel">0x00000000</span></div>
+    </div>
+    <div class="hud hud-tr">
+      <div class="hud-line mono" id="fovLine">DRIFT&nbsp;AUTO</div>
+      <div class="hud-line mono" id="landLine">LAND&nbsp;—%</div>
+      <div class="hud-line mono" id="reliefLine">RELIEF&nbsp;×1.00</div>
+    </div>
+    <div class="hud hud-bl">
+      <div class="histo-wrap">
+        <canvas id="histo" width="220" height="64" aria-label="Elevation histogram of the current terrain"></canvas>
+        <div class="histo-cap mono">ELEVATION DISTRIBUTION</div>
+      </div>
+    </div>
+    <div class="hud hud-br">
+      <div class="ctrl">
+        <button id="reseed" class="btn-reseed" type="button">RESEED&nbsp;WORLD</button>
+        <label class="slider">
+          <span class="mono">SEA</span>
+          <input id="sea" type="range" min="0" max="0.60" step="0.005" value="0.475" aria-label="Sea level">
+        </label>
+        <label class="slider">
+          <span class="mono">RELIEF</span>
+          <input id="relief" type="range" min="0.4" max="1.6" step="0.01" value="1.0" aria-label="Relief exaggeration">
+        </label>
+      </div>
+    </div>
+
+    <div class="hud hud-bc">
+      <canvas id="profile" width="380" height="44" aria-label="Elevation cross-section through the apex"></canvas>
+      <div class="profile-cap mono">PROFILE A—A′ · THROUGH APEX</div>
+    </div>
+
+    <div class="frame-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  </div>
+
+  <div class="raster-wrap" aria-hidden="true">
+    <canvas id="raster" height="26"></canvas>
+  </div>
+</section>
+
+<section class="band band-intro">
+  <div class="band-idx mono">§00</div>
+  <h1 class="display">EVERY WORLD ABOVE<br>WAS NEVER SEEN<br>BEFORE YOU ARRIVED.</h1>
+  <p class="lede">TERRA OBSCURA is an observatory for terrain that does not exist yet.
+  The instrument seeds a fractal field, raises mountains on your graphics card, floods
+  the basins, and draws every contour line live. Nothing is an image. Reseed it and
+  the world you were watching is gone forever.</p>
+</section>
+
+<section class="band band-log" id="log">
+  <div class="band-head">
+    <div class="band-idx mono">§01</div>
+    <h2 class="band-title">SURVEY LOG</h2>
+    <div class="band-note mono">RETAINED WORLDS · 3 OF ∞</div>
+  </div>
+  <div class="log-rows">
+    <article class="log-row" data-seed="4C11D8A2" tabindex="0" role="button" aria-label="Load world The Braid into the instrument">
+      <span class="log-seed mono">0x4C11D8A2</span>
+      <h3 class="log-name">THE BRAID</h3>
+      <p class="log-obs">Channels braid across the north like slack rope, cutting the coast into a hundred islets. The south is one unbroken massif belt — the apex rises from its middle with three major contours clear of anything nearby.</p>
+      <span class="log-stat mono">LAND 76% · APEX 0.828</span>
+    </article>
+    <article class="log-row" data-seed="B03E7F19" tabindex="0" role="button" aria-label="Load world Deepwater into the instrument">
+      <span class="log-seed mono">0xB03E7F19</span>
+      <h3 class="log-name">DEEPWATER</h3>
+      <p class="log-obs">The southern gulf is the deepest sounding this survey has retained: −0.270 below the waterline, a basin that stays open sea almost anywhere you drag the slider. The north shatters into lake country.</p>
+      <span class="log-stat mono">LAND 73% · NADIR −0.270</span>
+    </article>
+    <article class="log-row" data-seed="77A2C5E0" tabindex="0" role="button" aria-label="Load world Ringwater into the instrument">
+      <span class="log-seed mono">0x77A2C5E0</span>
+      <h3 class="log-name">RINGWATER</h3>
+      <p class="log-obs">A near-perfect ring of water moats the central highland — the noise field folded back on itself. The apex hides on the far northern rim, across a sound wide enough to have its own weather.</p>
+      <span class="log-stat mono">LAND 74% · APEX 0.821</span>
+    </article>
+  </div>
+</section>
+
+<section class="band band-method" id="method">
+  <div class="band-head">
+    <div class="band-idx mono">§02</div>
+    <h2 class="band-title">METHOD</h2>
+    <div class="band-note mono">HOW THE INSTRUMENT WORKS</div>
+  </div>
+  <div class="method-grid">
+    <div class="method-cell">
+      <span class="m-idx mono">M-1</span>
+      <h3>FIELD</h3>
+      <p>Six octaves of simplex noise, domain-warped so ridgelines bend instead of tile. The 256×256 heightfield is generated in JavaScript — the CPU knows every altitude, which is how the callouts find the true apex and nadir.</p>
+    </div>
+    <div class="method-cell">
+      <span class="m-idx mono">M-2</span>
+      <h3>LIFT</h3>
+      <p>The field is uploaded once as a floating-point texture. A vertex shader reads it and lifts 65,536 vertices on the GPU. RELIEF is a single uniform — moving the slider re-renders the planet without touching geometry.</p>
+    </div>
+    <div class="method-cell">
+      <span class="m-idx mono">M-3</span>
+      <h3>INK</h3>
+      <p>Contours are not drawn — they are computed per-pixel: the fractional part of altitude, sharpened by its own screen-space derivative. Minor lines every 0.02, majors every 0.10, anti-aliased at any zoom.</p>
+    </div>
+    <div class="method-cell">
+      <span class="m-idx mono">M-4</span>
+      <h3>FLOOD</h3>
+      <p>The sea is one comparison in the fragment shader. Slide it and the shoreline recomputes at 60fps, the histogram marker moves, and the LAND percentage re-tallies from the real field data.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band-colophon">
+  <div class="colophon">
+    <div class="colo-cell">
+      <span class="c-key mono">INSTRUMENT</span>
+      <span class="c-val">Three.js · custom GLSL · zero images</span>
+    </div>
+    <div class="colo-cell">
+      <span class="c-key mono">TYPE</span>
+      <span class="c-val">Archivo Variable · IBM Plex Mono</span>
+    </div>
+    <div class="colo-cell">
+      <span class="c-key mono">BUILT BY</span>
+      <span class="c-val">Claude Fable 5, autonomously</span>
+    </div>
+    <div class="colo-cell">
+      <span class="c-key mono">HOW</span>
+      <span class="c-val"><a href="guide/">Read the build guide →</a></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <span class="mono">TERRA OBSCURA · SITE 01 / 25 · FABLE SHOWCASE</span>
+  <a class="mono" href="https://fable-index.netlify.app">FABLE INDEX ↗</a>
+</footer>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" } }
+</script>
+<script type="module" src="main.js"></script>
+</body>
+</html>

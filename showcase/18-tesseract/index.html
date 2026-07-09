@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TESSERACT — Drag a slider into the fourth dimension</title>
+<meta name="description" content="A square becomes a cube becomes a tesseract. The slider is a dimension dial; the math underneath is the real projection, not an animation of one.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FBFAF7'/%3E%3Crect x='7' y='7' width='13' height='13' fill='none' stroke='%23111' stroke-width='1.6'/%3E%3Crect x='13' y='13' width='13' height='13' fill='none' stroke='%232B47FF' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="mast">
+  <p class="over mono">AN INSTRUMENT FOR ONE IDEA</p>
+  <h1>TESSERACT</h1>
+  <p class="sub">You cannot see the fourth dimension.<br>
+  You can, however, watch its shadow learn to dance.</p>
+</header>
+
+<section class="lab">
+  <div class="stage-wrap">
+    <canvas id="stage" aria-label="Wireframe polytope morphing between a square, a cube, and a tesseract as the dimension slider moves"></canvas>
+  </div>
+
+  <div class="dial">
+    <div class="dial-read">
+      <span class="d-label mono">DIMENSION</span>
+      <span class="d-value mono" id="dValue">4.00</span>
+      <span class="d-name" id="dName">tesseract</span>
+    </div>
+    <input type="range" id="dim" min="200" max="400" value="400" step="1" aria-label="Dimension, from 2 to 4">
+    <div class="dial-marks mono"><span>2 · square</span><span>3 · cube</span><span>4 · tesseract</span></div>
+    <div class="spins mono">
+      <label><input type="checkbox" id="rXW" checked> ROTATE X–W</label>
+      <label><input type="checkbox" id="rYZ" checked> ROTATE Y–Z</label>
+      <label><input type="checkbox" id="rXY"> ROTATE X–Y</label>
+    </div>
+  </div>
+
+  <table class="census mono" aria-label="Element counts for the current polytope">
+    <thead><tr><th></th><th>VERTICES</th><th>EDGES</th><th>FACES</th><th>CELLS</th></tr></thead>
+    <tbody>
+      <tr id="rowSq"><td>SQUARE</td><td>4</td><td>4</td><td>1</td><td>—</td></tr>
+      <tr id="rowCu"><td>CUBE</td><td>8</td><td>12</td><td>6</td><td>1</td></tr>
+      <tr id="rowTe"><td>TESSERACT</td><td>16</td><td>32</td><td>24</td><td>8</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose">
+  <h2>What you are actually looking at</h2>
+  <p>Every picture of a cube is a lie of one dimension — three dimensions pressed onto
+  two, and your brain un-presses them without being asked. The blue figure above commits
+  the same lie twice: a four-dimensional cube pressed into three dimensions, then pressed
+  again onto your screen. The inner cube isn't inside. It is <em>beside</em> the outer
+  one, in a direction your neck cannot turn.</p>
+  <p>The rotation that looks like the shape swallowing itself is a plain, rigid spin —
+  in the X–W plane. Nothing deforms. In four dimensions this motion is as boring as a
+  turntable; the drama is entirely in the shadow.</p>
+</section>
+
+<footer class="foot mono">
+  <p>TESSERACT · SITE 18 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">THE PROJECTION MATH →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How RAINCODE was made</title>
+<meta name="description" content="Build guide for RAINCODE: a generated city cinemagraph behind two canvases — procedural rain and wipeable fog.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060B12'/%3E%3Cpath d='M8 4 L8 20 M16 8 L16 26 M24 2 L24 16' stroke='%2338E8D4' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:840px;margin:0 auto;padding:90px max(5vw,24px)}
+  .gw .kick{font-size:.62rem;letter-spacing:.3em;color:var(--mag);font-weight:700;display:block;margin-bottom:18px}
+  .gw h1{font-weight:700;font-size:clamp(2rem,5.5vw,3.4rem);letter-spacing:.04em;line-height:1;margin-bottom:16px}
+  .gw h2{font-weight:700;font-size:1.25rem;letter-spacing:.08em;margin:48px 0 12px;padding-top:26px;border-top:1px solid var(--hair)}
+  .gw p,.gw li{color:var(--txt-dim);font-weight:300;font-size:.98rem;line-height:1.75;max-width:66ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.78em;color:var(--neon);background:rgba(56,232,212,.08);padding:1px 6px}
+  .gw pre{background:#0A121C;border:1px solid var(--hair);padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.74rem;line-height:1.7}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 07 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>HOW THE WINDOW WORKS</h1>
+  <p>Written by Claude Fable 5, autonomously. RAINCODE is a sandwich of four layers:
+  a generated film, procedural rain, wipeable fog, and one neon title. The interaction
+  budget went to a single verb: <em>wipe</em>.</p>
+
+  <h2>1 · The film (generated)</h2>
+  <ul>
+    <li>City plate from Higgsfield <code>soul_2</code>: "view from inside a high-floor
+    window… neon teal and magenta… no text, no people." The model composed real window
+    mullions into the shot — pass 1 deleted my fake CSS mullion instead of fighting it.</li>
+    <li>The plate went to <code>kling3_0_turbo</code> as a start frame with a cinemagraph
+    prompt (flicker, drifting lights, moving haze, no camera). 5 seconds, loops, 3.5MB,
+    poster fallback for reduced motion.</li>
+  </ul>
+
+  <h2>2 · Rain that isn't a gif</h2>
+  <p>Ninety streaks on a canvas. Each is a vertical gradient line with a bright bead at
+  the tip, random length/speed/drift, recycled at the bottom. Drawing rain as
+  <em>streaks-on-glass</em> instead of falling drops is what sells the window.</p>
+
+  <h2>3 · Fog you can wipe</h2>
+  <pre><code>// the whole trick
+fx.globalCompositeOperation = 'destination-out';
+radialGradient(cursor, 0 → 62px);   // soft eraser
+fx.fill();                           // glass clears
+setInterval(paintFog(.045), 300);    // …and re-condenses</code></pre>
+  <p>The fog layer is a grey gradient + 240 condensation specks. The cursor erases with a
+  feathered radial brush; a timer paints 4.5% opacity fog back every 300ms, so the city
+  always fades away again. <code>touch-action:none</code> makes fingers work like cursors.</p>
+
+  <h2>4 · The three passes</h2>
+  <ol>
+    <li>Caught the double-mullion conflict between generated plate and CSS frame.</li>
+    <li>Verified the wipe by dispatching synthetic PointerEvents along a Lissajous path —
+    fog cleared, film visible, hint label faded.</li>
+    <li>Mobile touch wiping, reduced-motion (film paused on poster, rain frozen,
+    recondensation stopped — one clean wipe still works).</li>
+  </ol>
+
+  <h2>5 · Replicate it</h2>
+  <ul>
+    <li>Generate the world once; spend your code on the glass between it and the visitor.</li>
+    <li><code>destination-out</code> + soft radial brush = every "scratch-off" interaction you've ever liked.</li>
+    <li>Budget: one image + one 5s video ≈ 8 credits. Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Back to the window</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

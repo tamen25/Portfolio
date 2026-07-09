@@ -47,6 +47,30 @@ npm test               # tsx --test test/*.test.ts
 npm run sync-instagram # regenerate photo manifest from Instagram (see .env.example)
 ```
 
+Photos are curated visually at `/arrange` (dev server only; 404s in
+production). Drag to reorder within a collection, move a photo to another
+collection, or hide it from the site. Saving persists two files via
+`POST /api/arrange`, applied site-wide at build time:
+- `src/lib/photo-order.json` — per-collection display order.
+- `src/lib/photo-overrides.json` — `{ moves, hidden, featured }`. The manifest
+  stays Instagram-truth; overrides layer on top so curation survives re-syncs.
+  - `moves`: photo id → collection to display it under.
+  - `hidden`: photo ids removed from view (files stay; a re-sync won't un-hide).
+  - `featured`: home-page slot → photo id. Slots are `collectionsFeature`,
+    `wideFrame`, and `strip1`..`strip6` (the Instagram strip). Empty = an
+    automatic fallback pick.
+
+Collections are defined in `photos.ts` (`COLLECTION_META` + `COLLECTION_PREFERENCE`):
+Iceland, Leh, Spiti, Deep sky, Moon, Misc. Every preferred collection is a move
+target on /arrange even when empty, so you can sort frames into a new category.
+`journal` is labelled "Misc" (the caption-hashtag fallback bucket).
+
+`photos.ts` exposes `BASE_PHOTOS` (raw manifest) and `PHOTOS` (curated view =
+base + overrides), plus resolved home-slot photos (`COLLECTIONS_FEATURE_PHOTO`,
+`PANORAMA_PHOTO`, `INSTAGRAM_PHOTOS`). Stale ids left by a re-sync are tolerated
+at runtime and flagged by tests. Every opened image in the lightbox links to its
+Instagram post via the photo's `permalink`.
+
 The photo manifest is Instagram-driven: `sync-instagram` fetches posts (data
 export folder via `--from-export`, Behold feed, or Instagram Graph API),
 downloads new images to `public/photos/`, and rewrites

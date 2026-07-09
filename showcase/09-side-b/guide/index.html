@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How the SIDE B deck works</title>
+<meta name="description" content="Build guide for SIDE B: a skeuomorphic cassette deck whose lo-fi is synthesized live with the Web Audio API — no audio files.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%232B2826'/%3E%3Ccircle cx='11' cy='16' r='5' fill='none' stroke='%23E8622C' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:800px;margin:0 auto;padding:80px max(4vw,20px) 90px}
+  .gw .kick{font-weight:700;font-size:.68rem;letter-spacing:.28em;color:var(--orange);display:block;margin-bottom:16px}
+  .gw h1{font-family:var(--bungee);font-size:clamp(1.9rem,5vw,3rem);line-height:1.05;color:var(--case);margin-bottom:16px}
+  .gw h2{font-family:var(--bungee);font-size:1.25rem;color:var(--case);margin:48px 0 12px;padding-top:26px;border-top:3px solid var(--case)}
+  .gw p,.gw li{color:rgba(34,31,28,.78);font-size:1rem;line-height:1.7;max-width:66ch;font-weight:500}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.78em;background:rgba(34,31,28,.09);padding:1px 6px;border-radius:3px}
+  .gw pre{background:#221F1C;color:#EFEAE0;border-radius:8px;padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;color:inherit;font-size:.74rem;line-height:1.7}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 09 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>HOW THE DECK WORKS</h1>
+  <p>Written by Claude Fable 5, autonomously. SIDE B has no audio files. Every note is
+  synthesized the moment you press play — which means every play really is a slightly
+  different take, like a proper dub.</p>
+
+  <h2>1 · A LO-FI ENGINE IN 120 LINES</h2>
+  <ul>
+    <li><strong>Clock:</strong> the classic Web Audio lookahead scheduler — a 25ms
+    <code>setInterval</code> schedules everything inside a 120ms horizon against
+    <code>AudioContext.currentTime</code>. Sample-accurate, tab-jank-proof.</li>
+    <li><strong>Kick:</strong> a sine that pitch-drops 140→42Hz in 110ms. <strong>Hat:</strong>
+    a 60ms noise burst through a 7kHz highpass. <strong>Bass:</strong> triangle notes off a
+    16-step pattern. <strong>Pad:</strong> two detuned saws per chord note, slow attack,
+    closing lowpass.</li>
+    <li><strong>Tape hiss:</strong> a looped noise buffer through a highpass, mixed at
+    1–2% — the cheapest authenticity money can't buy.</li>
+    <li>Each shelf tape is just a parameter set: BPM, root note, chord loop, bass pattern,
+    filter cutoff, hiss level. Hot-swapping restarts the scheduler on the same context.</li>
+  </ul>
+
+  <h2>2 · PLASTIC WITHOUT PHOTOS</h2>
+  <ul>
+    <li>The deck and cassette are pure CSS: layered gradients for plastic, inset shadows
+    for mold lines, radial-gradient screws with a rotated slot pseudo-element.</li>
+    <li>Reels are three-spoke divs on a <code>spin</code> animation whose
+    <code>animation-play-state</code> is gated by a <code>.playing</code> class —
+    REW/FF simply flip direction and shorten the duration while held.</li>
+    <li>The VU meters read a real <code>AnalyserNode</code> RMS every frame; the right
+    channel gets a little jitter because perfect stereo symmetry reads as fake.</li>
+  </ul>
+
+  <h2>3 · THE COPY IS THE MERCHANDISE</h2>
+  <p>Tracklists like <em>"the dial tone, slowed 800%"</em> and <em>"fridge hum in F minor"</em>
+  do the world-building. A fake shop is only as good as its inventory.</p>
+
+  <h2>4 · THE THREE PASSES</h2>
+  <ol>
+    <li>Transport + hot-swap verified (label rewrites, counter resets, reels gate correctly).</li>
+    <li>Fixed a CSS custom-property inheritance bug — track numbers showed the wrong
+    tape color because <code>--tp</code> lived on an inner span instead of the button.</li>
+    <li>Mobile restack + reduced-motion (reels pause; sound remains user-initiated).</li>
+  </ol>
+
+  <h2>5 · REPLICATE IT</h2>
+  <ul>
+    <li>Synthesize, don't stream: a 4-voice loop costs zero bytes and never gets a DMCA.</li>
+    <li>Gate your animations on state classes so the UI can't lie about what's playing.</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Back to the shop</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

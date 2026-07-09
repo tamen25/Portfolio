@@ -15,6 +15,7 @@ const VERTEX = `
 const FRAGMENT = `
   uniform float iTime;
   uniform vec2 iResolution;
+  uniform vec2 iMouse;
 
   #define NUM_OCTAVES 3
 
@@ -48,7 +49,9 @@ const FRAGMENT = `
 
   void main() {
     vec2 shake = vec2(sin(iTime * 1.2) * 0.005, cos(iTime * 2.1) * 0.005);
-    vec2 p = ((gl_FragCoord.xy + shake * iResolution.xy) - iResolution.xy * 0.5) / iResolution.y * mat2(6.0, -4.0, 4.0, 6.0);
+    // Cursor gently steers the shower — a slow parallax toward the pointer.
+    vec2 par = (iMouse - 0.5) * 0.9;
+    vec2 p = ((gl_FragCoord.xy + shake * iResolution.xy) - iResolution.xy * 0.5) / iResolution.y * mat2(6.0, -4.0, 4.0, 6.0) - par;
     vec2 v;
     vec4 o = vec4(0.0);
 
@@ -93,6 +96,7 @@ export default function ShaderBackground() {
       uniforms: {
         iTime: { value: 0 },
         iResolution: { value: new THREE.Vector2(1, 1) },
+        iMouse: { value: new THREE.Vector2(0.5, 0.5) },
       },
       vertexShader: VERTEX,
       fragmentShader: FRAGMENT,
@@ -100,7 +104,10 @@ export default function ShaderBackground() {
     const geometry = new THREE.PlaneGeometry(2, 2);
     scene.add(new THREE.Mesh(geometry, material));
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    // Render at full CSS resolution (1x) for a crisp background — the 36fps cap
+    // below is what keeps this cheap, so we no longer need to downscale. Capped
+    // at 1x DPR so retina doesn't quadruple the fragment cost.
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
     const buffer = new THREE.Vector2();
     const resize = () => {
       renderer.setSize(host.clientWidth, host.clientHeight);
@@ -117,25 +124,65 @@ export default function ShaderBackground() {
       canvas.style.opacity = "1";
     });
 
+    // Pointer parallax — target set on move, eased toward each frame.
+    const target = new THREE.Vector2(0.5, 0.5);
+    const onPointer = (e: PointerEvent) => {
+      target.set(e.clientX / window.innerWidth, 1 - e.clientY / window.innerHeight);
+    };
+    window.addEventListener("pointermove", onPointer, { passive: true });
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
-    const animate = () => {
-      material.uniforms.iTime.value += 0.016;
+    let running = false;
+    // Cap the shader to ~36fps and drive time by real delta. A slow aurora needs
+    // nowhere near 60/120/144fps, so this is invisible but stops high-refresh
+    // displays from redrawing an expensive shader 120+ times a second.
+    const FRAME_MS = 1000 / 36;
+    let lastRender = 0;
+    const animate = (now: number) => {
+      raf = requestAnimationFrame(animate);
+      const dt = now - lastRender;
+      if (dt < FRAME_MS) return;
+      lastRender = now;
+      material.uniforms.iTime.value += Math.min(dt, 100) / 1000; // ~1 unit/sec, refresh-independent
+      const m = material.uniforms.iMouse.value as THREE.Vector2;
+      m.lerp(target, 0.08);
       renderer.render(scene, camera);
+    };
+    const start = () => {
+      if (running || reduced || document.hidden) return;
+      running = true;
       raf = requestAnimationFrame(animate);
     };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
     if (reduced) {
       material.uniforms.iTime.value = 12; // single still frame
       renderer.render(scene, camera);
-    } else {
-      raf = requestAnimationFrame(animate);
     }
+
+    // The single biggest perf win: only run the shader while the hero is on
+    // screen. Scrolling down the page no longer keeps a full-screen fragment
+    // shader pegged in the background.
+    const io = new IntersectionObserver(
+      ([e]) => (e.isIntersecting ? start() : stop()),
+      { threshold: 0.01 },
+    );
+    io.observe(host);
+    const onVisibility = () => (document.hidden ? stop() : start());
+    document.addEventListener("visibilitychange", onVisibility);
 
     const ro = new ResizeObserver(resize);
     ro.observe(host);
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pointermove", onPointer);
       ro.disconnect();
       host.removeChild(canvas);
       geometry.dispose();

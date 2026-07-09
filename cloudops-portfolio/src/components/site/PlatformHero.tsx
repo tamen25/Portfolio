@@ -11,6 +11,15 @@ export function PlatformHero() {
       <div className="absolute inset-0 -z-10 line-grid opacity-25" aria-hidden />
       <HeroLogStream />
       <HeroMeshLoader />
+      {/* Calms the center so the wordmark + CTAs read, while the mesh stays alive at the edges. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 55% at 50% 48%, rgba(10,11,13,0.82) 0%, rgba(10,11,13,0.5) 45%, transparent 78%)",
+        }}
+      />
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-8 px-6 py-32 text-center">
         <StatusPill variant="live" className="font-mono tracking-wide">

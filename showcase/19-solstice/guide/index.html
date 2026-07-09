@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How SOLSTICE relights itself</title>
+<meta name="description" content="Build guide for SOLSTICE: a draggable sun driving a page-wide lighting engine through CSS custom properties.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232E3E68'/%3E%3Ccircle cx='16' cy='20' r='7' fill='%23F2A65E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  body{background:#F2E3CD}
+  .gw{max-width:780px;margin:0 auto;padding:80px max(4vw,22px)}
+  .gw .kick{font-family:var(--syne);font-weight:700;font-size:.68rem;letter-spacing:.3em;color:var(--acc);display:block;margin-bottom:16px}
+  .gw h1{font-family:var(--syne);font-weight:800;font-size:clamp(2.2rem,6vw,3.6rem);line-height:.95;margin-bottom:18px}
+  .gw h2{font-family:var(--syne);font-weight:700;font-size:1.3rem;margin:46px 0 12px;padding-top:24px;border-top:1.5px solid var(--acc)}
+  .gw p,.gw li{color:var(--ink-dim);font-size:1rem;line-height:1.72;max-width:66ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.78em;background:rgba(38,34,27,.08);padding:1px 6px}
+  .gw pre{background:rgba(38,34,27,.06);border:1px solid rgba(38,34,27,.14);border-radius:10px;padding:16px 18px;overflow-x:auto;margin:14px 0}
+  .gw pre code{background:none;font-size:.74rem;line-height:1.7}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 19 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How the light engine works</h1>
+  <p>Written by Claude Fable 5, autonomously. The whole site is one input (the sun's
+  position) fanned out into every visual decision the page makes.</p>
+
+  <h2>1 · The sun is a slider on a bezier</h2>
+  <p>Time (0–24h) maps to a parameter along a quadratic bezier arc. Dragging the sun,
+  clicking the sky, pressing arrow keys, or loading <code>?t=0.6</code> all set the same
+  number. The sun's minimum altitude is 4° — the one thing this site refuses to
+  animate is a sunset.</p>
+
+  <h2>2 · Light as custom properties</h2>
+  <pre><code>warm = 1 − clamp(altitude × 1.6)
+--sky-top:   lerp(#7FB8E8 → #2E3E68, warm)
+--sky-hor:   lerp(#DCEBF5 → #F2A65E, warm)
+--sh-x:      −azimuth × 46px      // shadows point away from the sun
+--sh-y/blur: grow as the sun drops // low sun = long, soft shadows</code></pre>
+  <p>Every card, headline and border reads these variables, so one
+  <code>relight()</code> call re-lights the lineup, the practical cards, the footer —
+  everything — with plain CSS transitions smoothing the ride.</p>
+
+  <h2>3 · The mountains have layers</h2>
+  <p>The sun is drawn between the two SVG ridges — behind the far peaks, in front of
+  the near ones — so at midnight it grazes the skyline the way the actual midnight sun
+  does. Pass 2 existed because the first version let the mountains eat it.</p>
+
+  <h2>4 · The three passes</h2>
+  <ol>
+    <li>Relight verified at noon and midnight (palette, shadows, clock card, notes).</li>
+    <li>Sun/ridge layering fixed; arc raised above the near skyline.</li>
+    <li>Added <code>?t=</code> shareable time links (born as a QA tool, kept as a feature);
+    mobile + reduced-motion (drift off, drag stays).</li>
+  </ol>
+
+  <h2>5 · Replicate it</h2>
+  <ul>
+    <li>Pick ONE scalar input and let it drive everything — coherence comes free.</li>
+    <li>Shadows sell light direction more than color does; compute them, don't set them.</li>
+    <li>Deploy: <code>netlify deploy --prod --dir .</code></li>
+  </ul>
+
+  <p style="margin-top:44px"><a href="../">← Back to the festival</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

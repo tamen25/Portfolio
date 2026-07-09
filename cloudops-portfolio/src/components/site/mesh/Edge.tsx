@@ -5,9 +5,9 @@ import { useFrame } from "@react-three/fiber";
 import { Vector3, type Mesh } from "three";
 import type { Vec3 } from "@/lib/mesh-layout";
 
-const BASE = "#30363d";
+const BASE = "#33506f"; // dim steel-blue — visible against near-black so the graph reads as connected
 const ACTIVE = "#4d9fff";
-const PACKET = "#7db8ff";
+const PACKET = "#8fc4ff";
 
 export function Edge({ from, to, active, seed }: { from: Vec3; to: Vec3; active: boolean; seed: number }) {
   const packet = useRef<Mesh>(null);
@@ -30,10 +30,10 @@ export function Edge({ from, to, active, seed }: { from: Vec3; to: Vec3; active:
             args={[new Float32Array([...from, ...to]), 3]}
           />
         </bufferGeometry>
-        <lineBasicMaterial color={active ? ACTIVE : BASE} transparent opacity={active ? 0.9 : 0.4} />
+        <lineBasicMaterial color={active ? ACTIVE : BASE} transparent opacity={active ? 0.95 : 0.62} />
       </line>
       <mesh ref={packet}>
-        <sphereGeometry args={[0.09, 12, 12]} />
+        <sphereGeometry args={[0.075, 12, 12]} />
         <meshBasicMaterial color={PACKET} toneMapped={false} />
       </mesh>
     </group>

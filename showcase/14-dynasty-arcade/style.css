@@ -1,0 +1,167 @@
+/* DYNASTY ARCADE — indigo cabinet, phosphor screen. Press Start 2P / Rubik */
+:root{
+  --hall:#0E0A1E;
+  --cab:#191036;
+  --cab-2:#241852;
+  --screen:#0A0714;
+  --magenta:#FF3D8B;
+  --cyan:#35E5DC;
+  --ember:#FFB454;
+  --chrome:#E8E4F5;
+  --chrome-dim:rgba(232,228,245,.6);
+  --px:"Press Start 2P",monospace;
+  --body:"Rubik",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--hall);
+  background-image:
+    radial-gradient(circle at 50% -20%, #241852 0%, transparent 55%),
+    repeating-linear-gradient(90deg, rgba(53,229,220,.02) 0 1px, transparent 1px 80px);
+  color:var(--chrome);
+  font-family:var(--body);
+  overflow-x:hidden;
+}
+a{color:var(--cyan);text-decoration:none}
+a:hover{color:#9FF3ED}
+:focus-visible{outline:3px solid var(--magenta);outline-offset:3px}
+
+/* ---------- hall ---------- */
+.hall{text-align:center;padding:70px 20px 40px}
+.hall-over{font-family:var(--px);font-size:.55rem;color:var(--cyan);letter-spacing:.2em;margin-bottom:30px}
+.hall-name{
+  font-family:var(--px);font-size:clamp(1.4rem,4.6vw,3rem);
+  line-height:1.6;
+  text-shadow:3px 3px 0 var(--magenta), 6px 6px 0 rgba(255,61,139,.25);
+}
+.hall-name span{color:var(--ember);text-shadow:3px 3px 0 #7A3E00}
+
+/* ---------- cabinet ---------- */
+.cab-zone{display:grid;place-items:center;padding:40px 14px 90px}
+.cabinet{
+  width:min(560px,95vw);
+  background:linear-gradient(175deg,var(--cab-2),var(--cab) 40%);
+  border-radius:18px 18px 8px 8px;
+  padding:20px 22px 26px;
+  box-shadow:0 30px 70px rgba(0,0,0,.6), inset 0 1px 0 rgba(232,228,245,.1),
+    inset 4px 0 0 rgba(255,61,139,.25), inset -4px 0 0 rgba(53,229,220,.25);
+  position:relative;
+}
+.marquee{
+  background:linear-gradient(180deg,#2C1B63,#191036);
+  border:2px solid rgba(53,229,220,.4);
+  border-radius:8px;
+  text-align:center;padding:14px 8px;margin-bottom:16px;
+  box-shadow:0 0 30px rgba(53,229,220,.15), inset 0 0 24px rgba(53,229,220,.1);
+}
+.marquee span{
+  font-family:var(--px);font-size:clamp(.75rem,2.6vw,1.15rem);
+  color:var(--ember);
+  text-shadow:0 0 14px rgba(255,180,84,.8), 0 0 30px rgba(255,180,84,.4);
+  animation:marq 3s ease-in-out infinite;
+}
+@keyframes marq{0%,100%{opacity:1}92%{opacity:1}95%{opacity:.5}97%{opacity:1}}
+.bezel{
+  background:#0B0818;
+  border-radius:14px;
+  padding:14px;
+  box-shadow:inset 0 4px 18px rgba(0,0,0,.9);
+}
+.crt{
+  position:relative;overflow:hidden;
+  border-radius:10px / 14px;
+  background:var(--screen);
+  aspect-ratio:4/3;
+}
+#game{
+  width:100%;height:100%;display:block;
+  image-rendering:pixelated;
+  cursor:none;
+}
+.scanlines{
+  position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 2px, transparent 2px 4px);
+  mix-blend-mode:multiply;
+}
+.crt-glass{
+  position:absolute;inset:0;pointer-events:none;z-index:4;
+  background:
+    radial-gradient(ellipse at 30% 18%, rgba(232,228,245,.09), transparent 45%),
+    radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.5) 100%);
+  animation:flick 4.2s steps(1) infinite;
+}
+@keyframes flick{0%,100%{opacity:1}97.5%{opacity:.86}98%{opacity:1}}
+.attract{
+  position:absolute;inset:0;z-index:5;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  background:rgba(10,7,20,.82);
+  cursor:pointer;text-align:center;
+  transition:opacity .3s;
+}
+.attract.off{opacity:0;pointer-events:none}
+.a-title{font-family:var(--px);font-size:clamp(.8rem,3vw,1.2rem);color:var(--cyan);text-shadow:0 0 16px rgba(53,229,220,.7)}
+.a-cta{font-family:var(--px);font-size:clamp(.5rem,1.8vw,.65rem);color:var(--chrome)}
+.a-hi{font-family:var(--px);font-size:.55rem;color:var(--ember)}
+.blink{animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.panel{margin-top:16px}
+.hud-line{
+  display:flex;justify-content:space-between;
+  font-family:var(--px);font-size:.62rem;
+  color:var(--cyan);margin-bottom:12px;padding:0 4px;
+}
+#hudLives{color:var(--magenta);letter-spacing:.2em}
+.controls-note{
+  text-align:center;font-size:.68rem;letter-spacing:.16em;color:var(--chrome-dim);
+}
+.coin-door{display:flex;justify-content:center;gap:18px;margin-top:18px}
+.coin-door i{width:34px;height:8px;border-radius:4px;background:#0B0818;box-shadow:inset 0 2px 4px #000, 0 1px 0 rgba(232,228,245,.15)}
+
+/* ---------- unshipped ---------- */
+.unshipped{max-width:1060px;margin:0 auto;padding:30px max(4vw,18px) 80px;text-align:center}
+.un-head{font-family:var(--px);font-size:clamp(.9rem,3vw,1.4rem);margin-bottom:14px}
+.un-sub{color:var(--chrome-dim);margin-bottom:44px}
+.un-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.un-card{
+  background:var(--cab);
+  border:2px solid rgba(53,229,220,.18);
+  border-radius:10px;padding:26px 22px 24px;text-align:left;
+  transition:transform .2s, border-color .2s;
+}
+.un-card:hover{transform:translateY(-6px);border-color:var(--a,#35E5DC)}
+.un-art{
+  height:86px;border-radius:6px;display:grid;place-items:center;
+  background:
+    repeating-linear-gradient(45deg, color-mix(in srgb, var(--a) 16%, transparent) 0 8px, transparent 8px 16px),
+    var(--screen);
+  margin-bottom:18px;
+}
+.un-art span{font-size:2rem;color:var(--a);text-shadow:0 0 18px var(--a)}
+.un-card h3{font-family:var(--px);font-size:.72rem;letter-spacing:.06em;margin-bottom:12px}
+.un-card p{color:var(--chrome-dim);font-size:.88rem;line-height:1.65}
+.un-tag{
+  display:inline-block;margin-top:16px;
+  font-family:var(--px);font-size:.45rem;letter-spacing:.14em;
+  color:var(--hall);background:var(--a,#35E5DC);
+  padding:5px 9px;border-radius:3px;
+}
+
+/* ---------- creed / foot ---------- */
+.creed{text-align:center;padding:20px 20px 90px}
+.creed p{font-size:clamp(1.05rem,2.6vw,1.5rem);line-height:1.8;color:var(--chrome-dim);font-weight:300}
+.foot{
+  border-top:2px solid rgba(53,229,220,.15);
+  padding:28px max(4vw,18px) 40px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-size:.72rem;letter-spacing:.1em;color:var(--chrome-dim);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .un-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+}
+@media (prefers-reduced-motion:reduce){
+  .marquee span{animation:none}
+  .crt-glass{animation:none}
+  .blink{animation:none}
+}

@@ -1,0 +1,100 @@
+/* ORBITAL — midnight, champagne, porcelain. Marcellus / Outfit / Spline Sans Mono */
+:root{
+  --space:#05070F;
+  --midnight:#0A1024;
+  --champagne:#D8B25C;
+  --champagne-hi:#F0D89A;
+  --porcelain:#F2EFE9;
+  --porcelain-dim:rgba(242,239,233,.6);
+  --atmo:#4F7BD9;
+  --hair:rgba(216,178,92,.22);
+  --disp:"Marcellus",serif;
+  --ui:"Outfit",sans-serif;
+  --mono:"Spline Sans Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--space);color:var(--porcelain);font-family:var(--ui);font-weight:300;overflow-x:hidden}
+a{color:var(--champagne);text-decoration:none}
+a:hover{color:var(--champagne-hi)}
+.mono{font-family:var(--mono);letter-spacing:.14em}
+:focus-visible{outline:1.5px solid var(--champagne);outline-offset:3px}
+
+/* ---------- stage ---------- */
+.stage-wrap{position:relative;height:100vh;min-height:640px;overflow:hidden}
+#space{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+#space:active{cursor:grabbing}
+
+.brand{position:absolute;top:44px;left:min(5vw,54px);z-index:5;pointer-events:none}
+.wordmark{
+  font-family:var(--disp);font-size:clamp(2.6rem,6.5vw,4.8rem);
+  letter-spacing:.34em;line-height:1;color:var(--porcelain);
+  text-shadow:0 0 40px rgba(79,123,217,.4);
+}
+.strap{font-family:var(--mono);font-size:.6rem;letter-spacing:.34em;color:var(--champagne);margin-top:14px}
+
+/* itineraries */
+.itins{
+  position:absolute;right:min(4vw,44px);top:50%;transform:translateY(-50%);z-index:5;
+  display:flex;flex-direction:column;gap:12px;width:min(300px,86vw);
+}
+.itin{
+  display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:baseline;
+  text-align:left;font-family:var(--ui);
+  background:rgba(10,16,36,.55);backdrop-filter:blur(8px);
+  border:1px solid var(--hair);
+  padding:18px 20px;cursor:pointer;color:var(--porcelain);
+  transition:border-color .3s, background .3s, transform .2s;
+}
+.itin:hover{transform:translateX(-4px);border-color:rgba(216,178,92,.5)}
+.itin[aria-pressed="true"]{border-color:var(--champagne);background:rgba(216,178,92,.1)}
+.i-name{font-family:var(--disp);font-size:1.15rem;letter-spacing:.04em}
+.i-alt{grid-column:1;font-size:.6rem;color:var(--porcelain-dim)}
+.i-price{grid-row:1/3;align-self:center;font-weight:400;color:var(--champagne);font-size:.95rem}
+
+/* manifest */
+.manifest{
+  position:absolute;left:0;right:0;bottom:0;z-index:5;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  border-top:1px solid var(--hair);
+  background:rgba(5,7,15,.7);backdrop-filter:blur(10px);
+}
+.m-cell{padding:16px 20px 18px;border-right:1px solid rgba(216,178,92,.1);display:flex;flex-direction:column;gap:5px}
+.m-cell:last-child{border-right:none}
+.m-k{font-size:.54rem;color:var(--champagne)}
+.m-v{font-family:var(--disp);font-size:clamp(1rem,2vw,1.4rem);letter-spacing:.03em}
+
+.hint{
+  position:absolute;left:min(5vw,54px);bottom:96px;z-index:5;
+  font-size:.58rem;color:var(--porcelain-dim);letter-spacing:.3em;
+}
+
+/* ---------- service ---------- */
+.service{max-width:1150px;margin:0 auto;padding:110px max(5vw,24px) 80px}
+.svc-no{color:var(--champagne);font-size:.62rem;display:block;margin-bottom:14px}
+.svc-head h2{font-family:var(--disp);font-size:clamp(1.8rem,4vw,3rem);line-height:1.06;max-width:20ch}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:60px}
+.svc h3{font-family:var(--disp);font-size:1.35rem;margin-bottom:12px;color:var(--champagne-hi)}
+.svc p{color:var(--porcelain-dim);line-height:1.75;font-size:.98rem;max-width:38ch}
+
+/* ---------- honesty ---------- */
+.honesty{border-block:1px solid var(--hair);padding:70px 24px;text-align:center;background:var(--midnight)}
+.h-line{font-family:var(--disp);font-size:clamp(1.2rem,2.6vw,1.8rem);line-height:1.6}
+.h-line em{color:var(--champagne);font-style:normal;font-family:var(--mono);font-size:.8em;letter-spacing:.08em}
+
+/* ---------- footer ---------- */
+.foot{
+  padding:34px max(5vw,24px) 44px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  color:var(--porcelain-dim);font-size:.62rem;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .stage-wrap{height:auto;min-height:0;padding-bottom:0}
+  #space{position:relative;display:block;height:56vh}
+  .brand{top:24px;left:20px}
+  .itins{position:static;transform:none;width:auto;padding:18px 16px 0;flex-direction:column}
+  .manifest{position:static;grid-template-columns:repeat(2,1fr)}
+  .m-cell:nth-child(5){grid-column:1/-1}
+  .hint{display:none}
+  .svc-grid{grid-template-columns:1fr;gap:30px}
+}

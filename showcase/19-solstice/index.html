@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOLSTICE — A festival where the sun forgets to set</title>
+<meta name="description" content="Three nights above the Arctic Circle with no nights in them. Drag the sun along its arc — the whole page relights, shadows and all.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232E3E68'/%3E%3Ccircle cx='16' cy='20' r='7' fill='%23F2A65E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="sky" id="sky">
+  <svg class="arc-scene" id="arcScene" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-label="Drag the sun along its arc to change the time of day">
+    <path id="sunArc" d="M 60 500 Q 600 -60 1140 500" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.6" stroke-dasharray="3 7"/>
+    <path class="ridge r-far" d="M0 640 L0 470 L140 380 L260 450 L420 350 L560 440 L700 360 L860 460 L1000 390 L1200 470 L1200 640 Z"/>
+    <g id="sunGrp" style="cursor:grab" tabindex="0" role="slider" aria-label="Sun position" aria-valuemin="0" aria-valuemax="24" aria-valuenow="12">
+      <circle id="sunGlow" r="64" fill="url(#glow)"/>
+      <circle id="sun" r="26"/>
+    </g>
+    <defs>
+      <radialGradient id="glow"><stop offset="0%" stop-color="rgba(255,220,150,.55)"/><stop offset="100%" stop-color="rgba(255,220,150,0)"/></radialGradient>
+    </defs>
+    <path class="ridge r-near" d="M0 640 L0 540 L180 460 L340 530 L520 440 L680 530 L840 450 L1020 540 L1200 480 L1200 640 Z"/>
+  </svg>
+
+  <div class="sky-copy">
+    <p class="s-over">69.6° NORTH · THREE NIGHTS, ZERO NIGHTS</p>
+    <h1 class="s-title">SOL—<br>STICE</h1>
+    <p class="s-line">A music festival where the sun forgets to set.<br>
+    <strong>Drag it.</strong> The light will follow you everywhere on this page.</p>
+  </div>
+
+  <div class="clockcard" aria-live="polite">
+    <span class="cc-time" id="ccTime">12:00</span>
+    <span class="cc-note" id="ccNote">high noon — the fjord is showing off</span>
+    <span class="cc-alt" id="ccAlt">SUN ALTITUDE 44°</span>
+  </div>
+</header>
+
+<main>
+<section class="lineup">
+  <h2 class="lu-head">THE ALL-HOURS LINEUP</h2>
+  <div class="lu-row">
+    <article class="act">
+      <span class="act-time">23:30</span>
+      <h3>THE LOW GOLD ORCHESTRA</h3>
+      <p>Brass on the shore while the sun grazes the water and changes its mind.
+      The hour photographers pretend they discovered.</p>
+    </article>
+    <article class="act">
+      <span class="act-time">02:30</span>
+      <h3>FJORD CHOIR</h3>
+      <p>Forty voices across the water. Sound carries differently when the day
+      refuses to end — longer, like the shadows.</p>
+    </article>
+    <article class="act">
+      <span class="act-time">05:00</span>
+      <h3>SUNRISE SET (CEREMONIAL)</h3>
+      <p>There is no sunrise. We hold the set anyway, out of respect for the
+      tradition and the espresso machine.</p>
+    </article>
+  </div>
+</section>
+
+<section class="practical">
+  <div class="pr-card">
+    <span class="pr-k">WHEN</span>
+    <p>June 19 – 22.<br>Officially 72 hours; experientially one long, golden afternoon.</p>
+  </div>
+  <div class="pr-card">
+    <span class="pr-k">WHERE</span>
+    <p>Sølvfjord, above the Arctic Circle.<br>The mountains you see above are a
+    reasonable sketch of the real ones.</p>
+  </div>
+  <div class="pr-card">
+    <span class="pr-k">BRING</span>
+    <p>An eye mask you will not use, and one warm coat for the hour the sun
+    pretends to leave.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p>SOLSTICE · SITE 19 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE LIGHT ENGINE WORKS →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

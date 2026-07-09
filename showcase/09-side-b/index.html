@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIDE B — Tapes that only have B-sides</title>
+<meta name="description" content="A mixtape shop with a working deck. Press play: the reels spin, the VU meters breathe, and the music is generated live in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%232B2826'/%3E%3Ccircle cx='11' cy='16' r='5' fill='none' stroke='%23E8622C' stroke-width='2'/%3E%3Ccircle cx='21' cy='16' r='5' fill='none' stroke='%2317A398' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Permanent+Marker&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <h1 class="logo">SIDE&nbsp;B</h1>
+  <p class="tagline">TAPES THAT ONLY HAVE B-SIDES · EST. WHENEVER THE A-SIDE ENDED</p>
+</header>
+
+<!-- ============ THE DECK ============ -->
+<section class="deck-zone" aria-label="Cassette deck">
+  <div class="deck">
+    <div class="deck-brand"><span>FABLE·CORP</span><span class="deck-model">TD-2026 “WALKGIANT”</span></div>
+
+    <div class="cassette" id="cassette">
+      <div class="screw s1" aria-hidden="true"></div><div class="screw s2" aria-hidden="true"></div>
+      <div class="screw s3" aria-hidden="true"></div><div class="screw s4" aria-hidden="true"></div>
+      <div class="c-label">
+        <div class="c-stripes" aria-hidden="true"><i></i><i></i></div>
+        <p class="c-title" id="cTitle">dusk commute</p>
+        <p class="c-side">SIDE B · CHROME · 90 MIN</p>
+      </div>
+      <div class="c-window">
+        <div class="reel reel-l" id="reelL" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="tape-line" aria-hidden="true"></div>
+        <div class="reel reel-r" id="reelR" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+      <div class="c-foot" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="deck-panel">
+      <div class="vu-pair" aria-hidden="true">
+        <div class="vu"><i id="vuL"></i></div>
+        <div class="vu"><i id="vuR"></i></div>
+        <span class="vu-cap">VU</span>
+      </div>
+      <div class="counter mono" id="counter" aria-label="Tape counter">000</div>
+      <div class="transport" role="group" aria-label="Transport controls">
+        <button class="t-btn" id="btnRew" type="button" aria-label="Rewind">◀◀</button>
+        <button class="t-btn t-play" id="btnPlay" type="button" aria-label="Play">▶</button>
+        <button class="t-btn" id="btnStop" type="button" aria-label="Stop">■</button>
+        <button class="t-btn" id="btnFf" type="button" aria-label="Fast forward">▶▶</button>
+      </div>
+      <p class="deck-hint" id="deckHint">PRESS PLAY — THE MUSIC IS GENERATED LIVE, NOT A FILE</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SHELF ============ -->
+<section class="shelf" id="shelf">
+  <h2 class="shelf-head">THIS WEEK ON THE SHELF</h2>
+  <p class="shelf-sub">Three tapes, dubbed nightly. Click one to load it into the deck.</p>
+
+  <div class="shelf-row">
+    <button class="tape" data-flavor="dusk" data-title="dusk commute" aria-pressed="true" type="button" style="--tp:#E8622C">
+      <span class="tp-case">
+        <span class="tp-title">dusk commute</span>
+        <span class="tp-vol">VOL. 1</span>
+      </span>
+      <ol class="tp-list">
+        <li>streetlights coming on, in order</li>
+        <li>the bus you just missed (dub)</li>
+        <li>rain on the window, but warm</li>
+        <li>home, eventually</li>
+      </ol>
+    </button>
+
+    <button class="tape" data-flavor="pool" data-title="pool lights" aria-pressed="false" type="button" style="--tp:#17A398">
+      <span class="tp-case">
+        <span class="tp-title">pool lights</span>
+        <span class="tp-vol">VOL. 2</span>
+      </span>
+      <ol class="tp-list">
+        <li>chlorine sunset</li>
+        <li>diving board, 2 a.m.</li>
+        <li>the lifeguard's day off</li>
+        <li>underwater radio</li>
+      </ol>
+    </button>
+
+    <button class="tape" data-flavor="static" data-title="static slow" aria-pressed="false" type="button" style="--tp:#8069B0">
+      <span class="tp-case">
+        <span class="tp-title">static slow</span>
+        <span class="tp-vol">VOL. 3</span>
+      </span>
+      <ol class="tp-list">
+        <li>the dial tone, slowed 800%</li>
+        <li>test pattern lullaby</li>
+        <li>fridge hum in F minor</li>
+        <li>sign-off, national anthem optional</li>
+      </ol>
+    </button>
+  </div>
+</section>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="creed">
+  <h2>WHY B-SIDES?</h2>
+  <p>The A-side is what they wanted you to hear. The B-side is what was left when nobody
+  was watching — the take with the cough in it, the song that runs a minute too long,
+  the good stuff. We only stock the good stuff. Our tapes are blank on one side out
+  of respect.</p>
+</section>
+
+<footer class="foot">
+  <p>SIDE B · SITE 09 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE DECK WORKS →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

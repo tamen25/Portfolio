@@ -1,0 +1,113 @@
+/* XEROX RIOT — toner on cheap paper. Anton / Courier Prime / Caveat */
+:root{
+  --paper:#F2F0EA;
+  --toner:#141414;
+  --toner-soft:rgba(20,20,20,.78);
+  --riot:#FF2E88;
+  --safety:#FF7A1A;
+  --anton:"Anton",sans-serif;
+  --courier:"Courier Prime",monospace;
+  --marker:"Caveat",cursive;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='110' height='110' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#B9B4A8;
+  background-image:var(--grain);
+  color:var(--toner);
+  font-family:var(--courier);
+  padding:40px 12px 60px;
+  overflow-x:hidden;
+}
+a{color:var(--riot)}
+:focus-visible{outline:3px solid var(--riot);outline-offset:3px}
+mark{background:var(--riot);color:var(--paper);padding:1px 7px;font-style:normal}
+
+/* ---------- sheets ---------- */
+.sheet{
+  position:relative;
+  max-width:780px;margin:0 auto 34px;
+  background:var(--paper);
+  background-image:var(--grain);
+  padding:46px 48px 52px;
+  box-shadow:0 14px 34px rgba(20,20,20,.35);
+  clip-path:polygon(0 6px,3% 0,97% 4px,100% 0,100% calc(100% - 8px),96% 100%,4% calc(100% - 3px),0 100%);
+  opacity:0;transform:translateY(26px) rotate(0deg);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.sheet.torn{opacity:1;transform:translateY(0)}
+.tilt-l{transform:translateY(26px) rotate(-1.1deg)}
+.tilt-l.torn{transform:rotate(-1.1deg)}
+.tilt-r{transform:translateY(26px) rotate(.9deg)}
+.tilt-r.torn{transform:rotate(.9deg)}
+
+/* ---------- cover ---------- */
+.cover{text-align:center;padding-top:54px}
+.issue{font-weight:700;font-size:.72rem;letter-spacing:.14em}
+.riot{
+  font-family:var(--anton);
+  font-size:clamp(4.6rem,17vw,11rem);
+  line-height:.86;letter-spacing:.01em;
+  margin:26px 0 20px;
+  text-shadow:5px 5px 0 var(--riot);
+  transform:rotate(-1.4deg);
+}
+.strap{font-size:1.05rem;font-weight:700;transform:rotate(.6deg)}
+.sticker{
+  position:absolute;
+  font-family:var(--anton);font-size:.85rem;letter-spacing:.06em;line-height:1.15;
+  background:var(--safety);color:var(--toner);
+  border-radius:50%;
+  display:grid;place-items:center;text-align:center;
+  width:110px;height:110px;
+  box-shadow:2px 3px 8px rgba(20,20,20,.3);
+}
+.st-1{top:24px;right:30px;transform:rotate(9deg);background:var(--riot);color:var(--paper)}
+.st-2{bottom:30px;left:26px;transform:rotate(-8deg)}
+.st-3{bottom:-26px;right:-14px;transform:rotate(7deg);width:96px;height:96px;font-size:.7rem;background:var(--riot);color:var(--paper)}
+.scribble{
+  position:absolute;right:34px;bottom:44px;
+  font-family:var(--marker);font-size:1.3rem;color:var(--toner-soft);
+  transform:rotate(-5deg);
+}
+
+/* ---------- innards ---------- */
+.head-cut{
+  font-family:var(--anton);font-size:clamp(1.5rem,4.4vw,2.3rem);letter-spacing:.02em;
+  background:var(--toner);color:var(--paper);
+  display:inline-block;padding:8px 16px 6px;
+  transform:rotate(-.6deg);
+  margin-bottom:26px;
+}
+.head-cut small{font-family:var(--courier);font-size:.5em;letter-spacing:.06em}
+.mani{list-style:none;counter-reset:m;display:flex;flex-direction:column;gap:16px}
+.mani li{
+  counter-increment:m;
+  font-weight:700;font-size:clamp(1rem,2.4vw,1.3rem);line-height:1.5;
+}
+.mani li::before{
+  content:counter(m) ". ";
+  font-family:var(--anton);color:var(--riot);font-size:1.2em;
+}
+.steps p,.reviews p,.ads p{font-size:1rem;line-height:1.75;margin-bottom:14px}
+.steps b,.reviews b{font-weight:700}
+.reviews b{display:inline-block;transform:rotate(-.4deg)}
+.ads p{border-bottom:1.5px dashed rgba(20,20,20,.35);padding-bottom:12px}
+.classifieds .barcode{
+  display:block;margin-top:26px;height:44px;width:200px;
+  background:repeating-linear-gradient(90deg,var(--toner) 0 2px,transparent 2px 5px,var(--toner) 5px 9px,transparent 9px 11px);
+}
+
+/* ---------- foot ---------- */
+.foot{
+  max-width:780px;margin:0 auto;text-align:center;
+  font-size:.78rem;font-weight:700;line-height:2;color:rgba(20,20,20,.75);
+}
+@media (max-width:640px){
+  .sheet{padding:34px 22px 44px}
+  .sticker{width:88px;height:88px;font-size:.68rem}
+  .st-3{right:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  .sheet{transition:opacity .2s}
+}

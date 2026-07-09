@@ -38,7 +38,8 @@ export function HeroMesh() {
         <Canvas
           camera={{ position: [0, 0, 12], fov: 50 }}
           frameloop={visible ? "always" : "never"}
-          gl={{ antialias: true, alpha: true }}
+          dpr={1}
+          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
           style={{ background: "transparent" }}
         >
           <MeshScene />

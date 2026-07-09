@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HERBARIUM PERPETUUM — The drawer of kept summers</title>
+<meta name="description" content="A botanical archive of four specimens that open like folios. Pressed plants, taxonomy, and the stories collectors never wrote down.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4EFE3'/%3E%3Cpath d='M16 26 C16 18 12 14 8 12 C14 12 16 16 16 18 C16 16 18 12 24 12 C20 14 16 18 16 26 Z' fill='%2322301F'/%3E%3Cline x1='16' y1='6' x2='16' y2='26' stroke='%2322301F' stroke-width='1.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <svg class="flourish" viewBox="0 0 200 60" aria-hidden="true">
+    <path d="M10 45 Q 60 10 100 30 T 190 25" fill="none" stroke="currentColor" stroke-width="1"/>
+    <path d="M52 28 q -6 -12 4 -16 q 2 10 -4 16 M96 29 q -2 -14 9 -15 q 0 11 -9 15 M142 26 q -7 -10 1 -16 q 5 9 -1 16" fill="none" stroke="currentColor" stroke-width=".9"/>
+  </svg>
+  <p class="est mono">CABINET IV · DRAWER 9 · EST. MDCCCLXXII</p>
+  <h1>Herbarium<br><em>Perpetuum</em></h1>
+  <p class="hero-line">The drawer of kept summers. Four specimens, pressed flat as letters,<br>
+  each holding the afternoon it was picked.</p>
+  <p class="hero-cue mono">— OPEN A FOLIO —</p>
+</header>
+
+<main>
+<section class="folios" id="folios">
+
+  <article class="folio" data-open="false">
+    <button class="folio-cover" type="button" aria-expanded="false">
+      <span class="fc-no mono">HP-091</span>
+      <span class="fc-taxon"><em>Dryopteris filix-mas</em></span>
+      <span class="fc-common">MALE FERN</span>
+      <span class="fc-tie" aria-hidden="true"></span>
+    </button>
+    <div class="folio-sheet" hidden>
+      <figure class="sheet-fig">
+        <div class="tissue" aria-hidden="true"></div>
+        <img src="assets/fern.webp" alt="Pressed fern frond on aged herbarium paper" loading="lazy">
+      </figure>
+      <div class="sheet-meta">
+        <table class="tax mono">
+          <tr><td>FAMILY</td><td>Dryopteridaceae</td></tr>
+          <tr><td>COLLECTED</td><td>June 1974 · beech wood, north slope</td></tr>
+          <tr><td>COLLECTOR</td><td>E. Halloran</td></tr>
+          <tr><td>CONDITION</td><td>Complete frond · spores intact</td></tr>
+        </table>
+        <p class="sheet-note">Collected in a forest that has since become a parking structure.
+        The shadow it grew in is preserved here with it — ferns keep their coolness
+        the way letters keep their handwriting.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="folio" data-open="false">
+    <button class="folio-cover" type="button" aria-expanded="false">
+      <span class="fc-no mono">HP-114</span>
+      <span class="fc-taxon"><em>Papaver rhoeas</em></span>
+      <span class="fc-common">COMMON POPPY</span>
+      <span class="fc-tie" aria-hidden="true"></span>
+    </button>
+    <div class="folio-sheet" hidden>
+      <figure class="sheet-fig">
+        <div class="tissue" aria-hidden="true"></div>
+        <img src="assets/poppy.webp" alt="Pressed red poppy with translucent petals on aged paper" loading="lazy">
+      </figure>
+      <div class="sheet-meta">
+        <table class="tax mono">
+          <tr><td>FAMILY</td><td>Papaveraceae</td></tr>
+          <tr><td>COLLECTED</td><td>August 1969 · fallow field, after storm</td></tr>
+          <tr><td>COLLECTOR</td><td>E. Halloran</td></tr>
+          <tr><td>CONDITION</td><td>Petals translucent · color holding</td></tr>
+        </table>
+        <p class="sheet-note">Picked the morning after a storm flattened the whole field —
+        the only one still standing. Pressed poppies go the color of things remembered
+        slightly wrong, which is to say: better.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="folio" data-open="false">
+    <button class="folio-cover" type="button" aria-expanded="false">
+      <span class="fc-no mono">HP-201</span>
+      <span class="fc-taxon"><em>Eucalyptus cinerea</em></span>
+      <span class="fc-common">SILVER DOLLAR GUM</span>
+      <span class="fc-tie" aria-hidden="true"></span>
+    </button>
+    <div class="folio-sheet" hidden>
+      <figure class="sheet-fig">
+        <div class="tissue" aria-hidden="true"></div>
+        <img src="assets/eucalyptus.webp" alt="Pressed eucalyptus sprig with round silver leaves" loading="lazy">
+      </figure>
+      <div class="sheet-meta">
+        <table class="tax mono">
+          <tr><td>FAMILY</td><td>Myrtaceae</td></tr>
+          <tr><td>COLLECTED</td><td>Posted 1962 · Adelaide → here</td></tr>
+          <tr><td>COLLECTOR</td><td>Aunt R. (by mail)</td></tr>
+          <tr><td>CONDITION</td><td>Fragrant when warmed, still</td></tr>
+        </table>
+        <p class="sheet-note">Sent by post from an aunt in Adelaide. The envelope smelled
+        of it for years; the letter inside never said much. Some families correspond
+        in foliage.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="folio" data-open="false">
+    <button class="folio-cover" type="button" aria-expanded="false">
+      <span class="fc-no mono">HP-238</span>
+      <span class="fc-taxon"><em>Lunaria annua</em></span>
+      <span class="fc-common">HONESTY</span>
+      <span class="fc-tie" aria-hidden="true"></span>
+    </button>
+    <div class="folio-sheet" hidden>
+      <figure class="sheet-fig">
+        <div class="tissue" aria-hidden="true"></div>
+        <img src="assets/lunaria.webp" alt="Pressed lunaria branch with translucent silver seed pods" loading="lazy">
+      </figure>
+      <div class="sheet-meta">
+        <table class="tax mono">
+          <tr><td>FAMILY</td><td>Brassicaceae</td></tr>
+          <tr><td>COLLECTED</td><td>October 1981 · churchyard wall</td></tr>
+          <tr><td>COLLECTOR</td><td>E. Halloran</td></tr>
+          <tr><td>CONDITION</td><td>Pods translucent · seeds visible</td></tr>
+        </table>
+        <p class="sheet-note">The plant the English call Honesty — its seed pods dry into
+        little windows you can hold to the light. The collector labeled it twice
+        and lied in neither.</p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="practice">
+  <h2><em>On the practice</em></h2>
+  <p>A herbarium is the slowest photograph there is. You press an afternoon between
+  blotting papers, weight it with dictionaries, and wait for the water — which is most
+  of what a flower is — to leave. What remains is not the plant. It is the plant's
+  signature, witnessed by tape.</p>
+</section>
+
+<section class="index-table">
+  <h2 class="it-head">DRAWER 9 · FULL CATALOGUE</h2>
+  <table class="cat mono">
+    <tr><td>HP-091</td><td><em>Dryopteris filix-mas</em></td><td class="ok">HELD ABOVE</td></tr>
+    <tr><td>HP-114</td><td><em>Papaver rhoeas</em></td><td class="ok">HELD ABOVE</td></tr>
+    <tr><td>HP-137</td><td><em>Convallaria majalis</em></td><td>LENT 1988 · NEVER RETURNED</td></tr>
+    <tr><td>HP-162</td><td><em>Quercus robur</em> (single leaf)</td><td>EATEN BY TIME (BEETLES)</td></tr>
+    <tr><td>HP-201</td><td><em>Eucalyptus cinerea</em></td><td class="ok">HELD ABOVE</td></tr>
+    <tr><td>HP-238</td><td><em>Lunaria annua</em></td><td class="ok">HELD ABOVE</td></tr>
+    <tr><td>HP-244</td><td><em>Rosa canina</em></td><td>DISINTEGRATED UPON OPENING, 2003</td></tr>
+  </table>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="mono">HERBARIUM PERPETUUM · SITE 08 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p class="mono"><a href="guide/">HOW THE FOLIOS WERE PRESSED →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

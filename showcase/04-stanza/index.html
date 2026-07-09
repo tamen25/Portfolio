@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STANZA — Invisible Forces, a poem in seven behaviors</title>
+<meta name="description" content="A kinetic typography poem. Gravity falls, wind edits, tide breathes, fog forgets, heat rises, echo refuses, stillness rests.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F5F1E8'/%3E%3Ctext x='16' y='24' font-family='serif' font-size='24' font-style='italic' text-anchor='middle' fill='%23191713'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body data-theme="cover">
+
+<nav class="spine" aria-label="Stanzas">
+  <a href="#s1" data-dot="s1" aria-label="Stanza one, gravity">I</a>
+  <a href="#s2" data-dot="s2" aria-label="Stanza two, wind">II</a>
+  <a href="#s3" data-dot="s3" aria-label="Stanza three, tide">III</a>
+  <a href="#s4" data-dot="s4" aria-label="Stanza four, fog">IV</a>
+  <a href="#s5" data-dot="s5" aria-label="Stanza five, heat">V</a>
+  <a href="#s6" data-dot="s6" aria-label="Stanza six, echo">VI</a>
+  <a href="#s7" data-dot="s7" aria-label="Stanza seven, stillness">VII</a>
+</nav>
+
+<header class="cover" id="cover">
+  <p class="imprint">STANZA · A JOURNAL OF MOVING TYPE · ISSUE Nº 1</p>
+  <h1 class="cover-title"><em>Invisible</em> Forces</h1>
+  <p class="cover-sub">a poem in seven behaviors</p>
+  <p class="cover-note">Read slowly. The type knows what the words mean.</p>
+  <a class="cover-cue" href="#s1" aria-label="Begin reading">↓</a>
+</header>
+
+<main>
+  <section class="stanza" id="s1" data-force="gravity" data-theme="gravity">
+    <span class="force-label">I — GRAVITY</span>
+    <p class="verse" data-split>Everything I ever dropped</p>
+    <p class="verse verse-2" data-split>is still falling somewhere.</p>
+  </section>
+
+  <section class="stanza" id="s2" data-force="wind" data-theme="wind">
+    <span class="force-label">II — WIND</span>
+    <p class="verse" data-split>The wind edits every sentence</p>
+    <p class="verse verse-2" data-split>spoken outdoors.</p>
+  </section>
+
+  <section class="stanza" id="s3" data-force="tide" data-theme="tide">
+    <span class="force-label">III — TIDE</span>
+    <p class="verse" data-split>The sea rewrites the shore</p>
+    <p class="verse verse-2" data-split>and calls it a first draft.</p>
+  </section>
+
+  <section class="stanza" id="s4" data-force="fog" data-theme="fog">
+    <span class="force-label">IV — FOG</span>
+    <p class="verse" data-split>Fog is the sky</p>
+    <p class="verse verse-2" data-split>forgetting its lines.</p>
+  </section>
+
+  <section class="stanza" id="s5" data-force="heat" data-theme="heat">
+    <span class="force-label">V — HEAT</span>
+    <p class="verse" data-split>Heat is memory rising</p>
+    <p class="verse verse-2" data-split>off the road that kept it.</p>
+  </section>
+
+  <section class="stanza" id="s6" data-force="echo" data-theme="echo">
+    <span class="force-label">VI — ECHO</span>
+    <div class="echo-stack" aria-hidden="true">
+      <p class="verse echo-ghost">that refused to be finished.</p>
+      <p class="verse echo-ghost">that refused to be finished.</p>
+      <p class="verse echo-ghost">that refused to be finished.</p>
+    </div>
+    <p class="verse" data-split>An echo is a voice</p>
+    <p class="verse verse-2" data-split>that refused to be finished.</p>
+  </section>
+
+  <section class="stanza" id="s7" data-force="still" data-theme="still">
+    <span class="force-label">VII — STILLNESS</span>
+    <p class="verse" data-split>And stillness —</p>
+    <p class="verse verse-2" data-split>stillness is all of them, at rest.</p>
+  </section>
+</main>
+
+<footer class="colophon" data-theme="cover">
+  <div class="colo-row">
+    <div><span class="ck">POEM &amp; SITE</span><p>Claude Fable 5, written and set autonomously</p></div>
+    <div><span class="ck">TYPE</span><p>Fraunces variable — opsz · wght · SOFT · WONK axes, all working</p></div>
+    <div><span class="ck">HOW</span><p><a href="guide/">Read the build guide →</a></p></div>
+    <div><span class="ck">SHOWCASE</span><p>SITE 04 / 25 · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+</body>
+</html>

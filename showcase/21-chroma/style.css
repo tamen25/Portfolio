@@ -1,0 +1,92 @@
+/* CHROMA — neutral dark so the colors star. Manrope / Fira Code */
+:root{
+  --void:#101014;
+  --panel:#17171D;
+  --txt:#F0F0F4;
+  --txt-dim:rgba(240,240,244,.6);
+  --hair:rgba(240,240,244,.14);
+  --man:"Manrope",sans-serif;
+  --code:"Fira Code",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--txt);font-family:var(--man);overflow-x:hidden}
+a{color:#9BB8FF;text-decoration:none}
+.mono{font-family:var(--code)}
+:focus-visible{outline:2.5px solid #9BB8FF;outline-offset:3px}
+
+/* ---------- head ---------- */
+.head{text-align:center;padding:64px 20px 20px}
+.head h1{
+  font-weight:800;font-size:clamp(3rem,10vw,6.4rem);letter-spacing:.08em;line-height:1;
+  background:linear-gradient(90deg,#FF4B6E,#FFD24B,#4BE38A,#4BC8FF,#B44BFF);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.strap{font-family:var(--code);font-size:.62rem;letter-spacing:.34em;color:var(--txt-dim);margin-top:16px}
+
+/* ---------- lab ---------- */
+.lab{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:30px;
+  padding:30px max(4vw,20px) 80px;align-items:start;
+}
+.solid-wrap{position:relative;border:1px solid var(--hair);border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 40%, #16161C, var(--void))}
+#solid{width:100%;aspect-ratio:1;display:block;cursor:grab;touch-action:none}
+#solid:active{cursor:grabbing}
+.axis-key{
+  position:absolute;left:16px;top:14px;display:flex;flex-direction:column;gap:4px;
+  font-size:.6rem;letter-spacing:.12em;color:var(--txt-dim);pointer-events:none;
+}
+.pick-hint{
+  position:absolute;left:0;right:0;bottom:14px;text-align:center;
+  font-size:.6rem;letter-spacing:.24em;color:var(--txt-dim);pointer-events:none;
+}
+
+/* bench */
+.bench{display:flex;flex-direction:column;gap:18px;position:sticky;top:20px}
+.sample{
+  display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:center;
+  background:var(--panel);border:1px solid var(--hair);border-radius:14px;padding:18px;
+}
+.sw{
+  width:88px;height:88px;border-radius:10px;background:#555;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+  transition:background .2s;
+}
+.sv{display:flex;flex-direction:column;gap:6px;font-size:.78rem;color:var(--txt-dim)}
+.sv span:first-child{font-size:1.05rem;color:var(--txt);font-weight:500}
+.slots{grid-column:1/-1;display:flex;gap:10px}
+.slot{
+  flex:1;font-family:var(--code);font-size:.6rem;letter-spacing:.16em;
+  background:none;border:1px solid var(--hair);border-radius:8px;color:var(--txt);
+  padding:11px 8px;cursor:pointer;transition:border-color .2s, background .2s;
+}
+.slot:hover{border-color:#9BB8FF}
+
+.contrast{background:var(--panel);border:1px solid var(--hair);border-radius:14px;padding:18px}
+.ct-title{font-size:.6rem;letter-spacing:.28em;color:var(--txt-dim);margin-bottom:12px}
+.ct-demo{
+  border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:6px;
+  background:#000;color:#fff;transition:background .2s,color .2s;
+  min-height:110px;justify-content:center;
+}
+.ct-big{font-weight:800;font-size:2.4rem;line-height:1}
+.ct-small{font-size:14px}
+.ct-read{display:flex;align-items:baseline;gap:14px;margin-top:12px}
+.ct-ratio{font-size:1.7rem;font-weight:600;color:var(--txt)}
+.ct-verdict{font-size:.66rem;letter-spacing:.14em;color:var(--txt-dim)}
+.ct-verdict.pass{color:#4BE38A}
+.ct-verdict.fail{color:#FF4B6E}
+
+.bench-note{font-size:.92rem;line-height:1.7;color:var(--txt-dim);padding:0 4px}
+
+/* ---------- foot ---------- */
+.foot{
+  border-top:1px solid var(--hair);padding:26px max(4vw,20px) 40px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-size:.6rem;letter-spacing:.16em;color:var(--txt-dim);
+}
+
+@media (max-width:900px){
+  .lab{grid-template-columns:1fr}
+  .bench{position:static}
+}

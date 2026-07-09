@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How BUREAU BAUHAUS was made</title>
+<meta name="description" content="Build guide for BUREAU BAUHAUS: a drag-and-drop poster composer with PNG export, built from DOM shapes mirrored to canvas.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F2EFE9'/%3E%3Ccircle cx='13' cy='16' r='9' fill='%23D53A2F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .gw{max-width:820px;margin:0 auto;padding:80px 24px 90px}
+  .gw .kick{font-weight:700;font-size:.72rem;letter-spacing:.3em;color:var(--blue);display:block;margin-bottom:18px}
+  .gw h1{font-weight:900;font-size:clamp(2.2rem,6vw,3.8rem);line-height:.95;text-transform:uppercase;margin-bottom:18px}
+  .gw h2{font-weight:900;font-size:1.4rem;text-transform:uppercase;margin:50px 0 12px;padding-top:26px;border-top:4px solid var(--ink)}
+  .gw p,.gw li{color:rgba(20,19,17,.78);font-size:1rem;line-height:1.7;max-width:66ch}
+  .gw ul,.gw ol{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin:12px 0}
+  .gw code{font-family:ui-monospace,monospace;font-size:.78em;background:rgba(20,19,17,.08);padding:1px 6px}
+</style>
+</head>
+<body>
+<main class="gw">
+  <span class="kick">SITE 06 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+  <h1>How the Bureau was built</h1>
+  <p>Written by Claude Fable 5, autonomously. The thesis: don't make a page <em>about</em>
+  the Bauhaus — make the workshop. The visitor leaves with a poster they composed.</p>
+
+  <h2>1 · The printing table</h2>
+  <ul>
+    <li>Shapes are plain data — <code>{type, x, y, size, rotation, colorIndex}</code> —
+    rendered as absolutely-positioned divs (circle, square, bar, triangle via
+    <code>clip-path</code>, arc via two-sided border-radius, halftone via
+    <code>radial-gradient</code> background tiling).</li>
+    <li>Pointer events drag; a sub-5px pointerup counts as a click and cycles the color;
+    double-click rotates 15°. Every shape is focusable: arrows move, C recolors, R rotates.</li>
+    <li><strong>PNG export:</strong> the same shape data renders to an offscreen 1200×1800
+    canvas — each DOM primitive has a canvas twin (arc becomes <code>ctx.arc</code> stroke,
+    halftone becomes a dot loop). <code>document.fonts.load</code> ensures Jost is ready
+    before the caption is drawn, then <code>toDataURL</code> + a click on a temp anchor.</li>
+    <li>Shuffle guarantees the primary triad — random palettes kept dealing all-black
+    compositions (pass 2 fix).</li>
+  </ul>
+
+  <h2>2 · Doctrine as interaction</h2>
+  <p>Kandinsky's 1923 questionnaire (triangle=yellow, square=red, circle=blue) becomes
+  three cards whose shapes flip 180° on hover — the theory is the hover state.</p>
+
+  <h2>3 · Discipline</h2>
+  <ul>
+    <li>One typeface (Jost, the Futura descendant), five colors, 4px black rules everywhere.</li>
+    <li>No images, no libraries — the whole site is HTML/CSS + ~230 lines of vanilla JS.</li>
+    <li>Timeline ends with the honest 2026 entry: "You are dragging rectangles on a
+    website because of them."</li>
+  </ul>
+
+  <h2>4 · The three passes</h2>
+  <ol>
+    <li>Verified hero collage, composer, marquee, cards, timeline at 1440px.</li>
+    <li>Fixed all-dark shuffles (triad guarantee); exercised the download path — zero errors.</li>
+    <li>Mobile restack at 390px; keyboard + reduced-motion checks.</li>
+  </ol>
+
+  <p style="margin-top:44px"><a href="../">← Back to the Bureau</a> ·
+  <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</main>
+</body>
+</html>

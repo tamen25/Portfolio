@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOLD — Instructions for patient hands</title>
+<meta name="description" content="An origami studio. The paper on this page folds itself — drag the crease slider and watch a flat square become a bird, in real CSS 3D.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAF7F0'/%3E%3Cpath d='M6 24 L16 6 L26 24 L16 19 Z' fill='%23C9412F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+<header class="mast">
+  <h1 class="mast-title">FOLD</h1>
+  <p class="mast-sub">A STUDIO OF ONE SQUARE · INSTRUCTIONS FOR PATIENT HANDS</p>
+</header>
+
+<!-- ============ THE SHEET ============ -->
+<section class="atelier" aria-label="A sheet of paper that folds itself">
+  <div class="table">
+    <div class="scene" id="scene">
+      <div class="sheet" id="sheet">
+        <div class="base">
+          <div class="flap flap-tl" id="fTL"><i></i></div>
+          <div class="flap flap-br" id="fBR"><i></i></div>
+          <div class="wing wing-l" id="wL"><i></i></div>
+          <div class="wing wing-r" id="wR"><i></i></div>
+        </div>
+      </div>
+      <div class="sheet-shadow" id="shadow" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="bench">
+    <label class="fold-label" for="foldRange">
+      <span class="fl-word" id="flWord">FLAT SHEET</span>
+      <span class="fl-step mono" id="flStep">STEP 0 / 4</span>
+    </label>
+    <input type="range" id="foldRange" min="0" max="400" value="0" step="1"
+           aria-label="Fold progress, four steps from flat sheet to bird">
+    <div class="bench-btns">
+      <button class="bb" id="btnFold" type="button">FOLD IT FOR ME</button>
+      <button class="bb bb-ghost" id="btnFlat" type="button">UNFOLD</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE CREASES ============ -->
+<section class="creases">
+  <h2 class="cr-head">THE FOUR CREASES</h2>
+  <div class="cr-row">
+    <figure class="cr">
+      <svg viewBox="0 0 120 120" aria-label="Step one: valley fold on the diagonal">
+        <rect x="10" y="10" width="100" height="100" class="paper-line"/>
+        <line x1="10" y1="110" x2="110" y2="10" class="valley"/>
+        <path d="M40 40 q 18 -4 34 8" class="arrow" marker-end="url(#ah)"/>
+        <defs><marker id="ah" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#C9412F"/></marker></defs>
+      </svg>
+      <figcaption><strong>1 · The diagonal.</strong> Corner to corner. Every bird begins
+      as a triangle pretending it was always one.</figcaption>
+    </figure>
+    <figure class="cr">
+      <svg viewBox="0 0 120 120" aria-label="Step two: fold the triangle in half again">
+        <path d="M10 110 L110 10 L110 110 Z" class="paper-line"/>
+        <line x1="60" y1="60" x2="110" y2="110" class="valley"/>
+        <path d="M92 68 q 8 12 -2 24" class="arrow" marker-end="url(#ah)"/>
+      </svg>
+      <figcaption><strong>2 · The quarter.</strong> Halve the triangle. The paper is
+      now thicker than it is wide-minded.</figcaption>
+    </figure>
+    <figure class="cr">
+      <svg viewBox="0 0 120 120" aria-label="Step three: tuck the beak">
+        <path d="M20 100 L60 20 L100 100 Z" class="paper-line"/>
+        <line x1="60" y1="20" x2="60" y2="100" class="mountain"/>
+        <path d="M42 60 q -14 -10 -6 -26" class="arrow" marker-end="url(#ah)"/>
+      </svg>
+      <figcaption><strong>3 · The beak.</strong> A small mountain tuck near the nose. It looks decorative. It is structural. Most beaks are both.</figcaption>
+    </figure>
+    <figure class="cr">
+      <svg viewBox="0 0 120 120" aria-label="Step four: stand the model upright">
+        <path d="M20 100 L60 20 L100 100 Z" class="paper-line"/>
+        <line x1="60" y1="20" x2="60" y2="100" class="mountain"/>
+        <path d="M78 60 q 14 -10 6 -26" class="arrow" marker-end="url(#ah)"/>
+      </svg>
+      <figcaption><strong>4 · The stand.</strong> Tip the whole thing upright and let go slowly. If it stays, you folded. If it falls, you practiced.</figcaption>
+    </figure>
+  </div>
+  <p class="cr-legend"><span class="lg-v">— — —</span> valley fold &nbsp;·&nbsp;
+  <span class="lg-m">———</span> mountain fold &nbsp;·&nbsp; the names are the hardest part</p>
+</section>
+
+<section class="creed">
+  <p>Origami is the only architecture<br>that forgives you completely —<br>
+  <em>unfold, and the site is level again.</em></p>
+</section>
+
+<footer class="foot">
+  <p>FOLD · SITE 17 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE PAPER WORKS →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

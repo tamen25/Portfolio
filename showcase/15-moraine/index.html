@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MORAINE — A memorial in ice, to ice</title>
+<meta name="description" content="Scroll is time. The ice on this page retreats exactly as much as Grinnell Glacier has since 1850 — the shader is bound to the published record.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060A0F'/%3E%3Cpath d='M4 24 L12 10 L18 18 L23 8 L28 24 Z' fill='%23BFE3F2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Archivo+Narrow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="ice" aria-hidden="true"></canvas>
+
+<div class="gauge" aria-live="polite">
+  <span class="g-year" id="gYear">1850</span>
+  <span class="g-area" id="gArea">710 acres of ice</span>
+  <span class="g-pct" id="gPct">100% remains</span>
+</div>
+
+<div class="timeline" id="timeline">
+
+  <header class="tl-head">
+    <p class="kicker">A MEMORIAL IN ICE, TO ICE</p>
+    <h1>MORAINE</h1>
+    <p class="lede">Grinnell Glacier, Montana. First measured at 710 acres.<br>
+    Scroll forward in time — <em>the ice on this page melts exactly as much as the record says it did.</em></p>
+    <p class="cue">▼</p>
+  </header>
+
+  <section class="era" data-year="1850" data-acres="710">
+    <h2>1850 — The baseline</h2>
+    <p>Surveyors sketch a river of ice pressing against the Garden Wall. It has been
+    here, grinding rock into flour, since before there was anyone to name it.</p>
+  </section>
+
+  <section class="era" data-year="1920" data-acres="500">
+    <h2>1920 — The hotel era</h2>
+    <p>Tourists ride mules up to touch it. Postcards call it eternal.
+    The ice has already signed different paperwork.</p>
+  </section>
+
+  <section class="era" data-year="1966" data-acres="326">
+    <h2>1966 — The first aerial audit</h2>
+    <p>USGS maps it properly from the sky: less than half the baseline remains.
+    The word "glacier" starts doing quiet overtime on the park's signage.</p>
+  </section>
+
+  <section class="era" data-year="1993" data-acres="240">
+    <h2>1993 — The measured decline</h2>
+    <p>Repeat photography makes the retreat undeniable — the same tripod holes,
+    the same mountain, a third less ice in every frame.</p>
+  </section>
+
+  <section class="era" data-year="2005" data-acres="152">
+    <h2>2005 — The lake grows</h2>
+    <p>Where ice was, there is now turquoise water — Upper Grinnell Lake, beautiful
+    the way a receipt is detailed. Melt has a color, and people photograph it.</p>
+  </section>
+
+  <section class="era" data-year="2026" data-acres="120">
+    <h2>Now — Still here, smaller</h2>
+    <p>Roughly a sixth of the baseline remains, huddled in the mountain's shadow.
+    The forecasts disagree only about the date of the last acre.</p>
+    <p class="era-note">Figures follow the published USGS area series (approximate;
+    the 1920 and 2026 values are interpolated from adjacent measurements).</p>
+  </section>
+
+  <footer class="tl-foot">
+    <p class="foot-line"><em>A moraine is the pile of rock a glacier leaves behind —<br>
+    the receipt for everything it carried.</em></p>
+    <p class="foot-meta">MORAINE · SITE 15 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+    <p class="foot-meta"><a href="guide/">HOW THE ICE WORKS →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+  </footer>
+</div>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" } }
+</script>
+<script type="module" src="main.js"></script>
+</body>
+</html>

@@ -11,7 +11,7 @@ export const PHOTOS_URL =
 export const SITE = {
   name: "Tamen Dutta",
   role: "Developer × Photographer",
-  email: "jj794001@gmail.com",
+  email: "tamendutta25@gmail.com",
   location: "Bangalore, IN",
   domain: "https://tamendutta.com",
   socials: [
@@ -79,13 +79,14 @@ export const PROJECTS: Project[] = [
     accent: "photo",
   },
   {
-    id: "next-01",
-    title: "In orbit",
-    subtitle: "Next project",
-    description: "Something new is being built. Check back soon.",
-    stack: [],
-    href: null,
-    preview: null,
+    id: "fable-showcase",
+    title: "Fable Showcase",
+    subtitle: "Twenty-five sites, zero templates",
+    description:
+      "A hall of twenty-five fundamentally different websites — WebGL instruments, a playable game, generated films, and a real 3D statue. Every door opens.",
+    stack: ["Three.js", "WebGL", "GSAP"],
+    href: "https://fable-index.netlify.app",
+    preview: "/previews/fable-showcase.png",
     accent: "dev",
   },
   {

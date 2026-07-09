@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIDE — How ARCHIVE-7 was forged</title>
+<meta name="description" content="Build guide for ARCHIVE-7: a zero-image dossier of CSS paper, interactive redactions, and a narrative game loop.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23EFE7D2'/%3E%3Crect x='5' y='9' width='22' height='5' rx='2' fill='%231B1A17'/%3E%3Crect x='5' y='19' width='14' height='5' rx='2' fill='%231B1A17'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=Stardos+Stencil:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=2">
+<style>
+  .gsheet{width:min(760px,94vw);margin:60px auto;background:var(--paper);
+    background-image:var(--grain);padding:52px 56px 64px;
+    box-shadow:0 18px 44px rgba(0,0,0,.5);transform:rotate(.3deg)}
+  .gsheet h1{font-family:var(--stencil);font-size:clamp(1.7rem,5vw,2.6rem);margin:8px 0 18px}
+  .gsheet h2{font-family:var(--courier);font-weight:700;font-size:.95rem;letter-spacing:.18em;
+    margin:40px 0 12px;border-bottom:2px solid var(--ink);padding-bottom:6px}
+  .gsheet p,.gsheet li{font-family:var(--type);font-size:.95rem;color:var(--ink)}
+  .gsheet ul,.gsheet ol{padding-left:22px;display:flex;flex-direction:column;gap:8px;margin:10px 0}
+  .gsheet code{font-family:var(--courier);font-weight:700;background:rgba(27,26,23,.08);padding:1px 6px;font-size:.85em}
+  .gk{font-family:var(--courier);font-weight:700;font-size:.66rem;letter-spacing:.26em;color:var(--stamp-red)}
+  @media(max-width:680px){.gsheet{padding:36px 22px}}
+</style>
+</head>
+<body>
+<div class="desk">
+  <article class="gsheet">
+    <span class="gk">SITE 03 / 25 · FABLE SHOWCASE · BUILD GUIDE</span>
+    <h1>HOW THIS FILE WAS FORGED</h1>
+    <p>Written by Claude Fable 5, which designed, wrote and built ARCHIVE-7 autonomously.
+    This site ships <strong>zero images</strong> — every texture, stamp and diagram is
+    CSS or inline SVG.</p>
+
+    <h2>1 · PAPER WITHOUT PHOTOGRAPHS</h2>
+    <ul>
+      <li>Grain: one inline SVG <code>feTurbulence</code> data-URI, tiled as
+      <code>background-image</code> over the desk, sheets and stamps.</li>
+      <li>Age: warm inset box-shadows (<code>rgba(140,110,50,.12)</code>) pool "sun yellowing"
+      toward sheet edges; each sheet carries ±0.5° rotation so the stack feels handled.</li>
+      <li>Stamps: double borders + <code>mix-blend-mode:multiply</code> + rotation.
+      Lesson from pass 1: a noise mask with 5% alpha erased them entirely — blend, don't mask.</li>
+    </ul>
+
+    <h2>2 · THE REDACTION GAME</h2>
+    <ol>
+      <li>Every secret is a real <code>&lt;button&gt;</code> with transparent text on an ink
+      background — screen readers announce "redacted text, activate to declassify".</li>
+      <li>Rough bar shape: an eight-value <code>border-radius</code>
+      (<code>3px 40% 4px 38% / 50% 4px 44% 3px</code>) plus a tiny skew — no two bars look alike.</li>
+      <li>The counter reads <code>document.querySelectorAll('.redact').length</code> — copy
+      can grow without breaking the "22 / 22".</li>
+      <li>Revealing everything unlocks the twist: the file's last redaction is the reason the
+      Registry closed the case. Give the completionist a narrative payoff, not a badge.</li>
+    </ol>
+
+    <h2>3 · DOCUMENT CHOREOGRAPHY</h2>
+    <ul>
+      <li>The folder cover rotates open with a single CSS 3D transform
+      (<code>rotateX(-96deg)</code>, perspective on the parent).</li>
+      <li>Rubber stamps "slam" via IntersectionObserver — scale 2.6→1 with an overshoot ease.</li>
+      <li>The surveillance route draws itself with the stroke-dashoffset trick when scrolled into view.</li>
+      <li>Reduced motion: no slams, no drawing, folder opens instantly — the file still reads perfectly.</li>
+    </ul>
+
+    <h2>4 · THE THREE PASSES</h2>
+    <ul>
+      <li><strong>Pass 1:</strong> invisible stamps (mask alpha bug) — fixed by removing the mask.</li>
+      <li><strong>Pass 2:</strong> scripted a full playthrough (22 clicks) — verified counter,
+      completion banner, stamp slam and map drawing.</li>
+      <li><strong>Pass 3:</strong> mobile revealed the documents were visible before the folder
+      opened — author <code>display:flex</code> beats the <code>hidden</code> attribute; fixed
+      with an explicit <code>[hidden]{display:none}</code> rule.</li>
+    </ul>
+
+    <h2>5 · REPLICATE IT</h2>
+    <ul>
+      <li>Pick a physical artifact and imitate its <em>flaws</em>: rotation, stains, overlap.</li>
+      <li>Make decoration honest: the counter counts, the route is a real path, the twist is text.</li>
+      <li>One HTML + one CSS + 60 lines of JS. Deploy: <code>netlify deploy --prod --dir .</code></li>
+    </ul>
+
+    <p style="margin-top:36px"><a href="../">← RETURN FILE TO REGISTRY</a> ·
+    <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+/* FABLE INDEX — the hall of doors. Archivo / Fragment Mono */
+:root{
+  --hall:#0D0D10;
+  --bone:#EDEBE6;
+  --bone-dim:rgba(237,235,230,.62);
+  --hair:rgba(237,235,230,.14);
+  --arch:"Archivo",sans-serif;
+  --mono:"Fragment Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--hall);color:var(--bone);font-family:var(--arch);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em}
+:focus-visible{outline:2.5px solid #FFB000;outline-offset:3px}
+
+/* ---------- hall ---------- */
+.hall{text-align:center;padding:90px 22px 60px;max-width:900px;margin:0 auto}
+.h-over{color:#FFB000;margin-bottom:28px}
+.h-title{
+  font-weight:900;font-stretch:122%;
+  font-size:clamp(4rem,15vw,10.5rem);line-height:.88;letter-spacing:.01em;
+  background:linear-gradient(120deg,#FFB000,#FF3D8B 30%,#B8E986 62%,#38E8D4);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.h-lede{margin-top:30px;font-size:clamp(1.02rem,2.2vw,1.25rem);line-height:1.75;color:var(--bone-dim);font-weight:300}
+.h-lede strong{color:var(--bone);font-weight:600}
+.h-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px;color:var(--bone-dim)}
+
+/* ---------- doors ---------- */
+.doors{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;
+  padding:20px max(3vw,16px) 80px;
+}
+.door{
+  --bg:#1A1A1E; --ink:#EDEBE6; --acc:#FFB000;
+  position:relative;display:flex;flex-direction:column;gap:10px;
+  background:var(--bg);color:var(--ink);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;
+  padding:22px 20px 20px;
+  min-height:190px;
+  overflow:hidden;
+  transition:transform .22s, box-shadow .22s;
+}
+.door:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.door::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:var(--motif,none);
+  opacity:.85;
+}
+.d-no{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;color:var(--acc);position:relative;z-index:2}
+.d-name{
+  font-weight:800;font-stretch:115%;font-size:1.35rem;letter-spacing:.02em;
+  position:relative;z-index:2;
+}
+.d-hook{font-size:.8rem;line-height:1.55;font-weight:300;opacity:.82;position:relative;z-index:2;max-width:30ch}
+.d-go{
+  margin-top:auto;position:relative;z-index:2;
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;color:var(--acc);
+}
+.door:hover .d-go::after{content:" →"}
+
+/* ---------- colophon / foot ---------- */
+.colophon{
+  max-width:660px;margin:0 auto;text-align:center;
+  padding:20px 22px 90px;
+}
+.colophon p{color:var(--bone-dim);line-height:1.8;font-weight:300;margin-bottom:16px}
+.colophon a{color:#FFB000;font-family:var(--mono);font-size:.72rem;letter-spacing:.22em}
+.foot{border-top:1px solid var(--hair);padding:28px 22px 40px;text-align:center;color:var(--bone-dim)}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLIPSTREAM — An air line from the age of arriving</title>
+<meta name="description" content="Golden-age aviation. Scroll, and the engineering drawing becomes the machine: blueprint linework morphing into photograph.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316324F'/%3E%3Cpath d='M4 18 L24 18 L28 15 M10 18 L13 12 L20 12' stroke='%23EAF2FA' stroke-width='1.6' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="mast">
+  <p class="m-over">EST. 1958 · THE AGE OF ARRIVING</p>
+  <h1>SLIPSTREAM</h1>
+  <p class="m-sub">An air line from the jet age — when the journey still wore a dinner jacket.<br>
+  Scroll — the drawing becomes the machine.</p>
+</header>
+
+<!-- ============ THE MORPH ============ -->
+<section class="morph-zone" id="morphZone">
+  <div class="morph-sticky">
+    <div class="stage">
+      <img class="photo" id="photo" src="assets/liner.webp" alt="A jet-age airliner cruising above golden clouds">
+      <svg class="print" id="print" viewBox="0 0 960 540" aria-label="Engineering drawing of the same airliner">
+        <!-- fuselage -->
+        <path class="ln" d="M120 300 Q 200 262 370 258 L 700 258 Q 800 260 848 286 Q 812 316 700 318 L 240 318 Q 160 314 120 300 Z"/>
+        <!-- nose + cockpit -->
+        <path class="ln" d="M700 258 Q 760 236 800 258"/>
+        <path class="ln" d="M712 258 L 724 240 L 762 240 L 776 254"/>
+        <!-- tail -->
+        <path class="ln" d="M120 300 L 76 232 L 128 244 L 168 276"/>
+        <path class="ln" d="M120 300 L 96 322 L 148 318"/>
+        <!-- wing -->
+        <path class="ln" d="M430 318 L 340 420 L 400 424 L 520 322"/>
+        <path class="ln" d="M470 258 L 420 180 L 470 176 L 540 252"/>
+        <!-- engine pod -->
+        <path class="ln" d="M468 340 q -6 26 14 28 l 44 0 q 20 -2 14 -28 l -14 -18 l -44 0 Z"/>
+        <circle class="ln" cx="497" cy="352" r="9"/>
+        <!-- windows -->
+        <path class="ln" d="M300 280 h16 M330 280 h16 M360 280 h16 M390 280 h16 M420 280 h16"/>
+        <!-- dimension lines -->
+        <path class="dim" d="M120 460 L 848 460 M120 450 v20 M848 450 v20"/>
+        <text class="dtx" x="452" y="480">SPAN 22.6 M — DO NOT SCALE FROM DRAWING</text>
+        <path class="dim" d="M900 232 L 900 318 M890 232 h20 M890 318 h20"/>
+        <text class="dtx" x="908" y="280" transform="rotate(90 908 280)">3.1 M</text>
+        <text class="dtx" x="120" y="200">FIG. 1 — SKYLINER MK.II · PORT ELEVATION</text>
+      </svg>
+      <div class="scan" id="scan" aria-hidden="true"></div>
+    </div>
+    <p class="morph-cap mono" id="morphCap">FIG. 1 — DRAWN</p>
+  </div>
+</section>
+
+<!-- ============ ROUTE BOARD ============ -->
+<section class="board">
+  <h2 class="b-head">THE ROUTE BOARD</h2>
+  <table class="routes">
+    <thead><tr><th>ROUTE</th><th>VIA</th><th>TIME ABOARD</th><th>REMARKS</th></tr></thead>
+    <tbody>
+      <tr><td>LONDON — NEW YORK</td><td>the great circle</td><td>8¾ HOURS</td><td>dinner over Greenland, a second dessert over Newfoundland</td></tr>
+      <tr><td>PARIS — RIO</td><td>Dakar</td><td>14 HOURS</td><td>two hemispheres, one lipstick retouch</td></tr>
+      <tr><td>SAN FRANCISCO — TOKYO</td><td>Wake Island</td><td>17 HOURS</td><td>the Pacific rehearses forever and still forgets its lines</td></tr>
+      <tr><td>ANYWHERE — ANYWHERE</td><td>the window seat</td><td>—</td><td>included with every ticket, then as now</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="creed">
+  <p>We are told the destination is the point.<br>
+  The Skyliner respectfully disagrees at five hundred miles per hour.</p>
+</section>
+
+<footer class="foot mono">
+  <p>SLIPSTREAM · SITE 22 / 25 · FABLE SHOWCASE · BUILT BY CLAUDE FABLE 5</p>
+  <p><a href="guide/">HOW THE MORPH WORKS →</a> · <a href="https://fable-index.netlify.app">FABLE INDEX ↗</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
